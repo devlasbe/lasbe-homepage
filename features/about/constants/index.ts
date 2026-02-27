@@ -1,4 +1,20 @@
-import { CarrerType } from "../types";
+type CarrerProjectDescType = { href?: string; desc: string };
+
+type CarrerProjectType = {
+  title: string;
+  period: string;
+  mainDesc: string;
+  stackList: string[];
+  descList: CarrerProjectDescType[];
+};
+
+type CarrerType = {
+  imageSrc: string;
+  company: string;
+  period: string;
+  desc: string;
+  projectList: CarrerProjectType[];
+};
 
 export const profileDataList = [
   { src: "/profile.svg", alt: "profile icon", label: "이름", value: "장성우" },
