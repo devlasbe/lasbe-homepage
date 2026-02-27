@@ -1,5 +1,5 @@
-import CardContainer from "@/components/main/CardContainer";
-import IconList from "@/components/main/icon/IconList";
+import CardContainer from "@/features/home/components/CardContainer";
+import IconList from "@/features/home/components/icon/IconList";
 import Typing from "@/components/Typing";
 
 export default function Home() {

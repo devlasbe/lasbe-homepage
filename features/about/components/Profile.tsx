@@ -1,13 +1,6 @@
 import { ScrollAnimation } from "@lasbe/react-scroll-animation";
 import Image from "next/image";
-
-type ProfileType = {
-  src: string;
-  alt: string;
-  label: string;
-  value: string;
-  idx: number;
-};
+import { ProfileType } from "../types";
 
 export default function Profile(props: ProfileType) {
   return (

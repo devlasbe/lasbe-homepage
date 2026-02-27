@@ -1,4 +1,4 @@
-import { useViewCount } from "@/services/view";
+import { useViewCount } from "../hooks/useViewCount";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 

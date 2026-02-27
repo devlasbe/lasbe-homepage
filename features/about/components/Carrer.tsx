@@ -1,22 +1,7 @@
 import Image from "next/image";
-import Stack from "../Stack";
+import Stack from "@/components/Stack";
 import Link from "next/link";
-
-type CarrerProjectType = {
-  title: string;
-  period: string;
-  mainDesc: string;
-  stackList: string[];
-  descList: { href?: string; desc: string }[];
-};
-
-export type CarrerType = {
-  imageSrc: string;
-  company: string;
-  period: string;
-  desc: string;
-  projectList: CarrerProjectType[];
-};
+import { CarrerType } from "../types";
 
 export default function Carrer(props: CarrerType) {
   return (

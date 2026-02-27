@@ -6,19 +6,8 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import Stack from "../Stack";
-
-type ProjectType = {
-  title: string;
-  period: string;
-  desc: string;
-  subDesc: string[];
-  imageList: string[];
-  stack: string[];
-  link?: string;
-  readme?: string;
-  idx: number;
-};
+import Stack from "@/components/Stack";
+import { ProjectType } from "../types";
 
 export default function Project(props: ProjectType) {
   return (

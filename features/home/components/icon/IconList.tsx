@@ -1,11 +1,12 @@
 "use client";
 
-import AboutMeModal from "@/components/aboutMeModal/AboutMeModal";
+import AboutMeModal from "@/features/about/components/AboutMeModal";
 import { useModal } from "@/components/modal";
 import { ScrollAnimation } from "@lasbe/react-scroll-animation";
 import { useMemo } from "react";
-import Icon, { IconType } from "./Icon";
-import SystemModal from "@/components/SystemModal";
+import Icon from "./Icon";
+import SystemModal from "@/features/view/components/SystemModal";
+import { IconType } from "../../types";
 
 export default function IconList() {
   const { openModal } = useModal();
@@ -37,13 +38,13 @@ export default function IconList() {
         backgroundColor: "bg-white",
         href: "https://github.com/devlasbe",
       },
-      {
-        type: "link",
-        src: "/npm_logo.svg",
-        label: "NPM",
-        alt: "npm logo",
-        href: "https://www.npmjs.com/~lasbe",
-      },
+      // {
+      //   type: "link",
+      //   src: "/npm_logo.svg",
+      //   label: "NPM",
+      //   alt: "npm logo",
+      //   href: "https://www.npmjs.com/~lasbe",
+      // },
       {
         type: "link",
         src: "/lasbe_logo.jpeg",
@@ -63,7 +64,7 @@ export default function IconList() {
           }),
       },
     ],
-    [openModal]
+    [openModal],
   );
 
   return (

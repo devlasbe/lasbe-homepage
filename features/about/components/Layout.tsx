@@ -1,9 +1,4 @@
-type LayoutType = {
-  title: string;
-  headerColorClassName: string;
-  isUseBgColor?: boolean;
-  children: React.ReactElement;
-};
+import { LayoutType } from "../types";
 
 export default function Layout({
   title,

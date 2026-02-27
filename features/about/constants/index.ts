@@ -1,37 +1,6 @@
-import Carrer, { CarrerType } from "./Carrer";
-import Layout from "./Layout";
-import Profile from "./Profile";
-import Project from "./Project";
+import { CarrerType } from "../types";
 
-export default function AboutMeModal() {
-  return (
-    <div className="flex flex-col gap-12 w-[95vw] md:w-[750px] px-4 py-12 bg-neutral-100">
-      <Layout title="PROFILE" headerColorClassName="bg-my-orange">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {profileDataList.map((data, idx) => (
-            <Profile {...data} idx={idx} key={`profile-${data.label}`} />
-          ))}
-        </div>
-      </Layout>
-      <Layout title="PROJECT" headerColorClassName="bg-my-green" isUseBgColor={false}>
-        <div className="flex flex-col gap-6 w-full">
-          {projectDataList.map((data, idx) => (
-            <Project {...data} idx={idx} key={`project-${data.title}`} />
-          ))}
-        </div>
-      </Layout>
-      <Layout title="CAREER" headerColorClassName="bg-my-blue">
-        <>
-          {carrerDataList.map((data) => (
-            <Carrer key={`carrer-${data.company}`} {...data} />
-          ))}
-        </>
-      </Layout>
-    </div>
-  );
-}
-
-const profileDataList = [
+export const profileDataList = [
   { src: "/profile.svg", alt: "profile icon", label: "이름", value: "장성우" },
   {
     src: "/calendar.svg",
@@ -48,7 +17,7 @@ const profileDataList = [
   },
 ];
 
-const projectDataList = [
+export const projectDataList = [
   {
     title: "오픈프차",
     period: "2024.11~",
@@ -171,7 +140,7 @@ const projectDataList = [
   },
 ];
 
-const carrerDataList: CarrerType[] = [
+export const carrerDataList: CarrerType[] = [
   {
     imageSrc: "/nuriflex.png",
     company: "Nuriflex",

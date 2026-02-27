@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { ModalProvider } from "./modal";
-import { useViewCount } from "@/services/view";
+import { useViewCount } from "@/features/view/hooks/useViewCount";
 
 export default function Provider({ children }: { children: React.ReactNode }) {
   const { increaseViewCountOneTime } = useViewCount();

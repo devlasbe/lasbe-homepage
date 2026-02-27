@@ -2,16 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-
-export type IconType = {
-  type: "link" | "button";
-  src: string;
-  label: string;
-  backgroundColor?: string;
-  alt: string;
-  href?: string;
-  onClick?: () => void;
-};
+import { IconType } from "../../types";
 
 export default function Icon({
   type,
