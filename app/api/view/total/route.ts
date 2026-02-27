@@ -1,6 +1,6 @@
 export const dynamic = "force-dynamic";
 
-import { db } from "@/utils/firebase";
+import { db } from "@/services/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { NextResponse } from "next/server";
 

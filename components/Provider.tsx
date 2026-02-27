@@ -1,17 +1,24 @@
 "use client";
 
 import { useEffect } from "react";
-import { ModalProvider } from "./modal";
-import { useViewCount } from "@/features/view/hooks/useViewCount";
+import { Provider as JotaiProvider } from "jotai";
+import { useViewCount } from "@/hooks/useViewCount";
 
-export default function Provider({ children }: { children: React.ReactNode }) {
+function ViewCountInitializer() {
   const { increaseViewCountOneTime } = useViewCount();
   useEffect(() => {
     increaseViewCountOneTime();
   }, [increaseViewCountOneTime]);
+  return null;
+}
+
+export default function Provider({ children }: { children: React.ReactNode }) {
   return (
-    <ModalProvider>
-      <>{children}</>
-    </ModalProvider>
+    <JotaiProvider>
+      <>
+        <ViewCountInitializer />
+        {children}
+      </>
+    </JotaiProvider>
   );
 }

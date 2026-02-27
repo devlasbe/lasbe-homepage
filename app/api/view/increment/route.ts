@@ -1,5 +1,5 @@
 import { getDateString } from "@/utils/date";
-import { db } from "@/utils/firebase";
+import { db } from "@/services/firebase";
 import { doc, getDoc, increment, setDoc, updateDoc } from "firebase/firestore";
 import { NextResponse } from "next/server";
 

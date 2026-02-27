@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import { getDateString } from "@/utils/date";
-import { db } from "@/utils/firebase";
+import { db } from "@/services/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { NextResponse } from "next/server";
 

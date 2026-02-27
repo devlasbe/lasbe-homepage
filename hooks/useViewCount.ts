@@ -1,7 +1,7 @@
 "use client";
 
 import { date } from "@/utils/date";
-import { fetchService } from "@/utils/fetchService";
+import { fetchService } from "@/services/fetchService";
 import { useCallback } from "react";
 
 const countHistory = {
