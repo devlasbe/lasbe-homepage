@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Archivo_Black, Noto_Sans_KR } from "next/font/google";
+import { Archivo_Black, Noto_Sans_KR, VT323, Press_Start_2P } from "next/font/google";
 import Provider from "@/components/Provider";
 
 const notoSansKr = Noto_Sans_KR({
@@ -13,6 +13,18 @@ const archivo = Archivo_Black({
   subsets: ["latin"],
   weight: ["400"],
   variable: "--archivo",
+});
+
+const vt323 = VT323({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--vt323",
+});
+
+const pressStart2P = Press_Start_2P({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--press-start",
 });
 
 export const metadata: Metadata = {
@@ -40,7 +52,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${notoSansKr.variable} ${archivo.variable} font-noto antialiased overflow-x-hidden text-neutral-900`}
+        className={`${notoSansKr.variable} ${archivo.variable} ${vt323.variable} ${pressStart2P.variable} font-noto antialiased overflow-x-hidden text-neutral-900`}
       >
         <Provider>{children}</Provider>
       </body>
