@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useWindowManager } from "@/features/win95/store/windowStore";
+import { useWindowManager } from "@/store/windowStore";
 
 export function useKeyboardShortcuts() {
   const { windows, closeWindow, maximizeWindow } = useWindowManager();
