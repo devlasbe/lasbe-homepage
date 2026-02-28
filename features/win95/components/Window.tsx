@@ -26,12 +26,20 @@ export default function Window({ window: win }: WindowPropsType) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [win.state]);
 
+  const handleDragStart = () => {
+    focusWindow(win.id);
+  };
+
   const handleDrag = (_e: DraggableEvent, data: DraggableData) => {
     setLocalPos({ x: data.x, y: data.y });
   };
 
   const handleDragStop = (_e: DraggableEvent, data: DraggableData) => {
     updatePosition(win.id, { x: data.x, y: data.y });
+  };
+
+  const handleResizeStart = () => {
+    focusWindow(win.id);
   };
 
   const handleResizeStop = (_e: React.SyntheticEvent, data: ResizeCallbackData) => {
@@ -115,6 +123,7 @@ export default function Window({ window: win }: WindowPropsType) {
       handle=".win95-titlebar"
       bounds="parent"
       position={localPos}
+      onStart={handleDragStart}
       onDrag={handleDrag}
       onStop={handleDragStop}
       disabled={isMobile}
@@ -133,6 +142,7 @@ export default function Window({ window: win }: WindowPropsType) {
             height={win.size.height}
             minConstraints={[280, 200]}
             resizeHandles={["se", "e", "s", "sw", "w"]}
+            onResizeStart={handleResizeStart}
             onResizeStop={handleResizeStop}
           >
             {windowContent}
