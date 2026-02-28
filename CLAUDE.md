@@ -19,10 +19,15 @@
 ```
 lasbe-homepage/
 ├── app/                        # Next.js App Router
-├── components/                 # 공통 React 컴포넌트
-├── hooks/                      # 여러 도메인에서 공유하는 커스텀 훅
-├── features/                   # 도메인별 components, hooks, utils, constants, types를 nested 하게 배치
-├── store/                      # 전역 상태 (jotai atoms)
+├── components/                 # 전체 컴포넌트
+│   ├── Provider.tsx            # 범용 — JotaiProvider + ViewCountInitializer
+│   ├── Typing.tsx              # 범용 — 타이핑 애니메이션
+│   ├── desktop/                # Win95 OS 셸 컴포넌트
+│   ├── windows/                # Window 컨텐츠 컴포넌트
+│   └── ui/                     # 공유 Win95 UI 서브컴포넌트
+├── store/                      # 전역 상태 (jotai atoms) — windowStore.ts
+├── constants/                  # 정적 상수 — win95.ts, portfolio.ts
+├── hooks/                      # 커스텀 훅 (useBreakpoint, useViewCount, useIconPositions, useKeyboardShortcuts)
 ├── services/                   # 외부 서비스 연동
 ├── utils/                      # 유틸리티 함수
 ├── docs/                       # 작업 계획 문서
@@ -46,10 +51,15 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 - **작업 전 계획 저장 필수**: 모든 작업을 시작하기 전에 반드시 `docs/` 폴더 아래에 작업 계획을 md 파일로 저장해야 한다. 해당 파일이 이미 존재한다면 새로 생성하지 않고 기존 파일을 수정한다.
 - **반응형 디자인 필수**: 모든 UI 작업은 반드시 반응형 디자인을 고려해야 한다. Tailwind CSS의 반응형 접두사(`sm:`, `md:`, `lg:` 등)를 활용하여 모바일부터 데스크톱까지 모든 화면 크기에서 올바르게 표시되어야 한다.
 - **Single Source of Truth**: 데이터와 상수는 단 한 곳에만 정의한다. 동일한 데이터를 여러 파일에 중복 정의하지 않는다. 컴포넌트에서 사용하는 정적 데이터(리스트, 설정 값 등)는 해당 도메인의 `constants/` 파일에 정의하고 import하여 사용한다.
-- **파일 배치 원칙**: 파일을 배치할 위치는 "현재 사용처"가 아니라 "기능의 성격"으로 판단한다.
-  - **루트 배치** (`components/`, `utils/`, `services/` 등): 기능 자체가 도메인에 종속되지 않는 범용 코드. 예) HTTP 클라이언트, DB 연결 설정, 날짜 유틸, 공통 UI 컴포넌트
-  - **features 배치** (`features/<domain>/`): 특정 도메인의 비즈니스 로직에 직접 속하는 코드. 예) 특정 화면의 컴포넌트/훅/상수/타입
-  - 판단 기준: "이 코드를 다른 도메인에서도 그대로 쓸 수 있는가?" → 그렇다면 루트, 아니라면 features
+- **파일 배치 원칙**: win95가 프로젝트 전체의 단일 도메인이므로 `features/` 계층 없이 루트 폴더에 직접 배치한다.
+  - `components/` — 범용 컴포넌트만 (Provider, Typing)
+  - `components/desktop/` — Win95 OS 셸 컴포넌트 (Desktop, Window, Taskbar 등)
+  - `components/windows/` — Window 컨텐츠 컴포넌트
+  - `components/ui/` — 공유 Win95 UI 서브컴포넌트 (2개 이상 사용처 확인 후 추출)
+  - `store/` — jotai atoms 및 관련 훅
+  - `constants/` — 정적 상수 데이터 (`win95.ts`, `portfolio.ts`)
+  - `hooks/` — 커스텀 훅 (범용 + Win95 훅 모두 포함)
+  - `services/`, `utils/` — 범용 서비스/유틸리티
 
 ## 코드 컨벤션
 
@@ -58,12 +68,14 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
   - `type UserInfoType = { ... }`
 
 - **매직 넘버 금지**: 컴포넌트 내 하드코딩된 수치(색상, 크기, 비율, 속도 등)는 파일 상단의 상수 블록으로 추출한다. 상수명은 UPPER_SNAKE_CASE로 작성하고, 관련 상수끼리 주석으로 그룹화한다.
+
   ```ts
   // ── 카메라 ──
-  const CAMERA_FOV  = 60;
+  const CAMERA_FOV = 60;
   const CAMERA_NEAR = 0.1;
-  const CAMERA_FAR  = 5000;
+  const CAMERA_FAR = 5000;
   ```
+
   파생 값은 기본 상수에서 계산한다 (`const NEAR_DOT_COUNT = Math.floor(NEAR_TOTAL * NEAR_DOT_RATIO)`).
 
 - **Font Size 토큰**: 커스텀 폰트 크기는 `text-system-*` prefix를 사용한다. (`tailwind.config.ts` `theme.extend.fontSize`에 정의)
@@ -76,16 +88,18 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 도메인 내 여러 컴포넌트에서 동일한 마크업 구조가 반복될 때 `ui/` 폴더에 공유 서브컴포넌트로 분리한다.
 
 ### `ui/`에 배치하는 기준
+
 - **2개 이상**의 컴포넌트에서 동일한 마크업 구조가 반복될 때
 - 도메인 데이터에 의존하지 않는 순수 표현(props → JSX) 컴포넌트
 
 ### 상위 컴포넌트에 유지하는 기준
+
 - 해당 컴포넌트에서만 1회 사용되는 복잡한 UI
 - 로컬 `useState`를 직접 포함하는 인터랙티브 조각
 - 특정 도메인 데이터 타입에 강하게 결합된 렌더링 로직
 
 ### 규칙
-- `ui/` 컴포넌트는 반드시 같은 레벨의 `ui/index.ts` barrel을 통해 export한다.
+
 - `ui/` 컴포넌트 props 타입은 `Type` postfix 포함. (`type FooPropsType = {...}`)
 - `ui/` 컴포넌트는 `"use client"` 없는 순수 표현 컴포넌트로 유지한다. (이벤트/상태가 필요하면 핸들러를 props로 받기)
 - 단일 사용처에서의 조기 추출 금지. 2개 이상 사용처 확인 후 추출한다.

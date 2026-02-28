@@ -1,6 +1,6 @@
 "use client";
 
-import Desktop from "@/features/win95/components/Desktop";
+import Desktop from "@/components/desktop/Desktop";
 
 export default function Home() {
   return <Desktop />;
