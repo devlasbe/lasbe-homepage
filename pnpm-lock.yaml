@@ -14,6 +14,9 @@ importers:
       '@lasbe/react-scroll-animation':
         specifier: ^2.0.6
         version: 2.0.6(react@18.3.1)
+      '@react95/icons':
+        specifier: ^2.2.0
+        version: 2.2.0
       firebase:
         specifier: ^10.14.1
         version: 10.14.1
@@ -469,6 +472,9 @@ packages:
 
   '@protobufjs/utf8@1.1.0':
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
+
+  '@react95/icons@2.2.0':
+    resolution: {integrity: sha512-mYmXZobSDgGC7qFsvLAK4WOOWSKMtSAXSLO4MasAJgT0FWeNrQegQpBMMqNHbeu3RLyBHA0OiYI6sYOdLmy6Sg==}
 
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
@@ -2597,6 +2603,8 @@ snapshots:
   '@protobufjs/pool@1.1.0': {}
 
   '@protobufjs/utf8@1.1.0': {}
+
+  '@react95/icons@2.2.0': {}
 
   '@rtsao/scc@1.1.0': {}
 

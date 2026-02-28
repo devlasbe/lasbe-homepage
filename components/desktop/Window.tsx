@@ -82,7 +82,7 @@ export default function Window({ window: win }: WindowPropsType) {
         className={`win95-titlebar flex items-center px-1 py-0.5 gap-1 select-none cursor-default flex-shrink-0 ${titleBarBg}`}
         onDoubleClick={handleTitlebarDoubleClick}
       >
-        <span className="text-system-ui mr-1">{win.icon}</span>
+        <win.icon style={{ width: 16, height: 16, display: "block", flexShrink: 0 }} />
         <span className="text-white text-system-ui font-bold truncate flex-1 font-vt323 tracking-wide">
           {win.title}
         </span>

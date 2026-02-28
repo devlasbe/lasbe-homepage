@@ -65,8 +65,9 @@ export default function Taskbar() {
               >
                 ← 뒤로
               </button>
-              <span className="flex-1 truncate font-vt323 text-system-ui text-center">
-                {activeWindow.icon} {activeWindow.title}
+              <span className="flex items-center gap-1 flex-1 truncate font-vt323 text-system-ui text-center">
+                <activeWindow.icon style={{ width: 16, height: 16, display: "block", flexShrink: 0 }} />
+                {activeWindow.title}
               </span>
             </>
           )}
@@ -84,7 +85,7 @@ export default function Taskbar() {
                 } bg-[#c0c0c0]`}
                 onClick={() => handleTaskbarButtonClick(win.id)}
               >
-                <span className="text-system-ui-md flex-shrink-0">{win.icon}</span>
+                <win.icon style={{ width: 16, height: 16, display: "block", flexShrink: 0 }} />
                 <span className="truncate">{win.title}</span>
               </button>
             );

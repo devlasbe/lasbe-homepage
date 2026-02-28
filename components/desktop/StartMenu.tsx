@@ -82,7 +82,7 @@ export default function StartMenu() {
             className="flex items-center gap-2 px-3 py-2 md:py-1.5 text-left text-system-body font-vt323 hover:bg-[#000080] hover:text-white active:bg-[#000080] active:text-white"
             onClick={() => handleItemClick(cfg)}
           >
-            <span className="text-system-heading w-6 text-center">{cfg.icon}</span>
+            <cfg.icon style={{ width: 24, height: 24, display: "block", flexShrink: 0 }} />
             <span>{cfg.label}</span>
           </button>
         ))}

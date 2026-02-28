@@ -1,13 +1,16 @@
 import { atom, useAtom } from "jotai";
 import { useCallback } from "react";
 import React from "react";
+import type { ComponentType, SVGProps } from "react";
+
+type IconType = ComponentType<SVGProps<SVGSVGElement>>;
 
 export type WindowStateType = "normal" | "minimized" | "maximized";
 
 export type Win95WindowType = {
   id: string;
   title: string;
-  icon: string;
+  icon: IconType;
   content: React.ReactNode;
   position: { x: number; y: number };
   size: { width: number; height: number };
@@ -20,7 +23,7 @@ export type Win95WindowType = {
 export type OpenWindowConfigType = {
   id: string;
   title: string;
-  icon: string;
+  icon: IconType;
   content: React.ReactNode;
   defaultSize: { width: number; height: number };
 };

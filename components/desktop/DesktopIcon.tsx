@@ -1,14 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import type { ComponentType, SVGProps } from "react";
 
 type DesktopIconPropsType = {
-  icon: string;
+  icon: ComponentType<SVGProps<SVGSVGElement>>;
   label: string;
   onDoubleClick: () => void;
 };
 
-export default function DesktopIcon({ icon, label, onDoubleClick }: DesktopIconPropsType) {
+export default function DesktopIcon({ icon: IconComponent, label, onDoubleClick }: DesktopIconPropsType) {
   const [selected, setSelected] = useState(false);
 
   const handleClick = () => {
@@ -39,11 +40,8 @@ export default function DesktopIcon({ icon, label, onDoubleClick }: DesktopIconP
       onTouchEnd={handleTouchEnd}
       onBlur={handleBlur}
     >
-      <div
-        className={`text-system-desktop-icon leading-none p-1 ${selected ? "bg-[#000080] opacity-80" : ""}`}
-        style={{ filter: selected ? "brightness(0.7) sepia(1) hue-rotate(180deg)" : "none" }}
-      >
-        {icon}
+      <div className={`p-1 ${selected ? "bg-[#000080] opacity-80" : ""}`}>
+        <IconComponent style={{ width: 32, height: 32, display: "block" }} />
       </div>
       <span
         className={`text-center text-white text-system-ui leading-tight font-vt323 break-words w-full px-0.5 ${
