@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import Draggable, { DraggableEvent, DraggableData } from "react-draggable";
 import { ResizableBox, ResizeCallbackData } from "react-resizable";
 import { Win95WindowType, useWindowManager } from "@/features/win95/store/windowStore";
@@ -15,6 +15,7 @@ export default function Window({ window: win }: WindowPropsType) {
     useWindowManager();
   const { isMobile, isTablet } = useBreakpoint();
   const nodeRef = useRef<HTMLDivElement>(null);
+  const resizeOriginRef = useRef<{ x: number; width: number } | null>(null);
 
   const [localPos, setLocalPos] = useState({ x: win.position.x, y: win.position.y });
 
@@ -38,11 +39,27 @@ export default function Window({ window: win }: WindowPropsType) {
     updatePosition(win.id, { x: data.x, y: data.y });
   };
 
-  const handleResizeStart = () => {
+  const handleResizeStart = (_e: React.SyntheticEvent, data: ResizeCallbackData) => {
     focusWindow(win.id);
+    if (data.handle === "w" || data.handle === "sw") {
+      resizeOriginRef.current = { x: localPos.x, width: win.size.width };
+    }
   };
 
+  const handleResize = useCallback((_e: React.SyntheticEvent, data: ResizeCallbackData) => {
+    if ((data.handle === "w" || data.handle === "sw") && resizeOriginRef.current) {
+      const deltaW = data.size.width - resizeOriginRef.current.width;
+      setLocalPos((prev) => ({ ...prev, x: resizeOriginRef.current!.x - deltaW }));
+    }
+  }, []);
+
   const handleResizeStop = (_e: React.SyntheticEvent, data: ResizeCallbackData) => {
+    if ((data.handle === "w" || data.handle === "sw") && resizeOriginRef.current) {
+      const deltaW = data.size.width - resizeOriginRef.current.width;
+      const newX = resizeOriginRef.current.x - deltaW;
+      updatePosition(win.id, { x: newX, y: localPos.y });
+      resizeOriginRef.current = null;
+    }
     updateSize(win.id, { width: data.size.width, height: data.size.height });
   };
 
@@ -143,6 +160,7 @@ export default function Window({ window: win }: WindowPropsType) {
             minConstraints={[280, 200]}
             resizeHandles={["se", "e", "s", "sw", "w"]}
             onResizeStart={handleResizeStart}
+            onResize={handleResize}
             onResizeStop={handleResizeStop}
           >
             {windowContent}
