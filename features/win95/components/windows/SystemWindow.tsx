@@ -13,7 +13,7 @@ export default function SystemWindow() {
         <div className="text-system-icon-lg">💻</div>
         <div>
           <p className="font-bold text-system-heading">장성우의 포트폴리오 시스템</p>
-          <p className="text-system-caption text-[#808080]">Windows 95 Portfolio Edition</p>
+          <p className="text-system-caption text-[#808080]">LASBE OS 95 Portfolio Edition</p>
           <p className="text-system-caption mt-1">
             프로세서: React 18 @ TypeScript 5.x
           </p>

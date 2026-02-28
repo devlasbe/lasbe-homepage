@@ -68,7 +68,7 @@ export default function StartMenu() {
             letterSpacing: "0.15em",
           }}
         >
-          Windows 95
+          LASBE OS 95
         </span>
       </div>
 

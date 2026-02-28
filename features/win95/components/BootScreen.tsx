@@ -71,7 +71,7 @@ export default function BootScreen({ onComplete }: BootScreenPropsType) {
       >
         {/* 타이틀바 */}
         <div className="bg-[#000080] flex items-center justify-between px-2 py-1">
-          <span className="font-vt323 text-white text-system-body">Windows 95</span>
+          <span className="font-vt323 text-white text-system-body">LASBE OS 95</span>
           <div className="flex gap-1">
             <button className="win95-raised bg-[#c0c0c0] text-black font-vt323 text-system-caption w-5 h-5 flex items-center justify-center leading-none">
               ─

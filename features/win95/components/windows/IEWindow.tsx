@@ -79,7 +79,7 @@ export default function IEWindow() {
         </div>
 
         <div className="px-4 pb-4 text-system-caption text-[#808080] text-center">
-          <p>이 페이지는 Windows 95 Internet Explorer에 최적화되어 있습니다.</p>
+          <p>이 페이지는 LASBE OS 95 Internet Explorer에 최적화되어 있습니다.</p>
           <p>© 1995 Lasbe. All rights reserved.</p>
         </div>
       </div>
