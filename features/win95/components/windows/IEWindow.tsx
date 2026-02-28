@@ -2,18 +2,15 @@
 
 import Link from "next/link";
 import { favoritesData } from "@/features/about/constants";
+import { Win95MenuBar, Win95StatusBar } from "../ui";
+
+// ── 메뉴 ──
+const MENU_ITEMS = ["파일(F)", "편집(E)", "보기(V)", "즐겨찾기(A)", "도움말(H)"] as const;
 
 export default function IEWindow() {
   return (
     <div className="flex flex-col h-full font-vt323 text-system-body">
-      {/* Menu bar */}
-      <div className="flex gap-4 px-2 py-0.5 text-system-caption border-b border-[#808080] bg-[#c0c0c0] flex-shrink-0">
-        {["파일(F)", "편집(E)", "보기(V)", "즐겨찾기(A)", "도움말(H)"].map((m) => (
-          <button key={m} className="hover:bg-[#000080] hover:text-white px-1">
-            {m}
-          </button>
-        ))}
-      </div>
+      <Win95MenuBar items={MENU_ITEMS} />
 
       {/* Navigation bar */}
       <div className="flex items-center gap-1 px-1 py-1 border-b border-[#808080] bg-[#c0c0c0] flex-shrink-0">
@@ -84,11 +81,7 @@ export default function IEWindow() {
         </div>
       </div>
 
-      {/* Status bar */}
-      <div className="h-5 flex items-center px-2 text-system-caption border-t border-[#808080] win95-sunken flex-shrink-0 gap-4">
-        <span>완료</span>
-        <span>🌐 인터넷</span>
-      </div>
+      <Win95StatusBar><span>완료</span><span>🌐 인터넷</span></Win95StatusBar>
     </div>
   );
 }

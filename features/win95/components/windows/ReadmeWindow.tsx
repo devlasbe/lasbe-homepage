@@ -1,25 +1,6 @@
 "use client";
 
-import React from "react";
-
-// ── 섹션 컴포넌트 ──
-type SectionPropsType = {
-  icon: string;
-  title: string;
-  children: React.ReactNode;
-};
-
-function Section({ icon, title, children }: SectionPropsType) {
-  return (
-    <div className="mb-5">
-      <div className="flex items-center gap-1 font-bold text-[#000080] border-b-2 border-[#000080] pb-1 mb-2">
-        <span>{icon}</span>
-        <span>{title}</span>
-      </div>
-      <div className="ml-1">{children}</div>
-    </div>
-  );
-}
+import { Win95Section, Win95StatusBar } from "../ui";
 
 // ── 데이터 ──
 const APPS = [
@@ -109,7 +90,7 @@ export default function ReadmeWindow() {
         </div>
 
         {/* Apps */}
-        <Section icon="📱" title="앱 목록">
+        <Win95Section icon="📱" title="앱 목록">
           {APPS.map(({ icon, name, desc }) => (
             <div key={name} className="flex items-start gap-2 mb-2">
               <span className="shrink-0 leading-tight">{icon}</span>
@@ -119,10 +100,10 @@ export default function ReadmeWindow() {
               </p>
             </div>
           ))}
-        </Section>
+        </Win95Section>
 
         {/* Keyboard shortcuts */}
-        <Section icon="⌨️" title="키보드 단축키">
+        <Win95Section icon="⌨️" title="키보드 단축키">
           <div className="win95-sunken bg-[#f8f8f8] p-2 space-y-1.5">
             {SHORTCUTS.map(({ key, desc }) => (
               <div key={key} className="flex items-center gap-3">
@@ -133,30 +114,30 @@ export default function ReadmeWindow() {
               </div>
             ))}
           </div>
-        </Section>
+        </Win95Section>
 
         {/* Window operations */}
-        <Section icon="🪟" title="창 조작">
+        <Win95Section icon="🪟" title="창 조작">
           {WINDOW_OPS.map(({ action, desc }) => (
             <div key={action} className="flex gap-2 mb-1">
               <span className="font-bold shrink-0 min-w-[9rem]">{action}</span>
               <span className="text-[#444]">{desc}</span>
             </div>
           ))}
-        </Section>
+        </Win95Section>
 
         {/* Desktop operations */}
-        <Section icon="🗂️" title="데스크톱 조작">
+        <Win95Section icon="🗂️" title="데스크톱 조작">
           {DESKTOP_OPS.map(({ action, desc }) => (
             <div key={action} className="flex gap-2 mb-1">
               <span className="font-bold shrink-0 min-w-[9rem]">{action}</span>
               <span className="text-[#444]">{desc}</span>
             </div>
           ))}
-        </Section>
+        </Win95Section>
 
         {/* Hidden gimmicks */}
-        <Section icon="✨" title="기타">
+        <Win95Section icon="✨" title="기타">
           {GIMMICKS.map(({ icon, title, desc }) => (
             <div key={title} className="flex items-start gap-2 mb-3">
               <span className="shrink-0 leading-tight">{icon}</span>
@@ -167,13 +148,10 @@ export default function ReadmeWindow() {
               </p>
             </div>
           ))}
-        </Section>
+        </Win95Section>
       </div>
 
-      {/* Status bar */}
-      <div className="h-5 flex items-center px-2 text-system-caption border-t border-[#808080] win95-sunken flex-shrink-0">
-        <span>도움말 뷰어 1.0 — LASBE OS 95 Portfolio Edition</span>
-      </div>
+      <Win95StatusBar><span>도움말 뷰어 1.0 — LASBE OS 95 Portfolio Edition</span></Win95StatusBar>
     </div>
   );
 }

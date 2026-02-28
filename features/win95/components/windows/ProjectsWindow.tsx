@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { projectDataList } from "@/features/about/constants";
+import { Win95TechBadgeList, Win95DescriptionList } from "../ui";
 
 export default function ProjectsWindow() {
   const [selectedIdx, setSelectedIdx] = useState(0);
@@ -81,24 +82,9 @@ export default function ProjectsWindow() {
 
         <p className="text-system-caption leading-relaxed mb-2">{project.desc}</p>
 
-        <ul className="pl-3 space-y-0.5 mb-2">
-          {project.subDesc.map((d) => (
-            <li key={d} className="list-disc text-system-caption">
-              {d}
-            </li>
-          ))}
-        </ul>
+        <Win95DescriptionList items={project.subDesc} className="mb-2" />
 
-        <div className="flex flex-wrap gap-0.5 mb-2">
-          {project.stack.map((s) => (
-            <span
-              key={s}
-              className="win95-raised bg-[#c0c0c0] px-1 text-system-caption"
-            >
-              {s}
-            </span>
-          ))}
-        </div>
+        <Win95TechBadgeList items={project.stack} className="mb-2" />
 
         <div className="flex gap-2">
           {project.link && (

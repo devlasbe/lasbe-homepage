@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { carrerDataList } from "@/features/about/constants";
+import { Win95TechBadgeList, Win95DescriptionList } from "../ui";
 
 export default function CareerWindow() {
   const [openProject, setOpenProject] = useState<string | null>(
@@ -59,33 +59,8 @@ export default function CareerWindow() {
                   <p className="mt-1 font-bold text-[#000080] leading-relaxed whitespace-pre-wrap">
                     {project.mainDesc}
                   </p>
-                  <ul className="pl-4 space-y-0.5 mt-1">
-                    {project.descList.map((d, i) => (
-                      <li key={i} className="list-disc leading-relaxed">
-                        {d.href ? (
-                          <Link
-                            href={d.href}
-                            target="_blank"
-                            className="text-[#000080] underline"
-                          >
-                            {d.desc}
-                          </Link>
-                        ) : (
-                          d.desc
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="flex flex-wrap gap-0.5 mt-1">
-                    {project.stackList.map((s) => (
-                      <span
-                        key={s}
-                        className="win95-raised bg-[#c0c0c0] px-1"
-                      >
-                        {s}
-                      </span>
-                    ))}
-                  </div>
+                  <Win95DescriptionList items={project.descList} />
+                  <Win95TechBadgeList items={project.stackList} className="mt-1" />
                 </div>
               )}
             </div>

@@ -1,6 +1,10 @@
 "use client";
 
 import { profileDataList, favoritesData } from "@/features/about/constants";
+import { Win95MenuBar, Win95StatusBar } from "../ui";
+
+// ── 메뉴 ──
+const MENU_ITEMS = ["파일(F)", "편집(E)", "서식(O)", "보기(V)", "도움말(H)"] as const;
 
 export default function NotepadWindow() {
   const name = profileDataList.find((p) => p.label === "이름")?.value ?? "";
@@ -15,17 +19,7 @@ export default function NotepadWindow() {
 
   return (
     <div className="flex flex-col h-full font-vt323">
-      {/* Menu bar */}
-      <div className="flex gap-4 px-2 py-0.5 text-system-body border-b border-[#808080] bg-[#c0c0c0] flex-shrink-0">
-        {["파일(F)", "편집(E)", "서식(O)", "보기(V)", "도움말(H)"].map((menu) => (
-          <button
-            key={menu}
-            className="hover:bg-[#000080] hover:text-white px-1"
-          >
-            {menu}
-          </button>
-        ))}
-      </div>
+      <Win95MenuBar items={MENU_ITEMS} />
 
       {/* Content */}
       <div className="flex-1 overflow-auto bg-white p-2 win95-sunken">
@@ -57,11 +51,7 @@ Blog    : ${blogDisplay}
         </pre>
       </div>
 
-      {/* Status bar */}
-      <div className="h-5 flex items-center px-2 text-system-caption border-t border-[#808080] win95-sunken flex-shrink-0 gap-4">
-        <span>Ln 1, Col 1</span>
-        <span>일반 텍스트</span>
-      </div>
+      <Win95StatusBar><span>Ln 1, Col 1</span><span>일반 텍스트</span></Win95StatusBar>
     </div>
   );
 }

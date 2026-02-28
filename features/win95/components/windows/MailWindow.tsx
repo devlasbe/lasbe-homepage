@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { profileDataList } from "@/features/about/constants";
+import { Win95StatusBar } from "../ui";
 
 const email = profileDataList.find((p) => p.label === "메일")?.value ?? "";
 
@@ -81,10 +82,7 @@ export default function MailWindow() {
         placeholder="메시지를 입력하세요..."
       />
 
-      {/* Status bar */}
-      <div className="h-5 flex items-center px-2 text-system-caption border-t border-[#808080] win95-sunken flex-shrink-0">
-        <span>준비</span>
-      </div>
+      <Win95StatusBar><span>준비</span></Win95StatusBar>
     </div>
   );
 }
