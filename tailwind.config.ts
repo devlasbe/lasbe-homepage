@@ -23,10 +23,10 @@ const config: Config = {
         "system-icon-md": ["1.5rem", { lineHeight: "2rem" }],
         "system-icon-lg": ["3rem", { lineHeight: "1" }],
         // OS Chrome — desktop base (mobile overrides in globals.css @layer utilities)
-        "system-ui": ["0.75rem", { lineHeight: "1rem" }],
-        "system-ui-md": ["0.875rem", { lineHeight: "1.25rem" }],
-        "system-ui-lg": ["1rem", { lineHeight: "1.5rem" }],
-        "system-desktop-icon": ["2.25rem", { lineHeight: "2.5rem" }],
+        "system-ui": ["1rem", { lineHeight: "1.5rem" }],
+        "system-ui-md": ["1.125rem", { lineHeight: "1.75rem" }],
+        "system-ui-lg": ["1.375rem", { lineHeight: "1.75rem" }],
+        "system-desktop-icon": ["3.5rem", { lineHeight: "1" }],
       },
       colors: {
         background: "var(--background)",
