@@ -1,5 +1,5 @@
 import type { ComponentType, SVGProps, ReactNode } from "react";
-import { Notepad, Folder, FileText, Computer, Mail, Ie, QuestionBubble, Explorer100 } from "@react95/icons";
+import { Notepad, Folder, FileText, Computer, Mail, Ie, QuestionBubble, Explorer100, Wordpad } from "@react95/icons";
 import NotepadWindow from "@/components/windows/NotepadWindow";
 import ProjectsWindow from "@/components/windows/ProjectsWindow";
 import CareerWindow from "@/components/windows/CareerWindow";
@@ -8,6 +8,7 @@ import MailWindow from "@/components/windows/MailWindow";
 import IEWindow from "@/components/windows/IEWindow";
 import ReadmeWindow from "@/components/windows/ReadmeWindow";
 import GithubWindow from "@/components/windows/GithubWindow";
+import ResumeWindow from "@/components/windows/ResumeWindow";
 
 type IconType = ComponentType<SVGProps<SVGSVGElement>>;
 
@@ -92,6 +93,15 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
     title: "GitHub - devlasbe",
     defaultSize: { width: 620, height: 540 },
     content: <GithubWindow />,
+    showInStartMenu: true,
+  },
+  {
+    id: "notion",
+    label: "경력기술서.pdf",
+    icon: Wordpad,
+    title: "경력기술서.pdf - Notion Viewer",
+    defaultSize: { width: 780, height: 560 },
+    content: <ResumeWindow />,
     showInStartMenu: true,
   },
 ];
