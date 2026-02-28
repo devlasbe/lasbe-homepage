@@ -30,7 +30,7 @@ const LERP = 0.04;
 const GYRO_SENSITIVITY = 30; // gamma/beta 정규화 제수
 
 // ── 트윙클 ────────────────────────────────
-const TWINKLE_GROUP_SIZE = 10;
+const TWINKLE_GROUP_SIZE = 100;
 const TWINKLE_GROUP_COUNT = 3;
 const TWINKLE_SPEED_MIN = 0.8;
 const TWINKLE_SPEED_VARIANCE = 1.2; // 최대 속도 = MIN + VARIANCE
@@ -58,7 +58,7 @@ type LayerConfigType = {
 // size: render buffer 픽셀 단위 (CSS 픽셀은 PIXEL_SCALE배)
 const LAYERS: LayerConfigType[] = [
   { count: 800, size: 2, texSize: 1, palette: FAR_PALETTE, parallax: 3 },
-  { count: 400, size: 3, texSize: 2, palette: MID_PALETTE, parallax: 7 },
+  { count: 400, size: 2, texSize: 2, palette: MID_PALETTE, parallax: 7 },
   { count: NEAR_DOT_COUNT, size: 4, texSize: 4, palette: NEAR_PALETTE, parallax: 15 },
   { count: NEAR_CROSS_COUNT, size: 5, texSize: 5, cross: true, palette: NEAR_PALETTE, parallax: 15 },
 ];
@@ -101,10 +101,7 @@ function randomStarPositions(count: number): Float32Array {
   return positions;
 }
 
-function randomColorsFromPalette(
-  count: number,
-  palette: number[]
-): Float32Array {
+function randomColorsFromPalette(count: number, palette: number[]): Float32Array {
   const colors = new Float32Array(count * 3);
   for (let i = 0; i < count; i++) {
     const hex = palette[Math.floor(Math.random() * palette.length)];
@@ -257,16 +254,9 @@ export default function SpaceBackground() {
 
       // Twinkle: 특정 별의 밝기를 sin으로 진동
       for (const group of twinkleGroups) {
-        const opacity =
-          0.5 +
-          0.5 *
-            Math.sin(elapsed * group.speed * Math.PI * 2 + group.phase);
-        const posAttr = geometries[group.layerIndex].getAttribute(
-          "position"
-        ) as THREE.BufferAttribute;
-        const colorAttr = geometries[group.layerIndex].getAttribute(
-          "color"
-        ) as THREE.BufferAttribute;
+        const opacity = 0.5 + 0.5 * Math.sin(elapsed * group.speed * Math.PI * 2 + group.phase);
+        const posAttr = geometries[group.layerIndex].getAttribute("position") as THREE.BufferAttribute;
+        const colorAttr = geometries[group.layerIndex].getAttribute("color") as THREE.BufferAttribute;
 
         for (const idx of group.indices) {
           if (idx < posAttr.count) {
