@@ -71,6 +71,25 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
   - Window Content (고정): `text-system-caption`, `text-system-body`, `text-system-heading`, `text-system-icon-md`, `text-system-icon-lg`
   - 새 토큰 추가 시 `tailwind.config.ts` `theme.extend.fontSize`에 추가한다.
 
+## 공유 UI 서브컴포넌트 분리 원칙
+
+도메인 내 여러 컴포넌트에서 동일한 마크업 구조가 반복될 때 `ui/` 폴더에 공유 서브컴포넌트로 분리한다.
+
+### `ui/`에 배치하는 기준
+- **2개 이상**의 컴포넌트에서 동일한 마크업 구조가 반복될 때
+- 도메인 데이터에 의존하지 않는 순수 표현(props → JSX) 컴포넌트
+
+### 상위 컴포넌트에 유지하는 기준
+- 해당 컴포넌트에서만 1회 사용되는 복잡한 UI
+- 로컬 `useState`를 직접 포함하는 인터랙티브 조각
+- 특정 도메인 데이터 타입에 강하게 결합된 렌더링 로직
+
+### 규칙
+- `ui/` 컴포넌트는 반드시 같은 레벨의 `ui/index.ts` barrel을 통해 export한다.
+- `ui/` 컴포넌트 props 타입은 `Type` postfix 포함. (`type FooPropsType = {...}`)
+- `ui/` 컴포넌트는 `"use client"` 없는 순수 표현 컴포넌트로 유지한다. (이벤트/상태가 필요하면 핸들러를 props로 받기)
+- 단일 사용처에서의 조기 추출 금지. 2개 이상 사용처 확인 후 추출한다.
+
 ## 개발 명령어
 
 ```bash
