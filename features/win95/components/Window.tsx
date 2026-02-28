@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import Draggable, { DraggableEvent, DraggableData } from "react-draggable";
 import { ResizableBox, ResizeCallbackData } from "react-resizable";
 import { Win95WindowType, useWindowManager } from "@/features/win95/store/windowStore";
+import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 type WindowPropsType = {
   window: Win95WindowType;
@@ -12,6 +13,7 @@ type WindowPropsType = {
 export default function Window({ window: win }: WindowPropsType) {
   const { focusWindow, updatePosition, updateSize, closeWindow, minimizeWindow, maximizeWindow } =
     useWindowManager();
+  const { isMobile, isTablet } = useBreakpoint();
   const nodeRef = useRef<HTMLDivElement>(null);
 
   const [localPos, setLocalPos] = useState({ x: win.position.x, y: win.position.y });
@@ -60,22 +62,26 @@ export default function Window({ window: win }: WindowPropsType) {
           {win.title}
         </span>
         <div className="flex gap-0.5 ml-auto flex-shrink-0">
-          <button
-            className="win95-btn"
-            onMouseDown={(e) => e.stopPropagation()}
-            onClick={() => minimizeWindow(win.id)}
-            title="최소화"
-          >
-            _
-          </button>
-          <button
-            className="win95-btn"
-            onMouseDown={(e) => e.stopPropagation()}
-            onClick={() => maximizeWindow(win.id)}
-            title="최대화/복원"
-          >
-            {win.state === "maximized" ? "❐" : "□"}
-          </button>
+          {!isMobile && (
+            <button
+              className="win95-btn"
+              onMouseDown={(e) => e.stopPropagation()}
+              onClick={() => minimizeWindow(win.id)}
+              title="최소화"
+            >
+              _
+            </button>
+          )}
+          {!isMobile && (
+            <button
+              className="win95-btn"
+              onMouseDown={(e) => e.stopPropagation()}
+              onClick={() => maximizeWindow(win.id)}
+              title="최대화/복원"
+            >
+              {win.state === "maximized" ? "❐" : "□"}
+            </button>
+          )}
           <button
             className="win95-btn font-bold"
             onMouseDown={(e) => e.stopPropagation()}
@@ -111,6 +117,7 @@ export default function Window({ window: win }: WindowPropsType) {
       position={localPos}
       onDrag={handleDrag}
       onStop={handleDragStop}
+      disabled={isMobile}
     >
       <div
         ref={nodeRef}
@@ -118,15 +125,19 @@ export default function Window({ window: win }: WindowPropsType) {
         style={{ zIndex: win.zIndex }}
         onMouseDown={() => focusWindow(win.id)}
       >
-        <ResizableBox
-          width={win.size.width}
-          height={win.size.height}
-          minConstraints={[280, 200]}
-          resizeHandles={["se", "e", "s", "sw", "w"]}
-          onResizeStop={handleResizeStop}
-        >
-          {windowContent}
-        </ResizableBox>
+        {isTablet ? (
+          <div style={{ width: win.size.width, height: win.size.height }}>{windowContent}</div>
+        ) : (
+          <ResizableBox
+            width={win.size.width}
+            height={win.size.height}
+            minConstraints={[280, 200]}
+            resizeHandles={["se", "e", "s", "sw", "w"]}
+            onResizeStop={handleResizeStop}
+          >
+            {windowContent}
+          </ResizableBox>
+        )}
       </div>
     </Draggable>
   );

@@ -2,82 +2,23 @@
 
 import { useEffect, useRef } from "react";
 import { useAtom } from "jotai";
-import { isStartMenuOpenAtom, useWindowManager, OpenWindowConfigType } from "@/features/win95/store/windowStore";
+import { isStartMenuOpenAtom, useWindowManager } from "@/features/win95/store/windowStore";
+import { WIN95_WINDOW_CONFIGS, Win95WindowConfigType } from "@/features/win95/constants";
+import NotepadWindow from "./windows/NotepadWindow";
+import ProjectsWindow from "./windows/ProjectsWindow";
+import CareerWindow from "./windows/CareerWindow";
+import SystemWindow from "./windows/SystemWindow";
+import MailWindow from "./windows/MailWindow";
+import IEWindow from "./windows/IEWindow";
 
-type StartMenuItemType = {
-  icon: string;
-  label: string;
-  config: OpenWindowConfigType;
+const WINDOW_CONTENT_MAP: Record<string, React.ReactNode> = {
+  notepad: <NotepadWindow />,
+  projects: <ProjectsWindow />,
+  career: <CareerWindow />,
+  system: <SystemWindow />,
+  mail: <MailWindow />,
+  internet: <IEWindow />,
 };
-
-const MENU_ITEMS: StartMenuItemType[] = [
-  {
-    icon: "📄",
-    label: "자기소개.txt",
-    config: {
-      id: "notepad",
-      title: "자기소개.txt",
-      icon: "📄",
-      content: null,
-      defaultSize: { width: 500, height: 400 },
-    },
-  },
-  {
-    icon: "📁",
-    label: "내 프로젝트",
-    config: {
-      id: "projects",
-      title: "내 프로젝트",
-      icon: "📁",
-      content: null,
-      defaultSize: { width: 700, height: 500 },
-    },
-  },
-  {
-    icon: "📋",
-    label: "내 경력",
-    config: {
-      id: "career",
-      title: "내 경력",
-      icon: "📋",
-      content: null,
-      defaultSize: { width: 700, height: 500 },
-    },
-  },
-  {
-    icon: "💾",
-    label: "기술스택.exe",
-    config: {
-      id: "system",
-      title: "기술스택.exe",
-      icon: "💾",
-      content: null,
-      defaultSize: { width: 400, height: 350 },
-    },
-  },
-  {
-    icon: "📧",
-    label: "메일 보내기",
-    config: {
-      id: "mail",
-      title: "메일 보내기",
-      icon: "📧",
-      content: null,
-      defaultSize: { width: 500, height: 400 },
-    },
-  },
-  {
-    icon: "🌐",
-    label: "인터넷",
-    config: {
-      id: "internet",
-      title: "인터넷",
-      icon: "🌐",
-      content: null,
-      defaultSize: { width: 600, height: 450 },
-    },
-  },
-];
 
 export default function StartMenu() {
   const [isOpen, setIsOpen] = useAtom(isStartMenuOpenAtom);
@@ -86,19 +27,23 @@ export default function StartMenu() {
 
   useEffect(() => {
     if (!isOpen) return;
-    const handleMouseDown = (e: MouseEvent) => {
+    const handleOutside = (e: MouseEvent | TouchEvent) => {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
         setIsOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleMouseDown);
-    return () => document.removeEventListener("mousedown", handleMouseDown);
+    document.addEventListener("mousedown", handleOutside);
+    document.addEventListener("touchstart", handleOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleOutside);
+      document.removeEventListener("touchstart", handleOutside);
+    };
   }, [isOpen, setIsOpen]);
 
   if (!isOpen) return null;
 
-  const handleItemClick = (item: StartMenuItemType) => {
-    openWindow(item.config);
+  const handleItemClick = (cfg: Win95WindowConfigType) => {
+    openWindow({ ...cfg, content: WINDOW_CONTENT_MAP[cfg.id] });
     setIsOpen(false);
   };
 
@@ -129,14 +74,14 @@ export default function StartMenu() {
 
       {/* Menu items */}
       <div className="flex flex-col min-w-[180px]">
-        {MENU_ITEMS.map((item) => (
+        {WIN95_WINDOW_CONFIGS.map((cfg) => (
           <button
-            key={item.config.id}
-            className="flex items-center gap-2 px-3 py-1.5 text-left text-system-body font-vt323 hover:bg-[#000080] hover:text-white"
-            onClick={() => handleItemClick(item)}
+            key={cfg.id}
+            className="flex items-center gap-2 px-3 py-2 md:py-1.5 text-left text-system-body font-vt323 hover:bg-[#000080] hover:text-white active:bg-[#000080] active:text-white"
+            onClick={() => handleItemClick(cfg)}
           >
-            <span className="text-system-heading w-6 text-center">{item.icon}</span>
-            <span>{item.label}</span>
+            <span className="text-system-heading w-6 text-center">{cfg.icon}</span>
+            <span>{cfg.label}</span>
           </button>
         ))}
 
@@ -145,7 +90,7 @@ export default function StartMenu() {
 
         {/* Shutdown */}
         <button
-          className="flex items-center gap-2 px-3 py-1.5 text-left text-system-body font-vt323 hover:bg-[#000080] hover:text-white"
+          className="flex items-center gap-2 px-3 py-2 md:py-1.5 text-left text-system-body font-vt323 hover:bg-[#000080] hover:text-white active:bg-[#000080] active:text-white"
           onClick={handleShutdown}
         >
           <span className="text-system-heading w-6 text-center">🖥️</span>

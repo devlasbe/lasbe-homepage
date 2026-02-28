@@ -24,12 +24,19 @@ export default function DesktopIcon({ icon, label, onDoubleClick }: DesktopIconP
     setSelected(false);
   };
 
+  // 모바일: 단일 탭으로 바로 열기 (더블탭 불필요)
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    e.preventDefault();
+    onDoubleClick();
+  };
+
   return (
     <div
-      className="flex flex-col items-center gap-0.5 w-20 sm:w-16 cursor-pointer select-none"
+      className="flex flex-col items-center gap-0.5 w-20 md:w-24 cursor-pointer select-none"
       tabIndex={0}
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
+      onTouchEnd={handleTouchEnd}
       onBlur={handleBlur}
     >
       <div

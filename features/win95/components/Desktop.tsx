@@ -1,6 +1,9 @@
 "use client";
 
-import { useWindowManager, OpenWindowConfigType } from "@/features/win95/store/windowStore";
+import { useAtom } from "jotai";
+import { useWindowManager, isBootCompleteAtom } from "@/features/win95/store/windowStore";
+import BootScreen from "./BootScreen";
+import { WIN95_WINDOW_CONFIGS } from "@/features/win95/constants";
 import DesktopIcon from "./DesktopIcon";
 import Window from "./Window";
 import Taskbar from "./Taskbar";
@@ -11,96 +14,33 @@ import SystemWindow from "./windows/SystemWindow";
 import MailWindow from "./windows/MailWindow";
 import IEWindow from "./windows/IEWindow";
 
-type DesktopIconConfigType = {
-  icon: string;
-  label: string;
-  config: OpenWindowConfigType;
+const WINDOW_CONTENT_MAP: Record<string, React.ReactNode> = {
+  notepad: <NotepadWindow />,
+  projects: <ProjectsWindow />,
+  career: <CareerWindow />,
+  system: <SystemWindow />,
+  mail: <MailWindow />,
+  internet: <IEWindow />,
 };
-
-const DESKTOP_ICONS: DesktopIconConfigType[] = [
-  {
-    icon: "📄",
-    label: "자기소개.txt",
-    config: {
-      id: "notepad",
-      title: "자기소개.txt - 메모장",
-      icon: "📄",
-      content: <NotepadWindow />,
-      defaultSize: { width: 500, height: 420 },
-    },
-  },
-  {
-    icon: "📁",
-    label: "내 프로젝트",
-    config: {
-      id: "projects",
-      title: "내 프로젝트",
-      icon: "📁",
-      content: <ProjectsWindow />,
-      defaultSize: { width: 700, height: 520 },
-    },
-  },
-  {
-    icon: "📋",
-    label: "내 경력",
-    config: {
-      id: "career",
-      title: "내 경력",
-      icon: "📋",
-      content: <CareerWindow />,
-      defaultSize: { width: 680, height: 520 },
-    },
-  },
-  {
-    icon: "💾",
-    label: "기술스택.exe",
-    config: {
-      id: "system",
-      title: "기술스택.exe - 시스템 속성",
-      icon: "💾",
-      content: <SystemWindow />,
-      defaultSize: { width: 420, height: 400 },
-    },
-  },
-  {
-    icon: "📧",
-    label: "메일 보내기",
-    config: {
-      id: "mail",
-      title: "메일 보내기 - Outlook Express",
-      icon: "📧",
-      content: <MailWindow />,
-      defaultSize: { width: 520, height: 420 },
-    },
-  },
-  {
-    icon: "🌐",
-    label: "인터넷",
-    config: {
-      id: "internet",
-      title: "인터넷 - Internet Explorer",
-      icon: "🌐",
-      content: <IEWindow />,
-      defaultSize: { width: 620, height: 480 },
-    },
-  },
-];
 
 export default function Desktop() {
   const { windows, openWindow } = useWindowManager();
+  const [isBootComplete, setIsBootComplete] = useAtom(isBootCompleteAtom);
 
   return (
     <div className="flex flex-col w-full h-dvh overflow-hidden">
       {/* Desktop area */}
       <div className="relative flex-1 bg-[#008080] overflow-hidden">
-        {/* Desktop icons - left column */}
-        <div className="absolute left-4 top-4 flex flex-col gap-6 sm:gap-4">
-          {DESKTOP_ICONS.map((item) => (
+        {/* Desktop icons - mobile: centered grid / md+: left column */}
+        <div className="absolute inset-0 md:inset-auto md:left-4 md:top-4 flex flex-wrap md:flex-col md:flex-nowrap justify-center md:justify-start content-start gap-6 pt-10 px-6 md:pt-4 md:px-0">
+          {WIN95_WINDOW_CONFIGS.map((cfg) => (
             <DesktopIcon
-              key={item.config.id}
-              icon={item.icon}
-              label={item.label}
-              onDoubleClick={() => openWindow(item.config)}
+              key={cfg.id}
+              icon={cfg.icon}
+              label={cfg.label}
+              onDoubleClick={() =>
+                openWindow({ ...cfg, content: WINDOW_CONTENT_MAP[cfg.id] })
+              }
             />
           ))}
         </div>
@@ -115,6 +55,10 @@ export default function Desktop() {
 
       {/* Taskbar */}
       <Taskbar />
+
+      {!isBootComplete && (
+        <BootScreen onComplete={() => setIsBootComplete(true)} />
+      )}
     </div>
   );
 }

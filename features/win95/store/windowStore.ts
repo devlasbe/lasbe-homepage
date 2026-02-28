@@ -27,6 +27,7 @@ export type OpenWindowConfigType = {
 
 export const windowsAtom = atom<Win95WindowType[]>([]);
 export const isStartMenuOpenAtom = atom<boolean>(false);
+export const isBootCompleteAtom = atom<boolean>(false);
 
 export const useWindowManager = () => {
   const [windows, setWindows] = useAtom(windowsAtom);
@@ -60,7 +61,18 @@ export const useWindowManager = () => {
 
         const cascade = prev.length * 20;
         const viewW = typeof window !== "undefined" ? window.innerWidth : 1280;
-        const isMobile = viewW < 640;
+        const viewH = typeof window !== "undefined" ? window.innerHeight : 900;
+        const isMobile = viewW < 768;
+        const isTablet = viewW >= 768 && viewW < 1024;
+
+        let initialSize = config.defaultSize;
+        if (isTablet) {
+          initialSize = {
+            width: Math.min(config.defaultSize.width, Math.round(viewW * 0.85)),
+            height: Math.min(config.defaultSize.height, Math.round((viewH - 48) * 0.85)),
+          };
+        }
+
         return [
           ...prev,
           {
@@ -69,7 +81,7 @@ export const useWindowManager = () => {
             icon: config.icon,
             content: config.content,
             position: { x: 50 + cascade, y: 50 + cascade },
-            size: config.defaultSize,
+            size: initialSize,
             zIndex: maxZ + 1,
             state: isMobile ? ("maximized" as WindowStateType) : ("normal" as WindowStateType),
           },
