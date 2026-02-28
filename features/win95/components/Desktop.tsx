@@ -6,6 +6,7 @@ import Draggable, { type DraggableEvent, type DraggableData } from "react-dragga
 import { useWindowManager, isBootCompleteAtom } from "@/features/win95/store/windowStore";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { useIconPositions } from "@/features/win95/hooks/useIconPositions";
+import { useKeyboardShortcuts } from "@/features/win95/hooks/useKeyboardShortcuts";
 import BootScreen from "./BootScreen";
 import { WIN95_WINDOW_CONFIGS } from "@/features/win95/constants";
 import DesktopIcon from "./DesktopIcon";
@@ -17,6 +18,8 @@ import CareerWindow from "./windows/CareerWindow";
 import SystemWindow from "./windows/SystemWindow";
 import MailWindow from "./windows/MailWindow";
 import IEWindow from "./windows/IEWindow";
+import ReadmeWindow from "./windows/ReadmeWindow";
+import SpaceBackground from "./SpaceBackground";
 
 const WINDOW_CONTENT_MAP: Record<string, React.ReactNode> = {
   notepad: <NotepadWindow />,
@@ -25,6 +28,7 @@ const WINDOW_CONTENT_MAP: Record<string, React.ReactNode> = {
   system: <SystemWindow />,
   mail: <MailWindow />,
   internet: <IEWindow />,
+  readme: <ReadmeWindow />,
 };
 
 // WIN95_WINDOW_CONFIGS는 정적 상수이므로 모듈 스코프에서 refs 배열 생성 가능
@@ -36,13 +40,16 @@ export default function Desktop() {
   const [isBootComplete, setIsBootComplete] = useAtom(isBootCompleteAtom);
   const { isMobile } = useBreakpoint();
   const { getPosition, updatePosition, isReady } = useIconPositions();
+  useKeyboardShortcuts();
   // 아이콘 id별 드래그 발생 여부 추적 (re-render 없이 관리)
   const draggedRef = useRef<Set<string>>(new Set());
 
   return (
     <div className="flex flex-col w-full h-dvh overflow-hidden">
       {/* Desktop area */}
-      <div className="relative flex-1 bg-[#008080] overflow-hidden">
+      <div className="relative flex-1 bg-black overflow-hidden">
+        {/* 우주 배경 — 최하단 레이어 */}
+        <SpaceBackground />
         {/* 모바일: 기존 중앙 그리드 레이아웃 유지 */}
         {isMobile && (
           <div className="absolute inset-0 flex flex-wrap justify-center content-start gap-6 pt-10 px-6">
