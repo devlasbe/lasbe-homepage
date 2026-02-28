@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
-type BootPhaseType = "checking" | "booting" | "fading";
+type BootPhaseType = "booting" | "fading";
 
 type BootScreenPropsType = {
   onComplete: () => void;
@@ -13,18 +13,10 @@ const TOTAL_SEGMENTS = 12;
 const INTERVAL_MS = 250;
 
 export default function BootScreen({ onComplete }: BootScreenPropsType) {
-  const [phase, setPhase] = useState<BootPhaseType>("checking");
+  const [phase, setPhase] = useState<BootPhaseType>("booting");
   const [progress, setProgress] = useState(0);
   const onCompleteRef = useRef(onComplete);
   onCompleteRef.current = onComplete;
-
-  useEffect(() => {
-    if (sessionStorage.getItem("win95-boot-shown")) {
-      onCompleteRef.current();
-      return;
-    }
-    setPhase("booting");
-  }, []);
 
   useEffect(() => {
     if (phase !== "booting") return;
@@ -46,7 +38,6 @@ export default function BootScreen({ onComplete }: BootScreenPropsType) {
   useEffect(() => {
     if (phase !== "fading") return;
     const timer = setTimeout(() => {
-      sessionStorage.setItem("win95-boot-shown", "1");
       onCompleteRef.current();
     }, 500);
     return () => clearTimeout(timer);
@@ -57,8 +48,6 @@ export default function BootScreen({ onComplete }: BootScreenPropsType) {
       setPhase("fading");
     }
   };
-
-  if (phase === "checking") return null;
 
   return (
     <div

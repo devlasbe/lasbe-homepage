@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useAtom } from "jotai";
 import { isStartMenuOpenAtom, useWindowManager } from "@/features/win95/store/windowStore";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
@@ -44,7 +45,7 @@ export default function Taskbar() {
           } bg-[#c0c0c0]`}
           onClick={() => setIsStartMenuOpen((prev) => !prev)}
         >
-          <span className="text-system-ui-lg">🪟</span>
+          <Image src="/lasbe_character.jpg" alt="시작" width={20} height={20} className="rounded-sm object-cover flex-shrink-0" />
           <span>시작</span>
         </button>
         <StartMenu />
