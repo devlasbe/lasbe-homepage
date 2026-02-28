@@ -19,6 +19,7 @@ import SystemWindow from "./windows/SystemWindow";
 import MailWindow from "./windows/MailWindow";
 import IEWindow from "./windows/IEWindow";
 import ReadmeWindow from "./windows/ReadmeWindow";
+import GithubWindow from "./windows/GithubWindow";
 import SpaceBackground from "./SpaceBackground";
 
 const WINDOW_CONTENT_MAP: Record<string, React.ReactNode> = {
@@ -29,6 +30,7 @@ const WINDOW_CONTENT_MAP: Record<string, React.ReactNode> = {
   mail: <MailWindow />,
   internet: <IEWindow />,
   readme: <ReadmeWindow />,
+  github: <GithubWindow />,
 };
 
 // WIN95_WINDOW_CONFIGS는 정적 상수이므로 모듈 스코프에서 refs 배열 생성 가능

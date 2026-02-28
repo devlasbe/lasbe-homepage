@@ -56,4 +56,11 @@ export const WIN95_WINDOW_CONFIGS: Win95WindowConfigType[] = [
     title: "README.txt - 도움말",
     defaultSize: { width: 520, height: 480 },
   },
+  {
+    id: "github",
+    label: "GitHub",
+    icon: "🐙",
+    title: "GitHub - devlasbe",
+    defaultSize: { width: 620, height: 540 },
+  },
 ];

@@ -10,6 +10,7 @@ import CareerWindow from "./windows/CareerWindow";
 import SystemWindow from "./windows/SystemWindow";
 import MailWindow from "./windows/MailWindow";
 import IEWindow from "./windows/IEWindow";
+import GithubWindow from "./windows/GithubWindow";
 
 const WINDOW_CONTENT_MAP: Record<string, React.ReactNode> = {
   notepad: <NotepadWindow />,
@@ -18,6 +19,7 @@ const WINDOW_CONTENT_MAP: Record<string, React.ReactNode> = {
   system: <SystemWindow />,
   mail: <MailWindow />,
   internet: <IEWindow />,
+  github: <GithubWindow />,
 };
 
 export default function StartMenu() {
