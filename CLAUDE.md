@@ -25,9 +25,9 @@ lasbe-homepage/
 │   ├── desktop/                # Win95 OS 셸 컴포넌트
 │   ├── windows/                # Window 컨텐츠 컴포넌트
 │   └── ui/                     # 공유 Win95 UI 서브컴포넌트
-├── store/                      # 전역 상태 (jotai atoms) — windowStore.ts
+├── atoms/                      # jotai atom 정의 및 타입 — window.ts
 ├── constants/                  # 정적 상수 — win95.ts, portfolio.ts
-├── hooks/                      # 커스텀 훅 (useBreakpoint, useViewCount, useIconPositions, useKeyboardShortcuts)
+├── hooks/                      # 커스텀 훅 (useBreakpoint, useViewCount, useIconPositions, useKeyboardShortcuts, useWindowManager)
 ├── services/                   # 외부 서비스 연동
 ├── utils/                      # 유틸리티 함수
 ├── docs/                       # 작업 계획 문서
@@ -56,9 +56,9 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
   - `components/desktop/` — Win95 OS 셸 컴포넌트 (Desktop, Window, Taskbar 등)
   - `components/windows/` — Window 컨텐츠 컴포넌트
   - `components/ui/` — 공유 Win95 UI 서브컴포넌트 (2개 이상 사용처 확인 후 추출)
-  - `store/` — jotai atoms 및 관련 훅
+  - `atoms/` — jotai atom 정의 및 타입 (순수 atom만, 훅 없음)
   - `constants/` — 정적 상수 데이터 (`win95.ts`, `portfolio.ts`)
-  - `hooks/` — 커스텀 훅 (범용 + Win95 훅 모두 포함)
+  - `hooks/` — 커스텀 훅 (범용 + Win95 훅 모두 포함, `useWindowManager` 포함)
   - `services/`, `utils/` — 범용 서비스/유틸리티
 
 ## 코드 컨벤션
