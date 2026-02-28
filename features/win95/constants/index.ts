@@ -49,4 +49,11 @@ export const WIN95_WINDOW_CONFIGS: Win95WindowConfigType[] = [
     title: "인터넷 - Internet Explorer",
     defaultSize: { width: 620, height: 480 },
   },
+  {
+    id: "readme",
+    label: "README.txt",
+    icon: "❓",
+    title: "README.txt - 도움말",
+    defaultSize: { width: 520, height: 480 },
+  },
 ];
