@@ -1,3 +1,62 @@
+export type SkillType = { name: string; level: number };
+export type SkillTabType = "프론트엔드" | "백엔드·인프라" | "도구";
+
+export const skillsData: Record<SkillTabType, SkillType[]> = {
+  프론트엔드: [
+    { name: "TypeScript", level: 90 },
+    { name: "React", level: 90 },
+    { name: "Next.js", level: 85 },
+    { name: "Tailwind CSS", level: 80 },
+    { name: "styled-components", level: 75 },
+    { name: "React Query", level: 75 },
+    { name: "Recoil / Jotai", level: 75 },
+    { name: "Electron", level: 60 },
+  ],
+  "백엔드·인프라": [
+    { name: "NestJS", level: 60 },
+    { name: "Firebase", level: 70 },
+    { name: "Docker", level: 65 },
+    { name: "GitHub Actions", level: 70 },
+    { name: "PM2", level: 60 },
+  ],
+  도구: [
+    { name: "Git", level: 85 },
+    { name: "Vite / Webpack", level: 75 },
+    { name: "Storybook", level: 70 },
+    { name: "Playwright", level: 65 },
+    { name: "Nexus (NPM)", level: 65 },
+  ],
+};
+
+export type FavoriteType = { label: string; icon: string; url: string; desc: string };
+
+export const favoritesData: FavoriteType[] = [
+  {
+    label: "GitHub",
+    icon: "🐙",
+    url: "https://github.com/devlasbe",
+    desc: "소스 코드 및 프로젝트 저장소",
+  },
+  {
+    label: "블로그",
+    icon: "📝",
+    url: "https://lasbe.tistory.com",
+    desc: "개발 기록 및 기술 블로그",
+  },
+  {
+    label: "오픈프차",
+    icon: "🏪",
+    url: "https://www.openfranchise.kr/",
+    desc: "프랜차이즈 창업 정보 서비스",
+  },
+  {
+    label: "안성재 GPT",
+    icon: "🍳",
+    url: "https://ansungjae-gpt.vercel.app/",
+    desc: "안성재 쉐프 스타일 요리 평가",
+  },
+];
+
 type CarrerProjectDescType = { href?: string; desc: string };
 
 type CarrerProjectType = {
