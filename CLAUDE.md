@@ -57,6 +57,15 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
   - `type ModalPropsType = { ... }`
   - `type UserInfoType = { ... }`
 
+- **매직 넘버 금지**: 컴포넌트 내 하드코딩된 수치(색상, 크기, 비율, 속도 등)는 파일 상단의 상수 블록으로 추출한다. 상수명은 UPPER_SNAKE_CASE로 작성하고, 관련 상수끼리 주석으로 그룹화한다.
+  ```ts
+  // ── 카메라 ──
+  const CAMERA_FOV  = 60;
+  const CAMERA_NEAR = 0.1;
+  const CAMERA_FAR  = 5000;
+  ```
+  파생 값은 기본 상수에서 계산한다 (`const NEAR_DOT_COUNT = Math.floor(NEAR_TOTAL * NEAR_DOT_RATIO)`).
+
 - **Font Size 토큰**: 커스텀 폰트 크기는 `text-system-*` prefix를 사용한다. (`tailwind.config.ts` `theme.extend.fontSize`에 정의)
   - OS Chrome (반응형): `text-system-ui`, `text-system-ui-md`, `text-system-ui-lg`, `text-system-desktop-icon` — desktop 기본값은 tailwind.config.ts에, 모바일 오버라이드는 `app/globals.css` `@layer utilities`에 정의
   - Window Content (고정): `text-system-caption`, `text-system-body`, `text-system-heading`, `text-system-icon-md`, `text-system-icon-lg`
