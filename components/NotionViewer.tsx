@@ -1,14 +1,14 @@
 "use client";
 
-// react-notion-x 관련 CSS — NotionViewer에서만 필요하므로 여기서 import (전역 preload 방지)
-import "react-notion-x/src/styles.css";
-import "prismjs/themes/prism-tomorrow.css";
-import "katex/dist/katex.min.css";
-
 import React, { useState, useEffect } from "react";
 import { NotionRenderer } from "react-notion-x";
 import type { ExtendedRecordMap } from "notion-types";
-import dynamic from "next/dynamic";
+import { Code } from "react-notion-x/build/third-party/code";
+import { Collection } from "react-notion-x/build/third-party/collection";
+import { Equation } from "react-notion-x/build/third-party/equation";
+import { Modal } from "react-notion-x/build/third-party/modal";
+import { Pdf } from "react-notion-x/build/third-party/pdf";
+
 import Link from "next/link";
 import Image from "next/image";
 
@@ -19,10 +19,6 @@ type NotionViewerPropsType = {
   directUrl?: string;
   onStateChange?: (state: FetchStateType) => void;
 };
-
-const Collection = dynamic(() => import("react-notion-x/build/third-party/collection").then((m) => m.Collection));
-const Code = dynamic(() => import("react-notion-x/build/third-party/code").then((m) => m.Code));
-const Equation = dynamic(() => import("react-notion-x/build/third-party/equation").then((m) => m.Equation));
 
 export default function NotionViewer({ pageId, directUrl, onStateChange }: NotionViewerPropsType) {
   const [fetchState, setFetchState] = useState<FetchStateType>("loading");
@@ -88,6 +84,8 @@ export default function NotionViewer({ pageId, directUrl, onStateChange }: Notio
         Collection,
         Code,
         Equation,
+        Modal,
+        Pdf,
       }}
     />
   );

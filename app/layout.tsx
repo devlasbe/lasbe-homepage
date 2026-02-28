@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "react-notion-x/src/styles.css";
+import "prismjs/themes/prism-tomorrow.css";
+import "katex/dist/katex.min.css";
 import { Archivo_Black, Noto_Sans_KR, VT323, Press_Start_2P } from "next/font/google";
 import Provider from "@/components/Provider";
 
