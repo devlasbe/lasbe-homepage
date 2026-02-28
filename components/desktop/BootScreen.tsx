@@ -85,6 +85,7 @@ export default function BootScreen({ onComplete }: BootScreenPropsType) {
                 width={80}
                 height={80}
                 className="w-full h-full object-cover"
+                priority
               />
             </div>
             <div>

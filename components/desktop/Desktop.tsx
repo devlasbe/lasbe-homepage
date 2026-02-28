@@ -23,7 +23,7 @@ export default function Desktop() {
   const { windows, openWindow } = useWindowManager();
   const [isBootComplete, setIsBootComplete] = useAtom(isBootCompleteAtom);
   const { isMobile } = useBreakpoint();
-  const { getPosition, updatePosition, isReady } = useIconPositions();
+  const { getPosition, updatePosition, isReady, windowHeight } = useIconPositions();
   useKeyboardShortcuts();
   // 아이콘 id별 드래그 발생 여부 추적 (re-render 없이 관리)
   const draggedRef = useRef<Set<string>>(new Set());
@@ -57,7 +57,7 @@ export default function Desktop() {
               const nodeRef = iconNodeRefs[index];
               return (
                 <Draggable
-                  key={cfg.id}
+                  key={`${cfg.id}-${windowHeight}`}
                   nodeRef={nodeRef as React.RefObject<HTMLElement>}
                   bounds="parent"
                   defaultPosition={getPosition(cfg.id, index)}
