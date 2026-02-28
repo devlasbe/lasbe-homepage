@@ -3,7 +3,9 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import Draggable, { DraggableEvent, DraggableData } from "react-draggable";
 import { ResizableBox, ResizeCallbackData } from "react-resizable";
-import { Win95WindowType, useWindowManager } from "@/store/windowStore";
+import { useAtomValue } from "jotai";
+import { Win95WindowType, windowsAtom } from "@/atoms/window";
+import { useWindowManager } from "@/hooks/useWindowManager";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 type WindowPropsType = {
@@ -13,6 +15,7 @@ type WindowPropsType = {
 export default function Window({ window: win }: WindowPropsType) {
   const { focusWindow, updatePosition, updateSize, closeWindow, minimizeWindow, maximizeWindow } =
     useWindowManager();
+  const windows = useAtomValue(windowsAtom);
   const { isMobile, isTablet } = useBreakpoint();
   const nodeRef = useRef<HTMLDivElement>(null);
   const resizeOriginRef = useRef<{ x: number; width: number } | null>(null);
@@ -67,10 +70,11 @@ export default function Window({ window: win }: WindowPropsType) {
     maximizeWindow(win.id);
   };
 
-  const titleBarBg =
-    win.state === "maximized"
-      ? "bg-gradient-to-r from-[#000080] to-[#1084d0]"
-      : "bg-gradient-to-r from-[#000080] to-[#1084d0]";
+  const isFocused = win.zIndex === Math.max(...windows.map((w) => w.zIndex));
+  const titleBarBg = isFocused
+    ? "bg-gradient-to-r from-[#000080] to-[#1084d0]"
+    : "bg-[#7b7b7b]";
+  const titleBarText = isFocused ? "text-white" : "text-[#c0c0c0]";
 
   const windowContent = (
     <div
@@ -83,7 +87,7 @@ export default function Window({ window: win }: WindowPropsType) {
         onDoubleClick={handleTitlebarDoubleClick}
       >
         <win.icon style={{ width: 16, height: 16, display: "block", flexShrink: 0 }} />
-        <span className="text-white text-system-ui font-bold truncate flex-1 font-vt323 tracking-wide">
+        <span className={`${titleBarText} text-system-ui font-bold truncate flex-1 font-vt323 tracking-wide`}>
           {win.title}
         </span>
         <div className="flex gap-0.5 ml-auto flex-shrink-0">

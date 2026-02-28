@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useAtom } from "jotai";
-import { isStartMenuOpenAtom, useWindowManager } from "@/store/windowStore";
+import { isStartMenuOpenAtom } from "@/atoms/window";
+import { useWindowManager } from "@/hooks/useWindowManager";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 import SystemTray from "./SystemTray";
 import StartMenu from "./StartMenu";

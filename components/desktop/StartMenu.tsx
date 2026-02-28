@@ -2,25 +2,9 @@
 
 import { useEffect, useRef } from "react";
 import { useAtom } from "jotai";
-import { isStartMenuOpenAtom, useWindowManager } from "@/store/windowStore";
-import { WIN95_WINDOW_CONFIGS, Win95WindowConfigType } from "@/constants/win95";
-import NotepadWindow from "../windows/NotepadWindow";
-import ProjectsWindow from "../windows/ProjectsWindow";
-import CareerWindow from "../windows/CareerWindow";
-import SystemWindow from "../windows/SystemWindow";
-import MailWindow from "../windows/MailWindow";
-import IEWindow from "../windows/IEWindow";
-import GithubWindow from "../windows/GithubWindow";
-
-const WINDOW_CONTENT_MAP: Record<string, React.ReactNode> = {
-  notepad: <NotepadWindow />,
-  projects: <ProjectsWindow />,
-  career: <CareerWindow />,
-  system: <SystemWindow />,
-  mail: <MailWindow />,
-  internet: <IEWindow />,
-  github: <GithubWindow />,
-};
+import { isStartMenuOpenAtom } from "@/atoms/window";
+import { useWindowManager } from "@/hooks/useWindowManager";
+import { WINDOW_CONFIGS, WindowConfigType } from "@/constants/windowConfigs";
 
 export default function StartMenu() {
   const [isOpen, setIsOpen] = useAtom(isStartMenuOpenAtom);
@@ -44,8 +28,8 @@ export default function StartMenu() {
 
   if (!isOpen) return null;
 
-  const handleItemClick = (cfg: Win95WindowConfigType) => {
-    openWindow({ ...cfg, content: WINDOW_CONTENT_MAP[cfg.id] });
+  const handleItemClick = (cfg: WindowConfigType) => {
+    openWindow({ ...cfg, content: cfg.content });
     setIsOpen(false);
   };
 
@@ -76,7 +60,7 @@ export default function StartMenu() {
 
       {/* Menu items */}
       <div className="flex flex-col min-w-[180px]">
-        {WIN95_WINDOW_CONFIGS.map((cfg) => (
+        {WINDOW_CONFIGS.filter((cfg) => cfg.showInStartMenu).map((cfg) => (
           <button
             key={cfg.id}
             className="flex items-center gap-2 px-3 py-2 md:py-1.5 text-left text-system-body font-vt323 hover:bg-[#000080] hover:text-white active:bg-[#000080] active:text-white"
