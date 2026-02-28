@@ -1,6 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { profileDataList } from "@/features/about/constants";
+
+const email = profileDataList.find((p) => p.label === "메일")?.value ?? "";
 
 export default function MailWindow() {
   const [subject, setSubject] = useState("");
@@ -8,7 +11,7 @@ export default function MailWindow() {
   const [sent, setSent] = useState(false);
 
   const handleSend = () => {
-    const mailto = `mailto:devlasbe@gmail.com?subject=${encodeURIComponent(
+    const mailto = `mailto:${email}?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
     window.open(mailto);
@@ -38,7 +41,7 @@ export default function MailWindow() {
       <div className="border-b-2 border-[#808080] flex-shrink-0">
         <div className="flex items-center px-2 py-1 border-b border-[#d0d0d0]">
           <span className="text-system-body w-20 shrink-0">받는사람:</span>
-          <span className="text-system-body text-[#000080]">devlasbe@gmail.com</span>
+          <span className="text-system-body text-[#000080]">{email}</span>
         </div>
         <div className="flex items-center px-2 py-1 border-b border-[#d0d0d0]">
           <span className="text-system-body w-20 shrink-0">참조(C):</span>

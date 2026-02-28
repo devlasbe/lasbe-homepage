@@ -1,6 +1,18 @@
 "use client";
 
+import { profileDataList, favoritesData } from "@/features/about/constants";
+
 export default function NotepadWindow() {
+  const name = profileDataList.find((p) => p.label === "이름")?.value ?? "";
+  const birth = profileDataList.find((p) => p.label === "생년월일")?.value ?? "";
+  const location = profileDataList.find((p) => p.label === "위치")?.value ?? "";
+  const email = profileDataList.find((p) => p.label === "메일")?.value ?? "";
+  const github = favoritesData.find((f) => f.label === "GitHub")?.url ?? "";
+  const blog = favoritesData.find((f) => f.label === "블로그")?.url ?? "";
+
+  const githubDisplay = github.replace("https://", "");
+  const blogDisplay = blog.replace("https://", "");
+
   return (
     <div className="flex flex-col h-full font-vt323">
       {/* Menu bar */}
@@ -18,14 +30,14 @@ export default function NotepadWindow() {
       {/* Content */}
       <div className="flex-1 overflow-auto bg-white p-2 win95-sunken">
         <pre className="whitespace-pre-wrap font-vt323 text-system-body leading-relaxed">
-{`이름        : 장성우
-생년월일    : 97.03.05
-위치        : 서울 동작구
-연락처      : devlasbe@gmail.com
+{`이름        : ${name}
+생년월일    : ${birth}
+위치        : ${location}
+연락처      : ${email}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-안녕하세요, 장성우입니다.
+안녕하세요, ${name}입니다.
 
 본질을 탐구하고, 주도적인 문제 해결을 즐기는
 프론트엔드 개발자입니다.
@@ -39,8 +51,8 @@ export default function NotepadWindow() {
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-GitHub  : github.com/devlasbe
-Blog    : lasbe.tistory.com
+GitHub  : ${githubDisplay}
+Blog    : ${blogDisplay}
 `}
         </pre>
       </div>

@@ -1,39 +1,10 @@
 "use client";
 
 import { useState } from "react";
-
-type SkillType = { name: string; level: number };
-type TabType = "프론트엔드" | "백엔드·인프라" | "도구";
-
-const SKILLS: Record<TabType, SkillType[]> = {
-  프론트엔드: [
-    { name: "TypeScript", level: 90 },
-    { name: "React", level: 90 },
-    { name: "Next.js", level: 85 },
-    { name: "Tailwind CSS", level: 80 },
-    { name: "styled-components", level: 75 },
-    { name: "React Query", level: 75 },
-    { name: "Recoil / Jotai", level: 75 },
-    { name: "Electron", level: 60 },
-  ],
-  "백엔드·인프라": [
-    { name: "NestJS", level: 60 },
-    { name: "Firebase", level: 70 },
-    { name: "Docker", level: 65 },
-    { name: "GitHub Actions", level: 70 },
-    { name: "PM2", level: 60 },
-  ],
-  도구: [
-    { name: "Git", level: 85 },
-    { name: "Vite / Webpack", level: 75 },
-    { name: "Storybook", level: 70 },
-    { name: "Playwright", level: 65 },
-    { name: "Nexus (NPM)", level: 65 },
-  ],
-};
+import { skillsData, SkillTabType } from "@/features/about/constants";
 
 export default function SystemWindow() {
-  const [activeTab, setActiveTab] = useState<TabType>("프론트엔드");
+  const [activeTab, setActiveTab] = useState<SkillTabType>("프론트엔드");
 
   return (
     <div className="flex flex-col h-full font-vt323 text-system-body">
@@ -52,7 +23,7 @@ export default function SystemWindow() {
 
       {/* Tabs */}
       <div className="flex flex-shrink-0 px-2 pt-2 gap-1 border-b border-[#808080]">
-        {(Object.keys(SKILLS) as TabType[]).map((tab) => (
+        {(Object.keys(skillsData) as SkillTabType[]).map((tab) => (
           <button
             key={tab}
             className={`px-3 py-1 text-system-caption border-t-2 border-l-2 border-r-2 border-[#808080] ${
@@ -70,7 +41,7 @@ export default function SystemWindow() {
       {/* Tab content */}
       <div className="flex-1 overflow-y-auto p-3 bg-[#c0c0c0]">
         <div className="space-y-3">
-          {SKILLS[activeTab].map((skill) => (
+          {skillsData[activeTab].map((skill) => (
             <div key={skill.name} className="flex items-center gap-2">
               <span className="w-36 text-system-caption text-right shrink-0">
                 {skill.name}:
