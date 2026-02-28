@@ -36,6 +36,12 @@
 - [x] NotepadWindow.tsx — 하드코딩 텍스트 제거, profileDataList + favoritesData 동적 구성
 - [x] MailWindow.tsx — 하드코딩 이메일 제거, profileDataList에서 추출
 
-## Phase 4 — 부팅 시퀀스 & 폴리시
+## Phase 4 — 아이콘 드래그 & 위치 저장 ← 완료
+- [x] `features/win95/hooks/useIconPositions.ts` 신규 생성 — localStorage 기반 위치 저장/복원
+- [x] Desktop.tsx — isMobile 분기: 모바일 중앙 그리드 유지 / 태블릿·데스크톱 Draggable 절대 배치
+- [x] 모듈 스코프 iconNodeRefs (findDOMNode 경고 방지), draggedRef Set으로 클릭/드래그 구분
+- [x] bounds="parent" 데스크톱 영역 밖 이동 방지, localStorage 불가 환경 try/catch 폴백
+
+## Phase 5 — 부팅 시퀀스 & 폴리시
 - [ ] BIOS → Windows 로딩 → 바탕화면 진입
 - [ ] 성능 최적화 & 접근성

@@ -1,7 +1,11 @@
 "use client";
 
+import { createRef, useRef } from "react";
 import { useAtom } from "jotai";
+import Draggable, { type DraggableEvent, type DraggableData } from "react-draggable";
 import { useWindowManager, isBootCompleteAtom } from "@/features/win95/store/windowStore";
+import { useBreakpoint } from "@/hooks/useBreakpoint";
+import { useIconPositions } from "@/features/win95/hooks/useIconPositions";
 import BootScreen from "./BootScreen";
 import { WIN95_WINDOW_CONFIGS } from "@/features/win95/constants";
 import DesktopIcon from "./DesktopIcon";
@@ -23,27 +27,84 @@ const WINDOW_CONTENT_MAP: Record<string, React.ReactNode> = {
   internet: <IEWindow />,
 };
 
+// WIN95_WINDOW_CONFIGS는 정적 상수이므로 모듈 스코프에서 refs 배열 생성 가능
+const iconNodeRefs = WIN95_WINDOW_CONFIGS.map(() => createRef<HTMLDivElement>());
+const DRAG_THRESHOLD = 4; // px 미만 이동은 클릭으로 간주
+
 export default function Desktop() {
   const { windows, openWindow } = useWindowManager();
   const [isBootComplete, setIsBootComplete] = useAtom(isBootCompleteAtom);
+  const { isMobile } = useBreakpoint();
+  const { getPosition, updatePosition, isReady } = useIconPositions();
+  // 아이콘 id별 드래그 발생 여부 추적 (re-render 없이 관리)
+  const draggedRef = useRef<Set<string>>(new Set());
 
   return (
     <div className="flex flex-col w-full h-dvh overflow-hidden">
       {/* Desktop area */}
       <div className="relative flex-1 bg-[#008080] overflow-hidden">
-        {/* Desktop icons - mobile: centered grid / md+: left column */}
-        <div className="absolute inset-0 md:inset-auto md:left-4 md:top-4 flex flex-wrap md:flex-col md:flex-nowrap justify-center md:justify-start content-start gap-6 pt-10 px-6 md:pt-4 md:px-0">
-          {WIN95_WINDOW_CONFIGS.map((cfg) => (
-            <DesktopIcon
-              key={cfg.id}
-              icon={cfg.icon}
-              label={cfg.label}
-              onDoubleClick={() =>
-                openWindow({ ...cfg, content: WINDOW_CONTENT_MAP[cfg.id] })
-              }
-            />
-          ))}
-        </div>
+        {/* 모바일: 기존 중앙 그리드 레이아웃 유지 */}
+        {isMobile && (
+          <div className="absolute inset-0 flex flex-wrap justify-center content-start gap-6 pt-10 px-6">
+            {WIN95_WINDOW_CONFIGS.map((cfg) => (
+              <DesktopIcon
+                key={cfg.id}
+                icon={cfg.icon}
+                label={cfg.label}
+                onDoubleClick={() =>
+                  openWindow({ ...cfg, content: WINDOW_CONTENT_MAP[cfg.id] })
+                }
+              />
+            ))}
+          </div>
+        )}
+
+        {/* 태블릿/데스크톱: 절대 좌표 + Draggable */}
+        {!isMobile && isReady && (
+          <>
+            {WIN95_WINDOW_CONFIGS.map((cfg, index) => {
+              const nodeRef = iconNodeRefs[index];
+              return (
+                <Draggable
+                  key={cfg.id}
+                  nodeRef={nodeRef as React.RefObject<HTMLElement>}
+                  bounds="parent"
+                  defaultPosition={getPosition(cfg.id, index)}
+                  onStart={() => {
+                    draggedRef.current.delete(cfg.id);
+                  }}
+                  onDrag={(_e: DraggableEvent, data: DraggableData) => {
+                    if (
+                      Math.abs(data.deltaX) > DRAG_THRESHOLD ||
+                      Math.abs(data.deltaY) > DRAG_THRESHOLD
+                    ) {
+                      draggedRef.current.add(cfg.id);
+                    }
+                  }}
+                  onStop={(_e: DraggableEvent, data: DraggableData) => {
+                    if (draggedRef.current.has(cfg.id)) {
+                      updatePosition(cfg.id, { x: data.x, y: data.y });
+                      draggedRef.current.delete(cfg.id);
+                    }
+                  }}
+                >
+                  <div ref={nodeRef} className="absolute">
+                    <DesktopIcon
+                      icon={cfg.icon}
+                      label={cfg.label}
+                      onDoubleClick={() => {
+                        if (!draggedRef.current.has(cfg.id)) {
+                          openWindow({ ...cfg, content: WINDOW_CONTENT_MAP[cfg.id] });
+                        }
+                        draggedRef.current.delete(cfg.id);
+                      }}
+                    />
+                  </div>
+                </Draggable>
+              );
+            })}
+          </>
+        )}
 
         {/* Open windows */}
         {windows
