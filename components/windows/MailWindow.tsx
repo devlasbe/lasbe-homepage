@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { profileDataList } from "@/features/about/constants";
+import { profileDataList } from "@/constants/portfolio";
 import { Win95StatusBar } from "../ui";
 
 const email = profileDataList.find((p) => p.label === "메일")?.value ?? "";

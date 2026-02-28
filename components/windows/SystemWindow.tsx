@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { skillsData, SkillTabType } from "@/features/about/constants";
+import { skillsData, SkillTabType } from "@/constants/portfolio";
 
 export default function SystemWindow() {
   const [activeTab, setActiveTab] = useState<SkillTabType>("프론트엔드");

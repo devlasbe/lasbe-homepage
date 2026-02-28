@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { carrerDataList } from "@/features/about/constants";
+import { carrerDataList } from "@/constants/portfolio";
 import { Win95TechBadgeList, Win95DescriptionList } from "../ui";
 
 export default function CareerWindow() {

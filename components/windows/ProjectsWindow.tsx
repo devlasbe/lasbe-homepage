@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { projectDataList } from "@/features/about/constants";
+import { projectDataList } from "@/constants/portfolio";
 import { Win95TechBadgeList, Win95DescriptionList } from "../ui";
 
 export default function ProjectsWindow() {

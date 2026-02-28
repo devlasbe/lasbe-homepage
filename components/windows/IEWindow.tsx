@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { favoritesData } from "@/features/about/constants";
+import { favoritesData } from "@/constants/portfolio";
 import { Win95MenuBar, Win95StatusBar } from "../ui";
 
 // ── 메뉴 ──

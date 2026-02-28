@@ -1,6 +1,6 @@
 "use client";
 
-import { profileDataList, favoritesData } from "@/features/about/constants";
+import { profileDataList, favoritesData } from "@/constants/portfolio";
 import { Win95MenuBar, Win95StatusBar } from "../ui";
 
 // ── 메뉴 ──
