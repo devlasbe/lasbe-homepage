@@ -12,14 +12,26 @@ const MENU_ITEMS = ["파일(F)", "보기(V)", "도움말(H)"] as const;
 type LoadStateType = "loading" | "loaded" | "error";
 
 export default function BlogWindow() {
+  const [iframeKey, setIframeKey] = useState(0);
   const [loadState, setLoadState] = useState<LoadStateType>("loading");
+
+  const handleRefresh = () => {
+    setLoadState("loading");
+    setIframeKey((k) => k + 1);
+  };
 
   return (
     <div className="flex flex-col h-full font-vt323 text-system-body">
       <Win95MenuBar items={MENU_ITEMS} />
 
       {/* 주소 표시줄 */}
-      <Win95AddressBar url={BLOG_URL} actionLabel="새창" actionHref={BLOG_URL} />
+      <Win95AddressBar
+        url={BLOG_URL}
+        showNavButtons
+        onRefresh={handleRefresh}
+        actionLabel="새창"
+        actionHref={BLOG_URL}
+      />
 
       {/* iframe 콘텐츠 영역 */}
       <div className="flex-1 relative bg-white win95-sunken overflow-hidden">
@@ -43,6 +55,7 @@ export default function BlogWindow() {
           </div>
         )}
         <iframe
+          key={iframeKey}
           src={BLOG_URL}
           className="w-full h-full border-none"
           onLoad={() => setLoadState("loaded")}
