@@ -7,6 +7,7 @@ import { useAtomValue } from "jotai";
 import { Win95WindowType, windowsAtom } from "@/atoms/window";
 import { useWindowManager } from "@/hooks/useWindowManager";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
+import Win95Button from "@/components/ui/Win95Button";
 
 type WindowPropsType = {
   window: Win95WindowType;
@@ -92,33 +93,34 @@ export default function Window({ window: win }: WindowPropsType) {
         </span>
         <div className="flex gap-0.5 ml-auto flex-shrink-0">
           {!isMobile && (
-            <button
-              className="win95-btn"
+            <Win95Button
+              size="sm"
               onMouseDown={(e) => e.stopPropagation()}
               onClick={() => minimizeWindow(win.id)}
               title="최소화"
             >
               _
-            </button>
+            </Win95Button>
           )}
           {!isMobile && (
-            <button
-              className="win95-btn"
+            <Win95Button
+              size="sm"
               onMouseDown={(e) => e.stopPropagation()}
               onClick={() => maximizeWindow(win.id)}
               title="최대화/복원"
             >
               {win.state === "maximized" ? "❐" : "□"}
-            </button>
+            </Win95Button>
           )}
-          <button
-            className="win95-btn font-bold"
+          <Win95Button
+            size="sm"
+            weight="bold"
             onMouseDown={(e) => e.stopPropagation()}
             onClick={() => closeWindow(win.id)}
             title="닫기"
           >
             ✕
-          </button>
+          </Win95Button>
         </div>
       </div>
       {/* Content area */}

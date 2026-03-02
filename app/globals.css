@@ -122,21 +122,16 @@ body {
   font-size: 10px;
   line-height: 1;
   padding: 0 2px;
-  background: #c0c0c0;
-  border-top: 1px solid #ffffff;
-  border-left: 1px solid #ffffff;
-  border-bottom: 1px solid #808080;
-  border-right: 1px solid #808080;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.win95-btn:active {
-  border-top: 1px solid #808080;
-  border-left: 1px solid #808080;
-  border-bottom: 1px solid #ffffff;
-  border-right: 1px solid #ffffff;
+button.win95-raised:active {
+  border-top: 2px solid #808080;
+  border-left: 2px solid #808080;
+  border-bottom: 2px solid #ffffff;
+  border-right: 2px solid #ffffff;
 }
 @media (max-width: 639px) {
   .win95-btn {

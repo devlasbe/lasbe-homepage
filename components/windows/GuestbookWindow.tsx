@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useGuestbook } from "@/hooks/useGuestbook";
-import { Win95StatusBar } from "../ui";
+import { Win95StatusBar, Win95Button } from "../ui";
 
 // ── 입력 최대 길이 ──
 const MAX_NAME_LENGTH = 20;
@@ -78,14 +78,10 @@ export default function GuestbookWindow() {
     <div className="flex flex-col h-full font-vt323">
       {/* Toolbar */}
       <div className="flex items-center gap-2 px-2 py-1 border-b-2 border-[#808080] bg-[#c0c0c0] flex-shrink-0">
-        <button
-          className="win95-raised bg-[#c0c0c0] px-3 py-0.5 text-system-body flex items-center gap-1"
-          onClick={fetchEntries}
-          disabled={isLoading}
-        >
+        <Win95Button size="lg" className="flex items-center gap-1" onClick={fetchEntries} disabled={isLoading}>
           <span>🔄</span>
           <span>새로고침(R)</span>
-        </button>
+        </Win95Button>
         {submitted && (
           <span className="text-system-body text-[#008000]">✓ 등록되었습니다!</span>
         )}
@@ -134,13 +130,9 @@ export default function GuestbookWindow() {
             <span className="text-system-body text-[#ff0000]">{formError ?? error}</span>
           )}
           <div className="ml-auto">
-            <button
-              className="win95-raised bg-[#c0c0c0] px-3 py-0.5 text-system-body disabled:opacity-50"
-              onClick={handleSubmit}
-              disabled={isSubmitting}
-            >
+            <Win95Button size="lg" onClick={handleSubmit} disabled={isSubmitting}>
               {isSubmitting ? "등록 중..." : "등록(A)"}
-            </button>
+            </Win95Button>
           </div>
         </div>
       </div>
@@ -169,12 +161,9 @@ export default function GuestbookWindow() {
                   </span>
                 </div>
                 {deletingId !== entry.id && (
-                  <button
-                    className="win95-raised bg-[#c0c0c0] px-2 py-0.5 text-system-caption shrink-0"
-                    onClick={() => handleDeleteClick(entry.id)}
-                  >
+                  <Win95Button className="shrink-0" onClick={() => handleDeleteClick(entry.id)}>
                     삭제
-                  </button>
+                  </Win95Button>
                 )}
               </div>
 
@@ -199,18 +188,12 @@ export default function GuestbookWindow() {
                     }}
                   />
                   <div className="flex gap-1">
-                    <button
-                      className="win95-raised bg-[#c0c0c0] px-2 py-0.5 text-system-caption"
-                      onClick={() => handleDeleteConfirm(entry.id)}
-                    >
+                    <Win95Button onClick={() => handleDeleteConfirm(entry.id)}>
                       확인
-                    </button>
-                    <button
-                      className="win95-raised bg-[#c0c0c0] px-2 py-0.5 text-system-caption"
-                      onClick={handleDeleteCancel}
-                    >
+                    </Win95Button>
+                    <Win95Button onClick={handleDeleteCancel}>
                       취소
-                    </button>
+                    </Win95Button>
                   </div>
                   {deleteErrors[entry.id] && (
                     <span className="text-system-caption text-[#ff0000]">

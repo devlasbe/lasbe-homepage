@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { carrerDataList } from "@/constants/portfolio";
-import { Win95TechBadgeList, Win95DescriptionList } from "../ui";
+import { Win95TechBadgeList, Win95DescriptionList, Win95Button } from "../ui";
 
 export default function CareerWindow() {
   const [openProject, setOpenProject] = useState<string | null>(
@@ -39,10 +39,9 @@ export default function CareerWindow() {
           const isOpen = openProject === project.title;
           return (
             <div key={project.title}>
-              <button
-                className={`w-full text-left px-2 py-1 flex items-center gap-2 text-system-caption win95-raised bg-[#c0c0c0] ${
-                  isOpen ? "font-bold" : ""
-                }`}
+              <Win95Button
+                weight={isOpen ? "bold" : "medium"}
+                className="w-full text-left flex items-center gap-2"
                 onClick={() =>
                   setOpenProject(isOpen ? null : project.title)
                 }
@@ -52,7 +51,7 @@ export default function CareerWindow() {
                 <span className="text-[#808080] text-system-caption shrink-0">
                   {project.period}
                 </span>
-              </button>
+              </Win95Button>
 
               {isOpen && (
                 <div className="px-3 pb-2 pt-1 text-system-caption space-y-1 bg-white win95-sunken mx-1 mb-1">

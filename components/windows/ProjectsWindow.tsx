@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { projectDataList } from "@/constants/portfolio";
-import { Win95TechBadgeList, Win95DescriptionList } from "../ui";
+import { Win95TechBadgeList, Win95DescriptionList, Win95Button } from "../ui";
 
 export default function ProjectsWindow() {
   const [selectedIdx, setSelectedIdx] = useState(0);
@@ -54,18 +54,16 @@ export default function ProjectsWindow() {
             />
             {project.imageList.length > 1 && (
               <div className="absolute bottom-1 right-1 flex items-center gap-1 z-10">
-                <button
-                  className="win95-raised bg-[#c0c0c0] px-1 text-system-caption disabled:opacity-50"
+                <Win95Button
                   onClick={() => setImgIdx((i) => Math.max(0, i - 1))}
                   disabled={imgIdx === 0}
                 >
                   ◀
-                </button>
+                </Win95Button>
                 <span className="text-system-caption text-white bg-black/50 px-1">
                   {imgIdx + 1}/{project.imageList.length}
                 </span>
-                <button
-                  className="win95-raised bg-[#c0c0c0] px-1 text-system-caption disabled:opacity-50"
+                <Win95Button
                   onClick={() =>
                     setImgIdx((i) =>
                       Math.min(project.imageList.length - 1, i + 1)
@@ -74,7 +72,7 @@ export default function ProjectsWindow() {
                   disabled={imgIdx === project.imageList.length - 1}
                 >
                   ▶
-                </button>
+                </Win95Button>
               </div>
             )}
           </div>

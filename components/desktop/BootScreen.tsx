@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Win95Button from "@/components/ui/Win95Button";
 
 type BootPhaseType = "booting" | "fading";
 
@@ -62,15 +63,15 @@ export default function BootScreen({ onComplete }: BootScreenPropsType) {
         <div className="bg-[#000080] flex items-center justify-between px-2 py-1">
           <span className="font-vt323 text-white text-system-body">LASBE OS 95</span>
           <div className="flex gap-1">
-            <button className="win95-raised bg-[#c0c0c0] text-black font-vt323 text-system-caption w-5 h-5 flex items-center justify-center leading-none">
+            <Win95Button size="sm" className="w-5 h-5 font-vt323 leading-none text-black">
               ─
-            </button>
-            <button className="win95-raised bg-[#c0c0c0] text-black font-vt323 text-system-caption w-5 h-5 flex items-center justify-center leading-none">
+            </Win95Button>
+            <Win95Button size="sm" className="w-5 h-5 font-vt323 leading-none text-black">
               □
-            </button>
-            <button className="win95-raised bg-[#c0c0c0] text-black font-vt323 text-system-caption w-5 h-5 flex items-center justify-center leading-none">
+            </Win95Button>
+            <Win95Button size="sm" className="w-5 h-5 font-vt323 leading-none text-black">
               ✕
-            </button>
+            </Win95Button>
           </div>
         </div>
 
@@ -112,12 +113,9 @@ export default function BootScreen({ onComplete }: BootScreenPropsType) {
 
           {/* 건너뛰기 버튼 */}
           <div className="flex justify-end">
-            <button
-              className="win95-raised bg-[#c0c0c0] font-vt323 text-system-body text-black px-4 py-0.5 cursor-pointer"
-              onClick={handleSkip}
-            >
+            <Win95Button size="lg" className="font-vt323 text-black" onClick={handleSkip}>
               건너뛰기
-            </button>
+            </Win95Button>
           </div>
         </div>
       </div>

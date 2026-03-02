@@ -1,6 +1,6 @@
 "use client";
 
-import { Win95Section, Win95StatusBar } from "../ui";
+import { Win95Section, Win95StatusBar, Win95Button } from "../ui";
 import { WINDOW_CONFIGS } from "@/constants/windowConfigs";
 
 const SHORTCUTS = [
@@ -64,9 +64,7 @@ export default function ReadmeWindow() {
       {/* Toolbar */}
       <div className="flex items-center gap-1 px-2 py-1 bg-[#c0c0c0] border-b border-[#808080] flex-shrink-0">
         {["도움말 항목(H)", "검색(S)", "이전(B)", "인쇄(P)"].map((btn) => (
-          <button key={btn} className="win95-raised px-2 py-0.5 text-system-caption">
-            {btn}
-          </button>
+          <Win95Button key={btn}>{btn}</Win95Button>
         ))}
       </div>
 
@@ -101,9 +99,9 @@ export default function ReadmeWindow() {
           <div className="win95-sunken bg-[#f8f8f8] p-2 space-y-1.5">
             {SHORTCUTS.map(({ key, desc }) => (
               <div key={key} className="flex items-center gap-3">
-                <span className="win95-raised px-1.5 py-0.5 text-system-caption font-bold whitespace-nowrap shrink-0">
+                <Win95Button weight="bold" className="whitespace-nowrap shrink-0">
                   {key}
-                </span>
+                </Win95Button>
                 <span>{desc}</span>
               </div>
             ))}

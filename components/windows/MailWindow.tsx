@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { profileDataList } from "@/constants/portfolio";
-import { Win95StatusBar } from "../ui";
+import { Win95StatusBar, Win95Button } from "../ui";
 
 const email = profileDataList.find((p) => p.label === "메일")?.value ?? "";
 
@@ -24,13 +24,10 @@ export default function MailWindow() {
     <div className="flex flex-col h-full font-vt323">
       {/* Toolbar */}
       <div className="flex items-center gap-2 px-2 py-1 border-b-2 border-[#808080] bg-[#c0c0c0] flex-shrink-0">
-        <button
-          className="win95-raised bg-[#c0c0c0] px-3 py-0.5 text-system-body font-bold flex items-center gap-1"
-          onClick={handleSend}
-        >
+        <Win95Button size="lg" weight="bold" className="flex items-center gap-1" onClick={handleSend}>
           <span>📤</span>
           <span>보내기(S)</span>
-        </button>
+        </Win95Button>
         {sent && (
           <span className="text-system-body text-[#008000]">
             ✓ 메일 앱이 열렸습니다!
@@ -69,9 +66,9 @@ export default function MailWindow() {
           <option>10</option>
         </select>
         <div className="w-px h-4 bg-[#808080] mx-1" />
-        <button className="win95-raised bg-[#c0c0c0] px-2 font-bold text-system-caption">B</button>
-        <button className="win95-raised bg-[#c0c0c0] px-2 italic text-system-caption">I</button>
-        <button className="win95-raised bg-[#c0c0c0] px-2 underline text-system-caption">U</button>
+        <Win95Button weight="bold">B</Win95Button>
+        <Win95Button className="italic">I</Win95Button>
+        <Win95Button className="underline">U</Win95Button>
       </div>
 
       {/* Body */}

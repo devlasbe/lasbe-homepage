@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { Explorer100 } from "@react95/icons";
-import { Win95MenuBar, Win95StatusBar, Win95AddressBar } from "../ui";
+import { Win95MenuBar, Win95StatusBar, Win95AddressBar, Win95Button } from "../ui";
 
 // ── GitHub API ──
 const GITHUB_USERNAME = "devlasbe";
@@ -113,12 +113,9 @@ export default function GithubWindow() {
           <div className="flex flex-col items-center justify-center h-full gap-3">
             <span className="text-system-icon-lg">⚠️</span>
             <p className="text-system-body text-[#f85149]">데이터를 불러오지 못했습니다.</p>
-            <button
-              onClick={fetchData}
-              className="win95-raised bg-[#c0c0c0] text-black px-4 py-1 text-system-caption"
-            >
+            <Win95Button size="lg" className="text-black" onClick={fetchData}>
               다시 시도
-            </button>
+            </Win95Button>
           </div>
         )}
 
