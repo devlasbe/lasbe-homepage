@@ -5,7 +5,7 @@ import { useViewCount } from "@/hooks/useViewCount";
 
 export default function SystemTray() {
   const [time, setTime] = useState("");
-  const [counts, setCounts] = useState<{ today?: number; total?: number }>({});
+  const [counts, setCounts] = useState<{ today?: number | null; total?: number | null }>({});
   const { getTodayViewCount, getAllViewCount } = useViewCount();
 
   useEffect(() => {
