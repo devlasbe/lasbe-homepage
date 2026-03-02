@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Explorer100 } from "@react95/icons";
 import { Win95MenuBar, Win95StatusBar, Win95AddressBar, Win95Button } from "../ui";
 
@@ -64,9 +65,7 @@ export default function GithubWindow() {
     try {
       const [profileRes, reposRes] = await Promise.all([
         fetch(`${GITHUB_API_BASE}/users/${GITHUB_USERNAME}`),
-        fetch(
-          `${GITHUB_API_BASE}/users/${GITHUB_USERNAME}/repos?sort=pushed&per_page=${REPO_COUNT}`
-        ),
+        fetch(`${GITHUB_API_BASE}/users/${GITHUB_USERNAME}/repos?sort=pushed&per_page=${REPO_COUNT}`),
       ]);
 
       if (!profileRes.ok || !reposRes.ok) throw new Error("API 오류");
@@ -124,22 +123,20 @@ export default function GithubWindow() {
             {/* Profile header */}
             <div className="border border-[#30363d] rounded p-4 flex gap-4 items-start">
               {/* Avatar */}
-              <img
+              <Image
                 src={profile.avatar_url}
                 alt={profile.login}
+                width={64}
+                height={64}
                 className="w-16 h-16 rounded-full border-2 border-[#30363d] flex-shrink-0"
               />
 
               {/* Info */}
               <div className="flex-1 min-w-0">
-                <p className="text-white font-bold text-system-heading leading-tight truncate">
-                  {profile.name}
-                </p>
+                <p className="text-white font-bold text-system-heading leading-tight truncate">{profile.name}</p>
                 <p className="text-[#8b949e] text-system-body truncate">@{profile.login}</p>
                 {profile.bio && (
-                  <p className="text-[#c9d1d9] text-system-caption mt-1 leading-snug line-clamp-2">
-                    {profile.bio}
-                  </p>
+                  <p className="text-[#c9d1d9] text-system-caption mt-1 leading-snug line-clamp-2">{profile.bio}</p>
                 )}
 
                 {/* Stats */}
@@ -159,9 +156,7 @@ export default function GithubWindow() {
 
             {/* Recent repos */}
             <div>
-              <p className="text-[#8b949e] text-system-caption mb-2 border-b border-[#30363d] pb-1">
-                최근 저장소
-              </p>
+              <p className="text-[#8b949e] text-system-caption mb-2 border-b border-[#30363d] pb-1">최근 저장소</p>
               <div className="space-y-2">
                 {repos.map((repo) => (
                   <Link
@@ -171,16 +166,10 @@ export default function GithubWindow() {
                     className="block border border-[#30363d] rounded p-3 hover:border-[#58a6ff] transition-colors"
                   >
                     <div className="flex items-start justify-between gap-2">
-                      <p className="text-[#58a6ff] text-system-body font-bold truncate">
-                        {repo.name}
-                      </p>
+                      <p className="text-[#58a6ff] text-system-body font-bold truncate">{repo.name}</p>
                       <div className="flex items-center gap-3 text-system-caption text-[#8b949e] shrink-0">
-                        {repo.stargazers_count > 0 && (
-                          <span>⭐ {repo.stargazers_count}</span>
-                        )}
-                        {repo.forks_count > 0 && (
-                          <span>🍴 {repo.forks_count}</span>
-                        )}
+                        {repo.stargazers_count > 0 && <span>⭐ {repo.stargazers_count}</span>}
+                        {repo.forks_count > 0 && <span>🍴 {repo.forks_count}</span>}
                       </div>
                     </div>
                     {repo.description && (
@@ -196,9 +185,7 @@ export default function GithubWindow() {
                             backgroundColor: LANG_COLORS[repo.language] ?? "#8b949e",
                           }}
                         />
-                        <span className="text-system-caption text-[#8b949e]">
-                          {repo.language}
-                        </span>
+                        <span className="text-system-caption text-[#8b949e]">{repo.language}</span>
                       </div>
                     )}
                   </Link>
@@ -213,7 +200,8 @@ export default function GithubWindow() {
                 target="_blank"
                 className="inline-block win95-raised bg-[#c0c0c0] text-black px-4 py-1 text-system-caption active:win95-sunken"
               >
-                <Explorer100 width={16} height={16} className="inline mr-1" />GitHub에서 열기
+                <Explorer100 width={16} height={16} className="inline mr-1" />
+                GitHub에서 열기
               </Link>
             </div>
           </div>
@@ -221,14 +209,11 @@ export default function GithubWindow() {
       </div>
 
       <Win95StatusBar>
-        <span>
-          {fetchState === "loading"
-            ? "연결 중..."
-            : fetchState === "error"
-              ? "연결 실패"
-              : "완료"}
+        <span>{fetchState === "loading" ? "연결 중..." : fetchState === "error" ? "연결 실패" : "완료"}</span>
+        <span className="flex items-center gap-1">
+          <Explorer100 width={16} height={16} />
+          GitHub
         </span>
-        <span className="flex items-center gap-1"><Explorer100 width={16} height={16} />GitHub</span>
       </Win95StatusBar>
     </div>
   );
