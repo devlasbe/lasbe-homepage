@@ -82,5 +82,12 @@ export function useIconPositions() {
     });
   }, []);
 
-  return { getPosition, updatePosition, isReady, windowHeight };
+  const resetPositions = useCallback(() => {
+    try {
+      localStorage.removeItem(LS_KEY);
+    } catch {}
+    window.location.reload();
+  }, []);
+
+  return { getPosition, updatePosition, resetPositions, isReady, windowHeight };
 }

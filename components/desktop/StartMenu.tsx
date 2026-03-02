@@ -4,11 +4,13 @@ import { useEffect, useRef } from "react";
 import { useAtom } from "jotai";
 import { isStartMenuOpenAtom } from "@/atoms/window";
 import { useWindowManager } from "@/hooks/useWindowManager";
+import { useIconPositions } from "@/hooks/useIconPositions";
 import { WINDOW_CONFIGS, WindowConfigType } from "@/constants/windowConfigs";
 
 export default function StartMenu() {
   const [isOpen, setIsOpen] = useAtom(isStartMenuOpenAtom);
   const { openWindow } = useWindowManager();
+  const { resetPositions } = useIconPositions();
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -33,9 +35,9 @@ export default function StartMenu() {
     setIsOpen(false);
   };
 
-  const handleShutdown = () => {
-    window.open("https://github.com/lasbe", "_blank");
+  const handleResetIcons = () => {
     setIsOpen(false);
+    resetPositions();
   };
 
   return (
@@ -74,13 +76,13 @@ export default function StartMenu() {
         {/* Divider */}
         <div className="my-1 mx-2 border-t border-[#808080] border-b border-b-white" />
 
-        {/* Shutdown */}
+        {/* Reset icon positions */}
         <button
           className="flex items-center gap-2 px-3 py-2 md:py-1.5 text-left text-system-body hover:bg-[#000080] hover:text-white active:bg-[#000080] active:text-white"
-          onClick={handleShutdown}
+          onClick={handleResetIcons}
         >
-          <span className="text-system-heading w-6 text-center">🖥️</span>
-          <span>GitHub 방문</span>
+          <span className="text-system-heading w-6 text-center">🗂️</span>
+          <span>아이콘 정렬</span>
         </button>
       </div>
     </div>
