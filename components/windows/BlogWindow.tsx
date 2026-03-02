@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Win95MenuBar, Win95StatusBar } from "../ui";
+import { Win95MenuBar, Win95StatusBar, Win95AddressBar } from "../ui";
 
 // ── 블로그 설정 ──
 const BLOG_URL = "https://lasbe.tistory.com";
@@ -19,20 +19,7 @@ export default function BlogWindow() {
       <Win95MenuBar items={MENU_ITEMS} />
 
       {/* 주소 표시줄 */}
-      <div className="flex items-center gap-1 px-1 py-1 border-b border-[#808080] bg-[#c0c0c0] flex-shrink-0">
-        <span className="text-system-caption px-1 shrink-0">주소(D):</span>
-        <div className="flex-1 win95-sunken bg-white px-1 py-0.5 text-system-caption text-[#000080] truncate">
-          {BLOG_URL}
-        </div>
-        <a
-          href={BLOG_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="win95-raised bg-[#c0c0c0] px-2 py-0.5 text-system-caption shrink-0"
-        >
-          새창
-        </a>
-      </div>
+      <Win95AddressBar url={BLOG_URL} actionLabel="새창" actionHref={BLOG_URL} />
 
       {/* iframe 콘텐츠 영역 */}
       <div className="flex-1 relative bg-white win95-sunken overflow-hidden">

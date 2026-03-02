@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { favoritesData } from "@/constants/portfolio";
-import { Win95MenuBar, Win95StatusBar } from "../ui";
+import { Win95MenuBar, Win95StatusBar, Win95AddressBar } from "../ui";
 
 // ── 메뉴 ──
 const MENU_ITEMS = ["파일(F)", "편집(E)", "보기(V)", "즐겨찾기(A)", "도움말(H)"] as const;
@@ -13,22 +13,7 @@ export default function IEWindow() {
       <Win95MenuBar items={MENU_ITEMS} />
 
       {/* Navigation bar */}
-      <div className="flex items-center gap-1 px-1 py-1 border-b border-[#808080] bg-[#c0c0c0] flex-shrink-0">
-        <button className="win95-raised bg-[#c0c0c0] px-2 py-0.5 text-system-caption opacity-50" disabled>
-          ◀
-        </button>
-        <button className="win95-raised bg-[#c0c0c0] px-2 py-0.5 text-system-caption opacity-50" disabled>
-          ▶
-        </button>
-        <button className="win95-raised bg-[#c0c0c0] px-2 py-0.5 text-system-caption opacity-50" disabled>
-          🔄
-        </button>
-        <span className="text-system-caption px-1 shrink-0">주소(D):</span>
-        <div className="flex-1 win95-sunken bg-white px-1 py-0.5 text-system-caption text-[#000080]">
-          http://lasbe.kr/favorites
-        </div>
-        <button className="win95-raised bg-[#c0c0c0] px-2 py-0.5 text-system-caption">이동</button>
-      </div>
+      <Win95AddressBar url="http://lasbe.kr/favorites" showNavButtons />
 
       {/* Favorites toolbar */}
       <div className="flex items-center gap-1 px-2 py-0.5 border-b border-[#808080] bg-[#c0c0c0] text-system-caption flex-shrink-0 overflow-x-auto">

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { Win95MenuBar, Win95StatusBar } from "../ui";
+import { Win95MenuBar, Win95StatusBar, Win95AddressBar } from "../ui";
 
 // ── GitHub API ──
 const GITHUB_USERNAME = "devlasbe";
@@ -92,38 +92,12 @@ export default function GithubWindow() {
       <Win95MenuBar items={MENU_ITEMS} />
 
       {/* Navigation bar */}
-      <div className="flex items-center gap-1 px-1 py-1 border-b border-[#808080] bg-[#c0c0c0] flex-shrink-0">
-        <button
-          className="win95-raised bg-[#c0c0c0] px-2 py-0.5 text-system-caption opacity-50"
-          disabled
-        >
-          ◀
-        </button>
-        <button
-          className="win95-raised bg-[#c0c0c0] px-2 py-0.5 text-system-caption opacity-50"
-          disabled
-        >
-          ▶
-        </button>
-        <button
-          className="win95-raised bg-[#c0c0c0] px-2 py-0.5 text-system-caption"
-          onClick={fetchData}
-          title="새로고침"
-        >
-          🔄
-        </button>
-        <span className="text-system-caption px-1 shrink-0">주소(D):</span>
-        <div className="flex-1 win95-sunken bg-white px-1 py-0.5 text-system-caption text-[#000080] truncate">
-          https://github.com/{GITHUB_USERNAME}
-        </div>
-        <Link
-          href={GITHUB_PROFILE_URL}
-          target="_blank"
-          className="win95-raised bg-[#c0c0c0] px-2 py-0.5 text-system-caption"
-        >
-          이동
-        </Link>
-      </div>
+      <Win95AddressBar
+        url={`https://github.com/${GITHUB_USERNAME}`}
+        showNavButtons
+        onRefresh={fetchData}
+        actionHref={GITHUB_PROFILE_URL}
+      />
 
       {/* Content area */}
       <div className="flex-1 overflow-y-auto bg-[#0d1117] win95-sunken text-white">
