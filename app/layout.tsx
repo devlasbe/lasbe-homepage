@@ -1,18 +1,15 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Archivo_Black, Noto_Sans_KR } from "next/font/google";
+import "react-notion-x/src/styles.css";
+import "prismjs/themes/prism-tomorrow.css";
+import "katex/dist/katex.min.css";
+import { Nanum_Gothic_Coding } from "next/font/google";
 import Provider from "@/components/Provider";
 
-const notoSansKr = Noto_Sans_KR({
+const nanumGothicCoding = Nanum_Gothic_Coding({
   subsets: ["latin"],
-  weight: ["400", "700", "900"],
-  variable: "--noto",
-});
-
-const archivo = Archivo_Black({
-  subsets: ["latin"],
-  weight: ["400"],
-  variable: "--archivo",
+  weight: ["400", "700"],
+  variable: "--font-main",
 });
 
 export const metadata: Metadata = {
@@ -40,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${notoSansKr.variable} ${archivo.variable} font-noto antialiased overflow-x-hidden text-neutral-900`}
+        className={`${nanumGothicCoding.variable} font-main antialiased overflow-x-hidden text-neutral-900`}
       >
         <Provider>{children}</Provider>
       </body>

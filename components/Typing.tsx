@@ -26,7 +26,7 @@ export default function Typing({ text }: { text: string }) {
 
   return (
     <div
-      className={`font-archivo text-md md:text-2xl font-extrabold text-wrap whitespace-pre-wrap text-center leading-normal`}
+      className={`text-md md:text-2xl font-extrabold text-wrap whitespace-pre-wrap text-center leading-normal`}
     >
       <span>{result}</span>
       <span className="cursor-animation border-r-2 px-0.5 border-neutral-900" />

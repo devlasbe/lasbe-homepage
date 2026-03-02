@@ -6,3 +6,7 @@ const calcBetweenDate = (start: string, end: string) => {
   return diffInDays;
 };
 export const date = { todayDate, calcBetweenDate };
+
+export function getDateString(d: Date = new Date()): string {
+  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+}
