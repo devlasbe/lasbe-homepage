@@ -18,17 +18,20 @@ export default function IEWindow() {
       {/* Favorites toolbar */}
       <div className="flex items-center gap-1 px-2 py-0.5 border-b border-[#808080] bg-[#c0c0c0] text-system-caption flex-shrink-0 overflow-x-auto">
         <span className="text-[#808080] shrink-0">즐겨찾기:</span>
-        {favoritesData.map((fav) => (
-          <Link
-            key={fav.label}
-            href={fav.url}
-            target="_blank"
-            className="win95-raised bg-[#c0c0c0] px-2 py-0.5 flex items-center gap-1 shrink-0"
-          >
-            <span>{fav.icon}</span>
-            <span>{fav.label}</span>
-          </Link>
-        ))}
+        {favoritesData.map((fav) => {
+          const Icon = fav.icon;
+          return (
+            <Link
+              key={fav.label}
+              href={fav.url}
+              target="_blank"
+              className="win95-raised bg-[#c0c0c0] px-2 py-0.5 flex items-center gap-1 shrink-0"
+            >
+              <Icon width={16} height={16} />
+              <span>{fav.label}</span>
+            </Link>
+          );
+        })}
       </div>
 
       {/* Content area */}
@@ -43,21 +46,24 @@ export default function IEWindow() {
         </div>
 
         <div className="p-4 space-y-2">
-          {favoritesData.map((fav) => (
+          {favoritesData.map((fav) => {
+            const Icon = fav.icon;
+            return (
             <Link
               key={fav.label}
               href={fav.url}
               target="_blank"
               className="items-center gap-3 p-2 win95-raised bg-[#c0c0c0] hover:bg-[#d0d0d0] block"
             >
-              <span className="text-system-icon-md">{fav.icon}</span>
+              <Icon width={24} height={24} />
               <div>
                 <p className="font-bold text-system-body">{fav.label}</p>
                 <p className="text-system-caption text-[#808080]">{fav.desc}</p>
                 <p className="text-system-caption text-[#000080] underline">{fav.url}</p>
               </div>
             </Link>
-          ))}
+            );
+          })}
         </div>
 
         <div className="px-4 pb-4 text-system-caption text-[#808080] text-center">

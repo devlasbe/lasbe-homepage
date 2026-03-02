@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { Explorer100 } from "@react95/icons";
 import { Win95MenuBar, Win95StatusBar, Win95AddressBar } from "../ui";
 
 // ── GitHub API ──
@@ -103,7 +104,7 @@ export default function GithubWindow() {
       <div className="flex-1 overflow-y-auto bg-[#0d1117] win95-sunken text-white">
         {fetchState === "loading" && (
           <div className="flex flex-col items-center justify-center h-full gap-3 text-[#8b949e]">
-            <span className="text-system-icon-lg animate-pulse">🐙</span>
+            <Explorer100 width={32} height={32} className="animate-pulse" />
             <p className="text-system-body">GitHub에서 데이터를 불러오는 중...</p>
           </div>
         )}
@@ -215,7 +216,7 @@ export default function GithubWindow() {
                 target="_blank"
                 className="inline-block win95-raised bg-[#c0c0c0] text-black px-4 py-1 text-system-caption active:win95-sunken"
               >
-                🐙 GitHub에서 열기
+                <Explorer100 width={16} height={16} className="inline mr-1" />GitHub에서 열기
               </Link>
             </div>
           </div>
@@ -230,7 +231,7 @@ export default function GithubWindow() {
               ? "연결 실패"
               : "완료"}
         </span>
-        <span>🐙 GitHub</span>
+        <span className="flex items-center gap-1"><Explorer100 width={16} height={16} />GitHub</span>
       </Win95StatusBar>
     </div>
   );

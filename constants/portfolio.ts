@@ -1,3 +1,7 @@
+import type { ComponentType } from "react";
+import type { SVGProps } from "react";
+import { Explorer100, Write1, Ie, QuestionBubble } from "@react95/icons";
+
 export type SkillType = { name: string; level: number };
 export type SkillTabType = "프론트엔드" | "백엔드·인프라" | "도구";
 
@@ -28,30 +32,35 @@ export const skillsData: Record<SkillTabType, SkillType[]> = {
   ],
 };
 
-export type FavoriteType = { label: string; icon: string; url: string; desc: string };
+export type FavoriteType = {
+  label: string;
+  icon: ComponentType<SVGProps<SVGSVGElement>>;
+  url: string;
+  desc: string;
+};
 
 export const favoritesData: FavoriteType[] = [
   {
     label: "GitHub",
-    icon: "🐙",
+    icon: Explorer100,
     url: "https://github.com/devlasbe",
     desc: "소스 코드 및 프로젝트 저장소",
   },
   {
     label: "블로그",
-    icon: "📝",
+    icon: Write1,
     url: "https://lasbe.tistory.com",
     desc: "개발 기록 및 기술 블로그",
   },
   {
     label: "오픈프차",
-    icon: "🏪",
+    icon: Ie,
     url: "https://www.openfranchise.kr/",
     desc: "프랜차이즈 창업 정보 서비스",
   },
   {
     label: "안성재 GPT",
-    icon: "🍳",
+    icon: QuestionBubble,
     url: "https://ansungjae-gpt.vercel.app/",
     desc: "안성재 쉐프 스타일 요리 평가",
   },
