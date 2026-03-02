@@ -29,6 +29,14 @@ const LERP = 0.04;
 // ── 자이로스코프 ──────────────────────────
 const GYRO_SENSITIVITY = 30; // gamma/beta 정규화 제수
 
+// ── 앰비언트 드리프트 ─────────────────────────────
+const IDLE_THRESHOLD_SECS = 1.5; // 마우스 정지 후 드리프트 시작까지 지연 (초)
+const DRIFT_FADE_SECS = 1.0; // 드리프트 블렌드 전환 시간 (초)
+const DRIFT_AMPLITUDE = 0.3; // 드리프트 최대 진폭 (-1~1 범위 기준)
+const DRIFT_SPEED_X = 0.06; // X축 드리프트 주파수 (Hz)
+const DRIFT_SPEED_Y = 0.04; // Y축 드리프트 주파수 (Hz, X와 다름)
+const DRIFT_PHASE_OFFSET = 1.1; // Y축 위상 오프셋 (rad, 리사주 패턴)
+
 // ── 트윙클 ────────────────────────────────
 const TWINKLE_GROUP_SIZE = 100;
 const TWINKLE_GROUP_COUNT = 3;
@@ -201,9 +209,12 @@ export default function SpaceBackground() {
     const mouse = { x: 0, y: 0 };
     const currentOffset = { x: 0, y: 0 };
 
+    let lastMouseMoveTime = performance.now();
+
     const handleMouseMove = (e: MouseEvent) => {
       mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
       mouse.y = (e.clientY / window.innerHeight) * 2 - 1;
+      lastMouseMoveTime = performance.now();
     };
     window.addEventListener("mousemove", handleMouseMove);
 
@@ -242,9 +253,21 @@ export default function SpaceBackground() {
       lastTime = now;
       elapsed += delta;
 
+      // 드리프트 블렌드 계산
+      const idleSecs = (now - lastMouseMoveTime) / 1000;
+      const driftBlend = Math.min(1, Math.max(0, (idleSecs - IDLE_THRESHOLD_SECS) / DRIFT_FADE_SECS));
+
+      // 드리프트 타겟 (Lissajous 느린 사인파)
+      const driftX = Math.sin(elapsed * DRIFT_SPEED_X * Math.PI * 2) * DRIFT_AMPLITUDE;
+      const driftY = Math.sin(elapsed * DRIFT_SPEED_Y * Math.PI * 2 + DRIFT_PHASE_OFFSET) * DRIFT_AMPLITUDE;
+
+      // 최종 LERP 타겟: 마우스 ↔ 드리프트 블렌드
+      const targetX = mouse.x * (1 - driftBlend) + driftX * driftBlend;
+      const targetY = -mouse.y * (1 - driftBlend) + driftY * driftBlend;
+
       // LERP 오프셋
-      currentOffset.x += (mouse.x - currentOffset.x) * LERP;
-      currentOffset.y += (-mouse.y - currentOffset.y) * LERP;
+      currentOffset.x += (targetX - currentOffset.x) * LERP;
+      currentOffset.y += (targetY - currentOffset.y) * LERP;
 
       // 레이어별 시차 적용
       for (let i = 0; i < pointsObjects.length; i++) {
