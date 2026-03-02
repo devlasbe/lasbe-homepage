@@ -25,12 +25,6 @@ jobs:
         with:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/${{secrets.DOCKER_IMAGENAME}}:${{github.run_id}}
-          build-args: |
-            FIREBASE_KEY=${{secrets.FIREBASE_KEY}}
-            FIREBASE_PROJECT=${{secrets.FIREBASE_PROJECT}}
-            FIREBASE_MESSAGING=${{secrets.FIREBASE_MESSAGING}}
-            FIREBASE_APP_ID=${{secrets.FIREBASE_APP_ID}}
-            FIREBASE_MEASUREMENT_ID=${{secrets.FIREBASE_MEASUREMENT_ID}}
 
       - name: execute remote ssh
         uses: appleboy/ssh-action@master
@@ -44,4 +38,10 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/${{secrets.DOCKER_IMAGENAME}}:${{github.run_id}}
             docker stop ${{secrets.DOCKER_IMAGENAME}} || true
             docker rm ${{secrets.DOCKER_IMAGENAME}} || true
-            docker run -d --restart=always --name ${{secrets.DOCKER_IMAGENAME}} -p 3000:3000 ${{ secrets.DOCKER_USERNAME }}/${{secrets.DOCKER_IMAGENAME}}:${{github.run_id}}
+            docker run -d --restart=always --name ${{secrets.DOCKER_IMAGENAME}} -p 3000:3000 \
+              -e FIREBASE_KEY=${{ secrets.FIREBASE_KEY }} \
+              -e FIREBASE_PROJECT=${{ secrets.FIREBASE_PROJECT }} \
+              -e FIREBASE_MESSAGING=${{ secrets.FIREBASE_MESSAGING }} \
+              -e FIREBASE_APP_ID=${{ secrets.FIREBASE_APP_ID }} \
+              -e FIREBASE_MEASUREMENT_ID=${{ secrets.FIREBASE_MEASUREMENT_ID }} \
+              ${{ secrets.DOCKER_USERNAME }}/${{secrets.DOCKER_IMAGENAME}}:${{github.run_id}}

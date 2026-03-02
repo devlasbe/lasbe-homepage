@@ -26,13 +26,21 @@ export const useViewCount = () => {
   }, [increaseViewCount]);
 
   const getTodayViewCount = useCallback(async () => {
-    const data = await fetchService.get<{ count: number }>("/api/view/today");
-    return data.count;
+    try {
+      const data = await fetchService.get<{ count: number }>("/api/view/today");
+      return data.count;
+    } catch {
+      return null;
+    }
   }, []);
 
   const getAllViewCount = useCallback(async () => {
-    const data = await fetchService.get<{ total: number }>("/api/view/total");
-    return data.total;
+    try {
+      const data = await fetchService.get<{ total: number }>("/api/view/total");
+      return data.total;
+    } catch {
+      return null;
+    }
   }, []);
 
   return {
