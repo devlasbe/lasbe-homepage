@@ -13,18 +13,6 @@ FROM base AS builder
   COPY --from=deps /app/node_modules ./node_modules
   COPY . .
 
-  ARG FIREBASE_KEY
-  ARG FIREBASE_PROJECT
-  ARG FIREBASE_MESSAGING
-  ARG FIREBASE_APP_ID
-  ARG FIREBASE_MEASUREMENT_ID
-
-  RUN echo "NEXT_PUBLIC_FIREBASE_KEY=$FIREBASE_KEY" >> .env \
-    && echo "NEXT_PUBLIC_FIREBASE_PROJECT=$FIREBASE_PROJECT" >> .env \
-    && echo "NEXT_PUBLIC_FIREBASE_MESSAGING=$FIREBASE_MESSAGING" >> .env \
-    && echo "NEXT_PUBLIC_FIREBASE_APP_ID=$FIREBASE_APP_ID" >> .env \
-    && echo "NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=$FIREBASE_MEASUREMENT_ID" >> .env
-    
   RUN corepack enable pnpm
   RUN pnpm run build
 
