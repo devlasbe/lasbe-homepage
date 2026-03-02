@@ -1,5 +1,5 @@
 import type { ComponentType, SVGProps, ReactNode } from "react";
-import { Notepad, Folder, FileText, Computer, Mail, Ie, QuestionBubble, Explorer100, Wordpad } from "@react95/icons";
+import { Notepad, Folder, FileText, Computer, Mail, Ie, QuestionBubble, Explorer100, Wordpad, Addrbook, Write1 } from "@react95/icons";
 import NotepadWindow from "@/components/windows/NotepadWindow";
 import ProjectsWindow from "@/components/windows/ProjectsWindow";
 import CareerWindow from "@/components/windows/CareerWindow";
@@ -9,6 +9,8 @@ import IEWindow from "@/components/windows/IEWindow";
 import ReadmeWindow from "@/components/windows/ReadmeWindow";
 import GithubWindow from "@/components/windows/GithubWindow";
 import ResumeWindow from "@/components/windows/ResumeWindow";
+import GuestbookWindow from "@/components/windows/GuestbookWindow";
+import BlogWindow from "@/components/windows/BlogWindow";
 
 type IconType = ComponentType<SVGProps<SVGSVGElement>>;
 
@@ -110,5 +112,25 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
     defaultSize: { width: 780, height: 560 },
     content: <ResumeWindow />,
     showInStartMenu: true,
+  },
+  {
+    id: "guestbook",
+    label: "방명록.exe",
+    icon: Addrbook,
+    title: "방명록 - Guestbook",
+    defaultSize: { width: 480, height: 500 },
+    content: <GuestbookWindow />,
+    showInStartMenu: true,
+    readmeDesc: "방문자가 이름과 댓글을 남길 수 있는 방명록",
+  },
+  {
+    id: "blog",
+    label: "블로그",
+    icon: Write1,
+    title: "블로그 - lasbe.tistory.com",
+    defaultSize: { width: 780, height: 560 },
+    content: <BlogWindow />,
+    showInStartMenu: true,
+    readmeDesc: "개발 블로그 (Tistory)",
   },
 ];

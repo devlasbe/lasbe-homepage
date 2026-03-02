@@ -70,3 +70,4 @@ node_modules/@react95/icons/svg/               — SVG 파일로 시각 확인
 | internet | `Ie` | Internet Explorer |
 | readme | `QuestionBubble` | 도움말/물음표 |
 | github | `Explorer100` | 파일 탐색기 = 코드 브라우징 |
+| guestbook | `Addrbook` | 주소록 = 방명록 |
