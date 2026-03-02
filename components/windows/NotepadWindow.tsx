@@ -18,12 +18,12 @@ export default function NotepadWindow() {
   const blogDisplay = blog.replace("https://", "");
 
   return (
-    <div className="flex flex-col h-full font-vt323">
+    <div className="flex flex-col h-full">
       <Win95MenuBar items={MENU_ITEMS} />
 
       {/* Content */}
       <div className="flex-1 overflow-auto bg-white p-2 win95-sunken">
-        <pre className="whitespace-pre-wrap font-vt323 text-system-body leading-relaxed">
+        <pre className="whitespace-pre-wrap text-system-body leading-relaxed">
 {`이름        : ${name}
 생년월일    : ${birth}
 위치        : ${location}

@@ -3,31 +3,13 @@ import "./globals.css";
 import "react-notion-x/src/styles.css";
 import "prismjs/themes/prism-tomorrow.css";
 import "katex/dist/katex.min.css";
-import { Archivo_Black, Noto_Sans_KR, VT323, Press_Start_2P } from "next/font/google";
+import { Nanum_Gothic_Coding } from "next/font/google";
 import Provider from "@/components/Provider";
 
-const notoSansKr = Noto_Sans_KR({
+const nanumGothicCoding = Nanum_Gothic_Coding({
   subsets: ["latin"],
-  weight: ["400", "700", "900"],
-  variable: "--noto",
-});
-
-const archivo = Archivo_Black({
-  subsets: ["latin"],
-  weight: ["400"],
-  variable: "--archivo",
-});
-
-const vt323 = VT323({
-  subsets: ["latin"],
-  weight: ["400"],
-  variable: "--vt323",
-});
-
-const pressStart2P = Press_Start_2P({
-  subsets: ["latin"],
-  weight: ["400"],
-  variable: "--press-start",
+  weight: ["400", "700"],
+  variable: "--font-main",
 });
 
 export const metadata: Metadata = {
@@ -55,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${notoSansKr.variable} ${archivo.variable} ${vt323.variable} ${pressStart2P.variable} font-noto antialiased overflow-x-hidden text-neutral-900`}
+        className={`${nanumGothicCoding.variable} font-main antialiased overflow-x-hidden text-neutral-900`}
       >
         <Provider>{children}</Provider>
       </body>

@@ -10,10 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        noto: ["var(--noto)"],
-        archivo: ["var(--archivo)"],
-        vt323: ["var(--vt323)"],
-        "press-start": ["var(--press-start)"],
+        main: ["var(--font-main)"],
       },
       fontSize: {
         // Window Content — fixed sizes

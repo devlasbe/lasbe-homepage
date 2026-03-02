@@ -21,7 +21,7 @@ export default function BlogWindow() {
   };
 
   return (
-    <div className="flex flex-col h-full font-vt323 text-system-body">
+    <div className="flex flex-col h-full text-system-body">
       <Win95MenuBar items={MENU_ITEMS} />
 
       {/* 주소 표시줄 */}

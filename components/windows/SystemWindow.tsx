@@ -7,7 +7,7 @@ export default function SystemWindow() {
   const [activeTab, setActiveTab] = useState<SkillTabType>("프론트엔드");
 
   return (
-    <div className="flex flex-col h-full font-vt323 text-system-body">
+    <div className="flex flex-col h-full text-system-body">
       {/* System header */}
       <div className="flex items-center gap-3 p-3 border-b-2 border-[#808080] bg-[#c0c0c0] flex-shrink-0">
         <div className="text-system-icon-lg">💻</div>

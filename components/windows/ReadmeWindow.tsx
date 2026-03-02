@@ -60,7 +60,7 @@ const GIMMICKS = [
 // ── 컴포넌트 ──
 export default function ReadmeWindow() {
   return (
-    <div className="flex flex-col h-full font-vt323 text-system-body">
+    <div className="flex flex-col h-full text-system-body">
       {/* Toolbar */}
       <div className="flex items-center gap-1 px-2 py-1 bg-[#c0c0c0] border-b border-[#808080] flex-shrink-0">
         {["도움말 항목(H)", "검색(S)", "이전(B)", "인쇄(P)"].map((btn) => (
@@ -83,11 +83,12 @@ export default function ReadmeWindow() {
           {WINDOW_CONFIGS.filter((c) => c.readmeDesc !== undefined).map((c) => {
             const Icon = c.icon;
             return (
-              <div key={c.id} className="flex items-start gap-2 mb-2">
+              <div key={c.id} className="flex items-start gap-2 mb-3">
                 <Icon className="shrink-0 w-4 h-4 mt-0.5" />
                 <p className="leading-snug">
                   <span className="font-bold">{c.label}</span>
-                  <span className="text-[#444]"> — {c.readmeDesc}</span>
+                  <br />
+                  <span className="text-system-caption text-[#555]">{c.readmeDesc}</span>
                 </p>
               </div>
             );

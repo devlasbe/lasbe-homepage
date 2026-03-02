@@ -47,7 +47,7 @@ export default function StartMenu() {
       {/* Left sidebar - "Windows 95" vertical text */}
       <div className="w-8 bg-gradient-to-t from-[#7b7b7b] to-[#000080] flex items-end justify-center pb-2 select-none">
         <span
-          className="text-white font-bold text-system-caption font-vt323 tracking-widest"
+          className="text-white font-bold text-system-caption tracking-widest"
           style={{
             writingMode: "vertical-rl",
             transform: "rotate(180deg)",
@@ -63,7 +63,7 @@ export default function StartMenu() {
         {WINDOW_CONFIGS.map((cfg) => (
           <button
             key={cfg.id}
-            className="flex items-center gap-2 px-3 py-2 md:py-1.5 text-left text-system-body font-vt323 hover:bg-[#000080] hover:text-white active:bg-[#000080] active:text-white"
+            className="flex items-center gap-2 px-3 py-2 md:py-1.5 text-left text-system-body hover:bg-[#000080] hover:text-white active:bg-[#000080] active:text-white"
             onClick={() => handleItemClick(cfg)}
           >
             <cfg.icon style={{ width: 24, height: 24, display: "block", flexShrink: 0 }} />
@@ -76,7 +76,7 @@ export default function StartMenu() {
 
         {/* Shutdown */}
         <button
-          className="flex items-center gap-2 px-3 py-2 md:py-1.5 text-left text-system-body font-vt323 hover:bg-[#000080] hover:text-white active:bg-[#000080] active:text-white"
+          className="flex items-center gap-2 px-3 py-2 md:py-1.5 text-left text-system-body hover:bg-[#000080] hover:text-white active:bg-[#000080] active:text-white"
           onClick={handleShutdown}
         >
           <span className="text-system-heading w-6 text-center">🖥️</span>

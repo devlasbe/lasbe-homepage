@@ -26,7 +26,7 @@ export default function SystemTray() {
   }, [getTodayViewCount, getAllViewCount]);
 
   return (
-    <div className="win95-sunken flex items-center gap-2 px-2 h-8 ml-auto text-system-caption font-vt323">
+    <div className="win95-sunken flex items-center gap-2 px-2 h-8 ml-auto text-system-caption">
       <span className="hidden sm:flex items-center gap-1">
         <span>👁</span>
         <span>

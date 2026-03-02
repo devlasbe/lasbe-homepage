@@ -88,7 +88,7 @@ export default function Window({ window: win }: WindowPropsType) {
         onDoubleClick={handleTitlebarDoubleClick}
       >
         <win.icon style={{ width: 16, height: 16, display: "block", flexShrink: 0 }} />
-        <span className={`${titleBarText} text-system-ui font-bold truncate flex-1 font-vt323 tracking-wide`}>
+        <span className={`${titleBarText} text-system-ui font-bold truncate flex-1 tracking-wide`}>
           {win.title}
         </span>
         <div className="flex gap-0.5 ml-auto flex-shrink-0">

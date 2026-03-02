@@ -61,15 +61,15 @@ export default function BootScreen({ onComplete }: BootScreenPropsType) {
       >
         {/* 타이틀바 */}
         <div className="bg-[#000080] flex items-center justify-between px-2 py-1">
-          <span className="font-vt323 text-white text-system-body">LASBE OS 95</span>
+          <span className="text-white text-system-body">LASBE OS 95</span>
           <div className="flex gap-1">
-            <Win95Button size="sm" className="w-5 h-5 font-vt323 leading-none text-black">
+            <Win95Button size="sm" className="w-5 h-5 leading-none text-black">
               ─
             </Win95Button>
-            <Win95Button size="sm" className="w-5 h-5 font-vt323 leading-none text-black">
+            <Win95Button size="sm" className="w-5 h-5 leading-none text-black">
               □
             </Win95Button>
-            <Win95Button size="sm" className="w-5 h-5 font-vt323 leading-none text-black">
+            <Win95Button size="sm" className="w-5 h-5 leading-none text-black">
               ✕
             </Win95Button>
           </div>
@@ -90,8 +90,8 @@ export default function BootScreen({ onComplete }: BootScreenPropsType) {
               />
             </div>
             <div>
-              <p className="font-vt323 text-system-heading text-black leading-tight">LASBE</p>
-              <p className="font-vt323 text-system-body text-black leading-tight">장성우 포트폴리오</p>
+              <p className="text-system-heading text-black leading-tight">LASBE</p>
+              <p className="text-system-body text-black leading-tight">장성우 포트폴리오</p>
             </div>
           </div>
 
@@ -99,7 +99,7 @@ export default function BootScreen({ onComplete }: BootScreenPropsType) {
           <div className="win95-sunken h-[2px]" />
 
           {/* 상태 텍스트 */}
-          <p className="font-vt323 text-system-body text-black">로그인 중...</p>
+          <p className="text-system-body text-black">로그인 중...</p>
 
           {/* 프로그레스바 */}
           <div className="win95-sunken p-1 flex gap-0.5">
@@ -113,7 +113,7 @@ export default function BootScreen({ onComplete }: BootScreenPropsType) {
 
           {/* 건너뛰기 버튼 */}
           <div className="flex justify-end">
-            <Win95Button size="lg" className="font-vt323 text-black" onClick={handleSkip}>
+            <Win95Button size="lg" className="text-black" onClick={handleSkip}>
               건너뛰기
             </Win95Button>
           </div>

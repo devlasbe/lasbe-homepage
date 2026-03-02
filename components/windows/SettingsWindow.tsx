@@ -20,7 +20,7 @@ export default function SettingsWindow() {
   }, [getTodayViewCount, getAllViewCount]);
 
   return (
-    <div className="flex flex-col h-full font-vt323 text-system-body">
+    <div className="flex flex-col h-full text-system-body">
       {/* Profile header */}
       <div className="flex items-center gap-4 p-4 border-b-2 border-[#808080] bg-[#c0c0c0] flex-shrink-0">
         <div

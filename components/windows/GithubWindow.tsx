@@ -88,7 +88,7 @@ export default function GithubWindow() {
   }, [fetchData]);
 
   return (
-    <div className="flex flex-col h-full font-vt323 text-system-body">
+    <div className="flex flex-col h-full text-system-body">
       <Win95MenuBar items={MENU_ITEMS} />
 
       {/* Navigation bar */}

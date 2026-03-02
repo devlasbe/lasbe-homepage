@@ -15,7 +15,7 @@ const MENU_ITEMS = ["파일(F)", "보기(V)", "도움말(H)"] as const;
 
 function UnderConstructionView() {
   return (
-    <div className="flex flex-col items-center justify-center h-full gap-4 font-vt323 text-system-body select-none">
+    <div className="flex flex-col items-center justify-center h-full gap-4 text-system-body select-none">
       <Warning style={{ width: 48, height: 48, display: "block" }} />
       <p className="text-system-heading font-bold text-[#000080]">공사 중입니다</p>
       <p className="text-system-caption text-[#808080]">Under Construction</p>
@@ -29,7 +29,7 @@ export default function ResumeWindow() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-full font-vt323 text-system-body text-[#808080]">
+      <div className="flex items-center justify-center h-full text-system-body text-[#808080]">
         Loading...
       </div>
     );
@@ -40,7 +40,7 @@ export default function ResumeWindow() {
   }
 
   return (
-    <div className="flex flex-col h-full font-vt323 text-system-body">
+    <div className="flex flex-col h-full text-system-body">
       <Win95MenuBar items={MENU_ITEMS} />
 
       {/* 주소 표시줄 */}

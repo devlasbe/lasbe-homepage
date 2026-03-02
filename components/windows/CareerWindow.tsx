@@ -13,7 +13,7 @@ export default function CareerWindow() {
   const career = carrerDataList[0];
 
   return (
-    <div className="flex flex-col h-full font-vt323 text-system-body overflow-y-auto bg-white win95-sunken p-3">
+    <div className="flex flex-col h-full text-system-body overflow-y-auto bg-white win95-sunken p-3">
       {/* Company header */}
       <div className="flex items-start gap-3 mb-3 pb-2 border-b-2 border-[#808080]">
         <div className="win95-sunken bg-white p-2 flex-shrink-0">

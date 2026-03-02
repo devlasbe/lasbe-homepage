@@ -75,7 +75,7 @@ export default function GuestbookWindow() {
   };
 
   return (
-    <div className="flex flex-col h-full font-vt323">
+    <div className="flex flex-col h-full">
       {/* Toolbar */}
       <div className="flex items-center gap-2 px-2 py-1 border-b-2 border-[#808080] bg-[#c0c0c0] flex-shrink-0">
         <Win95Button size="lg" className="flex items-center gap-1" onClick={fetchEntries} disabled={isLoading}>
@@ -94,7 +94,7 @@ export default function GuestbookWindow() {
             <label className="text-system-body w-14 shrink-0">이름:</label>
             <input
               type="text"
-              className="flex-1 text-system-body bg-white win95-sunken px-1 py-0.5 outline-none font-vt323"
+              className="flex-1 text-system-body bg-white win95-sunken px-1 py-0.5 outline-none"
               value={name}
               onChange={(e) => setName(e.target.value.slice(0, MAX_NAME_LENGTH))}
               placeholder="이름"
@@ -105,7 +105,7 @@ export default function GuestbookWindow() {
             <label className="text-system-body w-20 shrink-0">비밀번호:</label>
             <input
               type="password"
-              className="flex-1 text-system-body bg-white win95-sunken px-1 py-0.5 outline-none font-vt323"
+              className="flex-1 text-system-body bg-white win95-sunken px-1 py-0.5 outline-none"
               value={password}
               onChange={(e) => setPassword(e.target.value.slice(0, MAX_PASSWORD_LENGTH))}
               placeholder="비밀번호"
@@ -117,7 +117,7 @@ export default function GuestbookWindow() {
           <label className="text-system-body w-14 shrink-0">댓글:</label>
           <input
             type="text"
-            className="flex-1 text-system-body bg-white win95-sunken px-1 py-0.5 outline-none font-vt323"
+            className="flex-1 text-system-body bg-white win95-sunken px-1 py-0.5 outline-none"
             value={comment}
             onChange={(e) => setComment(e.target.value.slice(0, MAX_COMMENT_LENGTH))}
             placeholder="방명록을 남겨주세요!"
@@ -177,7 +177,7 @@ export default function GuestbookWindow() {
                 <div className="mt-1 flex flex-col sm:flex-row items-start sm:items-center gap-1">
                   <input
                     type="password"
-                    className="text-system-body bg-white win95-sunken px-1 py-0.5 outline-none font-vt323 w-32"
+                    className="text-system-body bg-white win95-sunken px-1 py-0.5 outline-none w-32"
                     value={deletePassword}
                     onChange={(e) => setDeletePassword(e.target.value)}
                     placeholder="비밀번호"

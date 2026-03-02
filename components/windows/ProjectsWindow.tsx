@@ -18,7 +18,7 @@ export default function ProjectsWindow() {
   };
 
   return (
-    <div className="flex h-full font-vt323 text-system-body">
+    <div className="flex h-full text-system-body">
       {/* Left panel - project list */}
       <div className="w-36 flex-shrink-0 border-r-2 border-[#808080] overflow-y-auto bg-white win95-sunken">
         {projectDataList.map((p, i) => (
