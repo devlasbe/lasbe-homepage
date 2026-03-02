@@ -7,7 +7,7 @@ import ResumeWindow from "@/components/windows/ResumeWindow";
 import GuestbookWindow from "@/components/windows/GuestbookWindow";
 import BlogWindow from "@/components/windows/BlogWindow";
 import OpenFranchiseWindow from "@/components/windows/OpenFranchiseWindow";
-import SettingsWindow from "@/components/windows/SettingsWindow";
+import MyProfileWindow from "@/components/windows/MyProfileWindow";
 
 type IconType = ComponentType<SVGProps<SVGSVGElement>>;
 
@@ -28,7 +28,7 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
     icon: User6,
     title: "내 정보 — 장성우",
     defaultSize: { width: 480, height: 520 },
-    content: <SettingsWindow />,
+    content: <MyProfileWindow />,
     readmeDesc: "캐릭터 이미지, 자기소개, 방문자 수를 확인하는 프로필 창",
   },
   {

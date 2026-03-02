@@ -9,7 +9,7 @@ import { Win95StatusBar } from "../ui";
 // ── 레이아웃 ──
 const CHARACTER_SIZE = 120;
 
-export default function SettingsWindow() {
+export default function MyProfileWindow() {
   const { getTodayViewCount, getAllViewCount } = useViewCount();
   const [todayCount, setTodayCount] = useState<number | null>(null);
   const [totalCount, setTotalCount] = useState<number | null>(null);
@@ -38,13 +38,9 @@ export default function SettingsWindow() {
         </div>
         <div>
           <p className="font-bold text-system-heading leading-tight">장성우</p>
-          <p className="text-system-caption text-[#000080] font-bold mt-0.5">
-            Frontend Developer
-          </p>
+          <p className="text-system-caption text-[#000080] font-bold mt-0.5">Frontend Developer</p>
           <p className="text-system-caption text-[#444] mt-1 leading-snug">
-            React · Next.js · TypeScript를 주력으로
-            <br />
-            사용자 경험을 고민하는 프론트엔드 개발자입니다.
+            React · React Native를 이용해 웹, 앱 개발을 합니다.
           </p>
         </div>
       </div>
@@ -71,9 +67,9 @@ export default function SettingsWindow() {
           <legend className="px-1 text-system-caption font-bold">경력 요약</legend>
           <div className="space-y-1.5 pt-1">
             {[
-              { label: "총 경력", value: "2년 (2022.08 ~ 2024.06)" },
-              { label: "주력 분야", value: "프론트엔드 (React, Next.js)" },
-              { label: "현재 상태", value: "새로운 기회 탐색 중 👀" },
+              { label: "총 경력", value: "3년+ (2022.08 ~ 재직 중)" },
+              { label: "주력 분야", value: "프론트엔드 (React, React Native)" },
+              { label: "현재 상태", value: "YPLABS 재직 중" },
             ].map(({ label, value }) => (
               <div key={label} className="flex items-center gap-2 text-system-caption">
                 <span className="w-20 text-right shrink-0 text-[#444]">{label}:</span>

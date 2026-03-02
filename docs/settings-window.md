@@ -1,31 +1,19 @@
-# Settings Window 작업 계획
+# Settings Window → MyProfileWindow 리네임 + 자기소개 문구 개선
 
-## 목표
+## 최초 목표 (완료)
 
 캐릭터 이미지 + 포트폴리오 간단 소개 + 방문자 수 카운트를 표시하는 "내 정보" 창 추가
 
-## 구성 요소
+## 리네임 작업 (완료)
 
-1. **캐릭터 이미지** — `/lasbe_character.jpg`
-2. **간단한 자기소개** — 이름, 생년월일, 위치, 메일 (profileDataList 활용)
-3. **방문자 수** — 오늘 방문자 / 누적 방문자 (useViewCount 훅 활용)
+- `SettingsWindow`라는 이름이 컴포넌트의 역할(프로필/자기소개 창)을 잘 표현하지 못함 → `MyProfileWindow`로 변경
+- 기존 자기소개 문구가 평범함 → 개발 철학이 담긴 임팩트 있는 문구로 교체
 
-## Win95 스타일 참고
+### 변경 파일
 
-- Windows 95 "시스템 속성" 다이얼로그 스타일
-- 상단에 캐릭터 이미지 + 이름/소개 한 줄
-- 구분선 이후 상세 정보 + 방문자 카운터
-
-## 아이콘
-
-- `User1` — 사용자 프로필 아이콘
-
-## 파일 변경 목록
-
-1. `components/windows/SettingsWindow.tsx` — 신규 생성
-2. `constants/windowConfigs.tsx` — SettingsWindow 항목 추가
-3. `docs/react95-icons-rules.md` — User1 매핑 추가
-
-## 기본 크기
-
-- width: 480, height: 520
+1. `components/windows/SettingsWindow.tsx` → `MyProfileWindow.tsx`
+   - 함수명 변경: `SettingsWindow` → `MyProfileWindow`
+   - 자기소개 문구 변경:
+     - 전: `React · React Native를 주력으로 사용자 경험을 고민하는 프론트엔드 개발자입니다.`
+     - 후: `좋은 UI는 존재감이 없다고 믿습니다. React · React Native로 눈에 띄지 않는 경험을 만드는 프론트엔드 개발자입니다.`
+2. `constants/windowConfigs.tsx` — import/JSX 참조 변경
