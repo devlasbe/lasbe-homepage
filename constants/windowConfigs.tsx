@@ -20,6 +20,7 @@ export type WindowConfigType = {
   defaultSize: { width: number; height: number };
   content: ReactNode;
   showInStartMenu: boolean;
+  readmeDesc?: string;
 };
 
 export const WINDOW_CONFIGS: WindowConfigType[] = [
@@ -31,6 +32,7 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
     defaultSize: { width: 500, height: 420 },
     content: <NotepadWindow />,
     showInStartMenu: true,
+    readmeDesc: "제 소개, 연락처, GitHub·블로그 링크를 담은 메모장 파일",
   },
   {
     id: "projects",
@@ -40,6 +42,7 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
     defaultSize: { width: 700, height: 520 },
     content: <ProjectsWindow />,
     showInStartMenu: true,
+    readmeDesc: "진행한 프로젝트를 이미지 뷰어와 함께 소개",
   },
   {
     id: "career",
@@ -49,6 +52,7 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
     defaultSize: { width: 680, height: 520 },
     content: <CareerWindow />,
     showInStartMenu: true,
+    readmeDesc: "경력 사항과 담당 프로젝트를 아코디언으로 펼쳐볼 수 있음",
   },
   {
     id: "system",
@@ -58,6 +62,7 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
     defaultSize: { width: 420, height: 400 },
     content: <SystemWindow />,
     showInStartMenu: true,
+    readmeDesc: "보유 기술과 숙련도를 탭별 게이지로 확인",
   },
   {
     id: "mail",
@@ -67,6 +72,7 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
     defaultSize: { width: 520, height: 420 },
     content: <MailWindow />,
     showInStartMenu: true,
+    readmeDesc: "Outlook Express 스타일 메일 작성기 (전송 시 mailto: 실행)",
   },
   {
     id: "internet",
@@ -76,6 +82,7 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
     defaultSize: { width: 620, height: 480 },
     content: <IEWindow />,
     showInStartMenu: true,
+    readmeDesc: "Internet Explorer 5.0 목업 — 즐겨찾기 링크 모음",
   },
   {
     id: "readme",

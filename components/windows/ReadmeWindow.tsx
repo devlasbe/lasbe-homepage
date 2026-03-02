@@ -1,16 +1,7 @@
 "use client";
 
 import { Win95Section, Win95StatusBar } from "../ui";
-
-// ── 데이터 ──
-const APPS = [
-  { icon: "📄", name: "자기소개.txt", desc: "제 소개, 연락처, GitHub·블로그 링크를 담은 메모장 파일" },
-  { icon: "📁", name: "내 프로젝트", desc: "진행한 프로젝트를 이미지 뷰어와 함께 소개" },
-  { icon: "📋", name: "내 경력", desc: "경력 사항과 담당 프로젝트를 아코디언으로 펼쳐볼 수 있음" },
-  { icon: "💾", name: "기술스택.exe", desc: "보유 기술과 숙련도를 탭별 게이지로 확인" },
-  { icon: "📧", name: "메일 보내기", desc: "Outlook Express 스타일 메일 작성기 (전송 시 mailto: 실행)" },
-  { icon: "🌐", name: "인터넷", desc: "Internet Explorer 5.0 목업 — 즐겨찾기 링크 모음" },
-];
+import { WINDOW_CONFIGS } from "@/constants/windowConfigs";
 
 const SHORTCUTS = [
   { key: "Esc", desc: "활성 창 닫기" },
@@ -91,15 +82,18 @@ export default function ReadmeWindow() {
 
         {/* Apps */}
         <Win95Section icon="📱" title="앱 목록">
-          {APPS.map(({ icon, name, desc }) => (
-            <div key={name} className="flex items-start gap-2 mb-2">
-              <span className="shrink-0 leading-tight">{icon}</span>
-              <p className="leading-snug">
-                <span className="font-bold">{name}</span>
-                <span className="text-[#444]"> — {desc}</span>
-              </p>
-            </div>
-          ))}
+          {WINDOW_CONFIGS.filter((c) => c.readmeDesc !== undefined).map((c) => {
+            const Icon = c.icon;
+            return (
+              <div key={c.id} className="flex items-start gap-2 mb-2">
+                <Icon className="shrink-0 w-4 h-4 mt-0.5" />
+                <p className="leading-snug">
+                  <span className="font-bold">{c.label}</span>
+                  <span className="text-[#444]"> — {c.readmeDesc}</span>
+                </p>
+              </div>
+            );
+          })}
         </Win95Section>
 
         {/* Keyboard shortcuts */}
