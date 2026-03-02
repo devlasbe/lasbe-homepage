@@ -60,7 +60,7 @@ export default function StartMenu() {
 
       {/* Menu items */}
       <div className="flex flex-col min-w-[180px]">
-        {WINDOW_CONFIGS.filter((cfg) => cfg.showInStartMenu).map((cfg) => (
+        {WINDOW_CONFIGS.map((cfg) => (
           <button
             key={cfg.id}
             className="flex items-center gap-2 px-3 py-2 md:py-1.5 text-left text-system-body font-vt323 hover:bg-[#000080] hover:text-white active:bg-[#000080] active:text-white"
