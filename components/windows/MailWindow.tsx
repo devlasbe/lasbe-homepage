@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { profileData } from "@/constants/portfolio";
+import { profile } from "@/constants/profile";
 import { Win95StatusBar, Win95Button } from "../ui";
 
-const email = profileData.mail.value;
+const email = profile.mail;
 
 export default function MailWindow() {
   const [subject, setSubject] = useState("");

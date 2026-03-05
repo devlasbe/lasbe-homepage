@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { Win95MenuBar, Win95StatusBar, Win95AddressBar } from "../ui";
+import { profile } from "@/constants/profile";
 
 // ── 블로그 설정 ──
-const BLOG_URL = "https://lasbe.tistory.com";
+const BLOG_URL = profile.blog.url;
 
 // ── 메뉴 ──
 const MENU_ITEMS = ["파일(F)", "보기(V)", "도움말(H)"] as const;

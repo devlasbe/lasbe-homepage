@@ -7,11 +7,12 @@ import { Icon } from "@/components/ui/icon";
 import { Win95MenuBar, Win95StatusBar, Win95AddressBar, Win95Button } from "../ui";
 import { githubService } from "@/services/githubService";
 import type { GithubProfileType, GithubRepoType } from "@/services/githubService";
+import { profile } from "@/constants/profile";
 
 // ── GitHub API ──
-const GITHUB_USERNAME = "devlasbe";
+const GITHUB_USERNAME = profile.github.username;
 const REPO_COUNT = 6;
-const GITHUB_PROFILE_URL = `https://github.com/${GITHUB_USERNAME}`;
+const GITHUB_PROFILE_URL = profile.github.url;
 
 // ── 메뉴 ──
 const MENU_ITEMS = ["파일(F)", "보기(V)", "도움말(H)"] as const;

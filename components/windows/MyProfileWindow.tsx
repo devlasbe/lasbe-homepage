@@ -3,7 +3,15 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useViewCount } from "@/hooks/useViewCount";
-import { profileData } from "@/constants/portfolio";
+import { profile } from "@/constants/profile";
+
+// ── 프로필 표시 데이터 ──
+const PROFILE = [
+  { label: "이름", value: profile.name },
+  { label: "생년월일", value: profile.birthday },
+  { label: "위치", value: profile.location },
+  { label: "메일", value: profile.mail },
+];
 import { Win95StatusBar } from "../ui";
 
 // ── 레이아웃 ──
@@ -51,7 +59,7 @@ export default function MyProfileWindow() {
         <fieldset className="win95-raised p-2">
           <legend className="px-1 text-system-caption font-bold">기본 정보</legend>
           <div className="space-y-1.5 pt-1">
-            {Object.values(profileData).map(({ label, value }) => (
+            {PROFILE.map(({ label, value }) => (
               <div key={label} className="flex items-center gap-2 text-system-caption">
                 <span className="w-20 text-right shrink-0 text-[#444]">{label}:</span>
                 <div className="flex-1 win95-sunken bg-white px-2 py-0.5">

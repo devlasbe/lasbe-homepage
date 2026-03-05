@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { projectDataList } from "@/constants/portfolio";
+import { project } from "@/constants/project";
 import { Win95MenuBar, Win95StatusBar, Win95TechBadgeList } from "../ui";
 import Win95Button from "../ui/Win95Button";
 
@@ -9,7 +9,7 @@ import Win95Button from "../ui/Win95Button";
 const MENU_ITEMS = ["파일(F)", "편집(E)", "보기(V)", "도움말(H)"] as const;
 
 export default function OpenFranchiseWindow() {
-  const data = projectDataList.find((p) => p.title === "오픈프차")!;
+  const data = project.OPEN_FRANCHISE;
 
   return (
     <div className="flex flex-col h-full text-system-body">

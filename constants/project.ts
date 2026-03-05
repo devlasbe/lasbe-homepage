@@ -1,12 +1,5 @@
-export const profileData = {
-  name: { label: "이름", value: "장성우" },
-  birthday: { label: "생년월일", value: "97.03.05" },
-  location: { label: "위치", value: "서울 동작구" },
-  mail: { label: "메일", value: "devlasbe@gmail.com" },
-};
-
-export const projectDataList = [
-  {
+export const project = {
+  OPEN_FRANCHISE: {
     title: "오픈프차",
     period: "2024.11~",
     desc: "공정거래위원회의 가맹사업 정보공개서를 기반으로 창업 전, 프랜차이즈 본사 정보, 브랜드의 매출, 가맹점 수, 인테리어 금액, 창업 비용 정보를 편리하게 확인할 수 있습니다.",
@@ -36,4 +29,4 @@ export const projectDataList = [
     link: "https://www.openfranchise.kr/",
     readme: "https://github.com/devlasbe/open-franchise-frontend",
   },
-];
+};
