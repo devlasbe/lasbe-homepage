@@ -1,7 +1,7 @@
 "use client";
 
 import { date } from "@/utils/date";
-import { fetchService } from "@/services/fetchService";
+import { viewService } from "@/services/viewService";
 import { useCallback } from "react";
 
 const countHistory = {
@@ -11,7 +11,7 @@ const countHistory = {
 
 export const useViewCount = () => {
   const increaseViewCount = useCallback(async () => {
-    await fetchService.post<{ success: boolean }>("/api/view/increment");
+    await viewService.increment();
   }, []);
 
   // 마지막 방문 시간에서 정각을 넘어가지 않으면 집계하지 않음
@@ -27,7 +27,7 @@ export const useViewCount = () => {
 
   const getTodayViewCount = useCallback(async () => {
     try {
-      const data = await fetchService.get<{ count: number }>("/api/view/today");
+      const data = await viewService.getToday();
       return data.count;
     } catch {
       return null;
@@ -36,7 +36,7 @@ export const useViewCount = () => {
 
   const getAllViewCount = useCallback(async () => {
     try {
-      const data = await fetchService.get<{ total: number }>("/api/view/total");
+      const data = await viewService.getTotal();
       return data.total;
     } catch {
       return null;

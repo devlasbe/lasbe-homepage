@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { SEO } from "@/constants/seo";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -6,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://lasbe.kr/sitemap.xml",
-    host: "https://lasbe.kr",
+    sitemap: SEO.SITEMAP_URL,
+    host: SEO.SITE_URL,
   };
 }

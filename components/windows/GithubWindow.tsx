@@ -3,14 +3,16 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Explorer100 } from "@react95/icons";
+import { Icon } from "@/components/ui/icon";
 import { Win95MenuBar, Win95StatusBar, Win95AddressBar, Win95Button } from "../ui";
+import { githubService } from "@/services/githubService";
+import type { GithubProfileType, GithubRepoType } from "@/services/githubService";
+import { profile } from "@/constants/profile";
 
 // ── GitHub API ──
-const GITHUB_USERNAME = "devlasbe";
+const GITHUB_USERNAME = profile.github.username;
 const REPO_COUNT = 6;
-const GITHUB_API_BASE = "https://api.github.com";
-const GITHUB_PROFILE_URL = `https://github.com/${GITHUB_USERNAME}`;
+const GITHUB_PROFILE_URL = profile.github.url;
 
 // ── 메뉴 ──
 const MENU_ITEMS = ["파일(F)", "보기(V)", "도움말(H)"] as const;
@@ -32,27 +34,6 @@ const LANG_COLORS: Record<string, string> = {
   Swift: "#F05138",
 };
 
-type GithubProfileType = {
-  name: string;
-  login: string;
-  bio: string | null;
-  avatar_url: string;
-  public_repos: number;
-  followers: number;
-  following: number;
-  html_url: string;
-};
-
-type GithubRepoType = {
-  id: number;
-  name: string;
-  description: string | null;
-  language: string | null;
-  stargazers_count: number;
-  forks_count: number;
-  html_url: string;
-};
-
 type FetchStateType = "idle" | "loading" | "success" | "error";
 
 export default function GithubWindow() {
@@ -63,16 +44,9 @@ export default function GithubWindow() {
   const fetchData = useCallback(async () => {
     setFetchState("loading");
     try {
-      const [profileRes, reposRes] = await Promise.all([
-        fetch(`${GITHUB_API_BASE}/users/${GITHUB_USERNAME}`),
-        fetch(`${GITHUB_API_BASE}/users/${GITHUB_USERNAME}/repos?sort=pushed&per_page=${REPO_COUNT}`),
-      ]);
-
-      if (!profileRes.ok || !reposRes.ok) throw new Error("API 오류");
-
       const [profileData, reposData] = await Promise.all([
-        profileRes.json() as Promise<GithubProfileType>,
-        reposRes.json() as Promise<GithubRepoType[]>,
+        githubService.getProfile(GITHUB_USERNAME),
+        githubService.getRepos(GITHUB_USERNAME, REPO_COUNT),
       ]);
 
       setProfile(profileData);
@@ -103,7 +77,7 @@ export default function GithubWindow() {
       <div className="flex-1 overflow-y-auto bg-[#0d1117] win95-sunken text-white">
         {fetchState === "loading" && (
           <div className="flex flex-col items-center justify-center h-full gap-3 text-[#8b949e]">
-            <Explorer100 width={32} height={32} className="animate-pulse" />
+            <Icon.Explorer100 width={32} height={32} className="animate-pulse" />
             <p className="text-system-body">GitHub에서 데이터를 불러오는 중...</p>
           </div>
         )}
@@ -200,7 +174,7 @@ export default function GithubWindow() {
                 target="_blank"
                 className="inline-block win95-raised bg-[#c0c0c0] text-black px-4 py-1 text-system-caption active:win95-sunken"
               >
-                <Explorer100 width={16} height={16} className="inline mr-1" />
+                <Icon.Explorer100 width={16} height={16} className="inline mr-1" />
                 GitHub에서 열기
               </Link>
             </div>
@@ -211,7 +185,7 @@ export default function GithubWindow() {
       <Win95StatusBar>
         <span>{fetchState === "loading" ? "연결 중..." : fetchState === "error" ? "연결 실패" : "완료"}</span>
         <span className="flex items-center gap-1">
-          <Explorer100 width={16} height={16} />
+          <Icon.Explorer100 width={16} height={16} />
           GitHub
         </span>
       </Win95StatusBar>

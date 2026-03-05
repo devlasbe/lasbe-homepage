@@ -1,11 +1,9 @@
 export const dynamic = "force-dynamic";
 
-import { db } from "@/services/firebase";
+import { db } from "@/utils/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { NextResponse } from "next/server";
-
-type TotalViewCountResponseType = { total: number };
-type ErrorResponseType = { error: string };
+import type { TotalViewCountResponseType, ErrorResponseType } from "../view.types";
 
 export async function GET(): Promise<
   NextResponse<TotalViewCountResponseType | ErrorResponseType>

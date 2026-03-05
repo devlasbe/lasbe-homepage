@@ -1,10 +1,8 @@
 import { createHash } from "crypto";
-import { db } from "@/services/firebase";
+import { db } from "@/utils/firebase";
 import { deleteDoc, doc, getDoc } from "firebase/firestore";
 import { NextRequest, NextResponse } from "next/server";
-
-type DeleteResponseType = { success: boolean };
-type ErrorResponseType = { error: string };
+import type { GuestbookDeleteResponseType, ErrorResponseType } from "../guestbook.types";
 
 type GuestbookDocType = {
   passwordHash: string;
@@ -13,7 +11,7 @@ type GuestbookDocType = {
 export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }
-): Promise<NextResponse<DeleteResponseType | ErrorResponseType>> {
+): Promise<NextResponse<GuestbookDeleteResponseType | ErrorResponseType>> {
   try {
     const { password } = (await request.json()) as { password: string };
 

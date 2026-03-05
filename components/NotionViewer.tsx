@@ -11,6 +11,7 @@ import { Pdf } from "react-notion-x/build/third-party/pdf";
 
 import Link from "next/link";
 import Image from "next/image";
+import { notionService } from "@/services/notionService";
 
 export type FetchStateType = "loading" | "success" | "error";
 
@@ -28,11 +29,8 @@ export default function NotionViewer({ pageId, directUrl, onStateChange }: Notio
     setFetchState("loading");
     onStateChange?.("loading");
 
-    fetch(`/api/notion?pageId=${pageId}`)
-      .then((res) => {
-        if (!res.ok) throw new Error();
-        return res.json() as Promise<ExtendedRecordMap>;
-      })
+    notionService
+      .getPage(pageId)
       .then((data) => {
         setRecordMap(data);
         setFetchState("success");

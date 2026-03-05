@@ -1,13 +1,10 @@
 "use client";
 
 import { useCallback, useState } from "react";
+import { guestbookService } from "@/services/guestbookService";
+import type { GuestbookEntryType } from "@/services/guestbookService";
 
-export type GuestbookEntryType = {
-  id: string;
-  name: string;
-  comment: string;
-  createdAt: string;
-};
+export type { GuestbookEntryType };
 
 export function useGuestbook() {
   const [entries, setEntries] = useState<GuestbookEntryType[]>([]);
@@ -19,13 +16,8 @@ export function useGuestbook() {
     setIsLoading(true);
     setError(null);
     try {
-      const res = await fetch("/api/guestbook");
-      const data = (await res.json()) as { entries: GuestbookEntryType[] } | { error: string };
-      if ("error" in data) {
-        setError(data.error);
-      } else {
-        setEntries(data.entries);
-      }
+      const data = await guestbookService.getEntries();
+      setEntries(data.entries);
     } catch {
       setError("목록을 불러오지 못했습니다.");
     } finally {
@@ -38,20 +30,12 @@ export function useGuestbook() {
       setIsSubmitting(true);
       setError(null);
       try {
-        const res = await fetch("/api/guestbook", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, password, comment }),
-        });
-        const data = (await res.json()) as { id: string; success: boolean } | { error: string };
-        if ("error" in data) {
-          setError(data.error);
-          return false;
-        }
+        await guestbookService.addEntry(name, password, comment);
         await fetchEntries();
         return true;
-      } catch {
-        setError("등록에 실패했습니다.");
+      } catch (err) {
+        const message = err instanceof Error ? err.message : "등록에 실패했습니다.";
+        setError(message);
         return false;
       } finally {
         setIsSubmitting(false);
@@ -63,19 +47,12 @@ export function useGuestbook() {
   const deleteEntry = useCallback(
     async (id: string, password: string): Promise<{ success: boolean; error?: string }> => {
       try {
-        const res = await fetch(`/api/guestbook/${id}`, {
-          method: "DELETE",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ password }),
-        });
-        const data = (await res.json()) as { success: boolean } | { error: string };
-        if ("error" in data) {
-          return { success: false, error: data.error };
-        }
+        await guestbookService.deleteEntry(id, password);
         setEntries((prev) => prev.filter((e) => e.id !== id));
         return { success: true };
-      } catch {
-        return { success: false, error: "삭제에 실패했습니다." };
+      } catch (err) {
+        const message = err instanceof Error ? err.message : "삭제에 실패했습니다.";
+        return { success: false, error: message };
       }
     },
     []

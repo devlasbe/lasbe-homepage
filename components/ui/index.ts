@@ -5,3 +5,5 @@ export { Win95Section } from "./Win95Section";
 export { Win95DescriptionList } from "./Win95DescriptionList";
 export { Win95AddressBar } from "./Win95AddressBar";
 export { default as Win95Button } from "./Win95Button";
+export { Win95Input } from "./Win95Input";
+export { Icon } from "./icon";

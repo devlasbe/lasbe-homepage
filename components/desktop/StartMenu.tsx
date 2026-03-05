@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useAtom } from "jotai";
-import { isStartMenuOpenAtom } from "@/atoms/window";
+import { useStartMenuContext } from "@/components/contexts/startMenuContext";
 import { useWindowManager } from "@/hooks/useWindowManager";
 import { useIconPositions } from "@/hooks/useIconPositions";
 import { WINDOW_CONFIGS, WindowConfigType } from "@/constants/windowConfigs";
+import { Icon } from "@/components/ui/icon";
 
 export default function StartMenu() {
-  const [isOpen, setIsOpen] = useAtom(isStartMenuOpenAtom);
+  const { isStartMenuOpen: isOpen, setIsStartMenuOpen: setIsOpen } = useStartMenuContext();
   const { openWindow } = useWindowManager();
   const { resetPositions } = useIconPositions();
   const menuRef = useRef<HTMLDivElement>(null);
@@ -81,7 +81,7 @@ export default function StartMenu() {
           className="flex items-center gap-2 px-3 py-2 md:py-1.5 text-left text-system-body hover:bg-[#000080] hover:text-white active:bg-[#000080] active:text-white"
           onClick={handleResetIcons}
         >
-          <span className="text-system-heading w-6 text-center">🗂️</span>
+          <Icon.FolderOpen style={{ width: 24, height: 24, display: "block", flexShrink: 0 }} />
           <span>아이콘 정렬</span>
         </button>
       </div>

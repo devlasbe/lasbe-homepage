@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useGuestbook } from "@/hooks/useGuestbook";
-import { Win95StatusBar, Win95Button } from "../ui";
+import { Win95StatusBar, Win95Button, Win95Input } from "../ui";
 
 // ── 입력 최대 길이 ──
 const MAX_NAME_LENGTH = 20;
@@ -92,9 +92,9 @@ export default function GuestbookWindow() {
         <div className="flex flex-col sm:flex-row gap-1 sm:gap-2 mb-1">
           <div className="flex items-center gap-1 flex-1">
             <label className="text-system-body w-14 shrink-0">이름:</label>
-            <input
+            <Win95Input
               type="text"
-              className="flex-1 text-system-body bg-white win95-sunken px-1 py-0.5 outline-none"
+              className="flex-1"
               value={name}
               onChange={(e) => setName(e.target.value.slice(0, MAX_NAME_LENGTH))}
               placeholder="이름"
@@ -103,9 +103,9 @@ export default function GuestbookWindow() {
           </div>
           <div className="flex items-center gap-1 flex-1">
             <label className="text-system-body w-20 shrink-0">비밀번호:</label>
-            <input
+            <Win95Input
               type="password"
-              className="flex-1 text-system-body bg-white win95-sunken px-1 py-0.5 outline-none"
+              className="flex-1"
               value={password}
               onChange={(e) => setPassword(e.target.value.slice(0, MAX_PASSWORD_LENGTH))}
               placeholder="비밀번호"
@@ -115,9 +115,9 @@ export default function GuestbookWindow() {
         </div>
         <div className="flex items-center gap-1 mb-1">
           <label className="text-system-body w-14 shrink-0">댓글:</label>
-          <input
+          <Win95Input
             type="text"
-            className="flex-1 text-system-body bg-white win95-sunken px-1 py-0.5 outline-none"
+            className="flex-1"
             value={comment}
             onChange={(e) => setComment(e.target.value.slice(0, MAX_COMMENT_LENGTH))}
             placeholder="방명록을 남겨주세요!"
@@ -175,9 +175,9 @@ export default function GuestbookWindow() {
               {/* Delete flow */}
               {deletingId === entry.id && (
                 <div className="mt-1 flex flex-col sm:flex-row items-start sm:items-center gap-1">
-                  <input
+                  <Win95Input
                     type="password"
-                    className="text-system-body bg-white win95-sunken px-1 py-0.5 outline-none w-32"
+                    className="w-32"
                     value={deletePassword}
                     onChange={(e) => setDeletePassword(e.target.value)}
                     placeholder="비밀번호"

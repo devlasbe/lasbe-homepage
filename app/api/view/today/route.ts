@@ -1,12 +1,10 @@
 export const dynamic = "force-dynamic";
 
 import { getDateString } from "@/utils/date";
-import { db } from "@/services/firebase";
+import { db } from "@/utils/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { NextResponse } from "next/server";
-
-type TodayViewCountResponseType = { count: number };
-type ErrorResponseType = { error: string };
+import type { TodayViewCountResponseType, ErrorResponseType } from "../view.types";
 
 export async function GET(): Promise<
   NextResponse<TodayViewCountResponseType | ErrorResponseType>

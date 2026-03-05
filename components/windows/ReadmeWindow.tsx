@@ -4,24 +4,24 @@ import { Win95Section, Win95StatusBar, Win95Button } from "../ui";
 import { WINDOW_CONFIGS } from "@/constants/windowConfigs";
 
 const SHORTCUTS = [
-  { key: "Esc", desc: "활성 창 닫기" },
-  { key: "Ctrl + Enter", desc: "활성 창 최대화 / 복원 토글 (Mac: Cmd + Enter)" },
-  { key: "타이틀바 더블클릭", desc: "창 최대화 / 복원 토글" },
+  { icon: "⌨️", key: "Esc", desc: "활성 창 닫기" },
+  { icon: "⌨️", key: "Ctrl + Enter", desc: "활성 창 최대화 / 복원 토글 (Mac: Cmd + Enter)" },
+  { icon: "🖱️", key: "타이틀바 더블클릭", desc: "창 최대화 / 복원 토글" },
 ];
 
 const WINDOW_OPS = [
-  { action: "타이틀바 드래그", desc: "창을 원하는 위치로 이동" },
-  { action: "가장자리 드래그", desc: "창 크기를 자유롭게 조절 (데스크톱 전용)" },
-  { action: "_ 버튼", desc: "창을 작업 표시줄로 최소화" },
-  { action: "□ 버튼", desc: "창 최대화 / 복원 토글" },
-  { action: "✕ 버튼", desc: "창 닫기" },
-  { action: "작업 표시줄 버튼 클릭", desc: "최소화된 창 복원 / 활성 창 최소화" },
+  { icon: "🖱️", action: "타이틀바 드래그", desc: "창을 원하는 위치로 이동" },
+  { icon: "↔️", action: "가장자리 드래그", desc: "창 크기를 자유롭게 조절 (데스크톱 전용)" },
+  { icon: "➖", action: "_ 버튼", desc: "창을 작업 표시줄로 최소화" },
+  { icon: "⬜", action: "□ 버튼", desc: "창 최대화 / 복원 토글" },
+  { icon: "✖️", action: "✕ 버튼", desc: "창 닫기" },
+  { icon: "🖱️", action: "작업 표시줄 버튼 클릭", desc: "최소화된 창 복원 / 활성 창 최소화" },
 ];
 
 const DESKTOP_OPS = [
-  { action: "아이콘 더블클릭", desc: "해당 앱 창 열기" },
-  { action: "아이콘 드래그", desc: "위치 자유 배치 — 새로고침 후에도 유지 (localStorage)" },
-  { action: "시작 버튼", desc: "시작 메뉴 열기 — 모든 앱에 접근 가능" },
+  { icon: "🖱️", action: "아이콘 더블클릭", desc: "해당 앱 창 열기" },
+  { icon: "✋", action: "아이콘 드래그", desc: "위치 자유 배치 — 새로고침 후에도 유지 (localStorage)" },
+  { icon: "🪟", action: "시작 버튼", desc: "시작 메뉴 열기 — 모든 앱에 접근 가능" },
 ];
 
 const GIMMICKS = [
@@ -78,53 +78,44 @@ export default function ReadmeWindow() {
           <p className="text-system-caption text-[#808080] mt-0.5">이 포트폴리오에 숨겨진 기믹들을 소개합니다</p>
         </div>
 
-        {/* Apps */}
-        <Win95Section icon="📱" title="앱 목록">
-          {WINDOW_CONFIGS.filter((c) => c.readmeDesc !== undefined).map((c) => {
-            const Icon = c.icon;
-            return (
-              <div key={c.id} className="flex items-start gap-2 mb-3">
-                <Icon className="shrink-0 w-4 h-4 mt-0.5" />
-                <p className="leading-snug">
-                  <span className="font-bold">{c.label}</span>
-                  <br />
-                  <span className="text-system-caption text-[#555]">{c.readmeDesc}</span>
-                </p>
-              </div>
-            );
-          })}
-        </Win95Section>
-
-        {/* Keyboard shortcuts */}
-        <Win95Section icon="⌨️" title="키보드 단축키">
-          <div className="win95-sunken bg-[#f8f8f8] p-2 space-y-1.5">
-            {SHORTCUTS.map(({ key, desc }) => (
-              <div key={key} className="flex items-center gap-3">
-                <Win95Button weight="bold" className="whitespace-nowrap shrink-0">
-                  {key}
-                </Win95Button>
-                <span>{desc}</span>
-              </div>
-            ))}
-          </div>
-        </Win95Section>
-
-        {/* Window operations */}
-        <Win95Section icon="🪟" title="창 조작">
-          {WINDOW_OPS.map(({ action, desc }) => (
-            <div key={action} className="flex gap-2 mb-1">
-              <span className="font-bold shrink-0 min-w-[9rem]">{action}</span>
-              <span className="text-[#444]">{desc}</span>
+        {/* Desktop operations */}
+        <Win95Section icon="🗂️" title="데스크톱 조작">
+          {DESKTOP_OPS.map(({ icon, action, desc }) => (
+            <div key={action} className="flex items-start gap-2 mb-3">
+              <span className="shrink-0 leading-tight">{icon}</span>
+              <p className="leading-snug">
+                <span className="font-bold">{action}</span>
+                <br />
+                <span className="text-system-caption text-[#555]">{desc}</span>
+              </p>
             </div>
           ))}
         </Win95Section>
 
-        {/* Desktop operations */}
-        <Win95Section icon="🗂️" title="데스크톱 조작">
-          {DESKTOP_OPS.map(({ action, desc }) => (
-            <div key={action} className="flex gap-2 mb-1">
-              <span className="font-bold shrink-0 min-w-[9rem]">{action}</span>
-              <span className="text-[#444]">{desc}</span>
+        {/* Keyboard shortcuts */}
+        <Win95Section icon="⌨️" title="키보드 단축키">
+          {SHORTCUTS.map(({ icon, key, desc }) => (
+            <div key={key} className="flex items-start gap-2 mb-3">
+              <span className="shrink-0 leading-tight">{icon}</span>
+              <p className="leading-snug">
+                <span className="font-bold">{key}</span>
+                <br />
+                <span className="text-system-caption text-[#555]">{desc}</span>
+              </p>
+            </div>
+          ))}
+        </Win95Section>
+
+        {/* Window operations */}
+        <Win95Section icon="🪟" title="창 조작">
+          {WINDOW_OPS.map(({ icon, action, desc }) => (
+            <div key={action} className="flex items-start gap-2 mb-3">
+              <span className="shrink-0 leading-tight">{icon}</span>
+              <p className="leading-snug">
+                <span className="font-bold">{action}</span>
+                <br />
+                <span className="text-system-caption text-[#555]">{desc}</span>
+              </p>
             </div>
           ))}
         </Win95Section>
@@ -141,6 +132,23 @@ export default function ReadmeWindow() {
               </p>
             </div>
           ))}
+        </Win95Section>
+
+        {/* Apps */}
+        <Win95Section icon="📱" title="앱 목록">
+          {WINDOW_CONFIGS.filter((c) => c.readmeDesc !== undefined).map((c) => {
+            const Icon = c.icon;
+            return (
+              <div key={c.id} className="flex items-start gap-2 mb-3">
+                <Icon className="shrink-0 w-4 h-4 mt-0.5" />
+                <p className="leading-snug">
+                  <span className="font-bold">{c.label}</span>
+                  <br />
+                  <span className="text-system-caption text-[#555]">{c.readmeDesc}</span>
+                </p>
+              </div>
+            );
+          })}
         </Win95Section>
       </div>
 

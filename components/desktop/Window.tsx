@@ -3,20 +3,20 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import Draggable, { DraggableEvent, DraggableData } from "react-draggable";
 import { ResizableBox, ResizeCallbackData } from "react-resizable";
-import { useAtomValue } from "jotai";
-import { Win95WindowType, windowsAtom } from "@/atoms/window";
+import { useWindowContext } from "@/components/contexts/windowContext";
+import type { WindowType } from "@/components/contexts/windowContext";
 import { useWindowManager } from "@/hooks/useWindowManager";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 import Win95Button from "@/components/ui/Win95Button";
 
 type WindowPropsType = {
-  window: Win95WindowType;
+  window: WindowType;
 };
 
 export default function Window({ window: win }: WindowPropsType) {
   const { focusWindow, updatePosition, updateSize, closeWindow, minimizeWindow, maximizeWindow } =
     useWindowManager();
-  const windows = useAtomValue(windowsAtom);
+  const { windows } = useWindowContext();
   const { isMobile, isTablet } = useBreakpoint();
   const nodeRef = useRef<HTMLDivElement>(null);
   const resizeOriginRef = useRef<{ x: number; width: number } | null>(null);
