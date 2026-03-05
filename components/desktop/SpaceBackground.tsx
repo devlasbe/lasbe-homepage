@@ -209,6 +209,7 @@ export default function SpaceBackground() {
     const mouse = { x: 0, y: 0 };
     const currentOffset = { x: 0, y: 0 };
 
+    let isGyroActive = false;
     let lastMouseMoveTime = performance.now();
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -220,6 +221,7 @@ export default function SpaceBackground() {
 
     const handleDeviceOrientation = (e: DeviceOrientationEvent) => {
       if (e.gamma !== null && e.beta !== null) {
+        isGyroActive = true;
         mouse.x = Math.max(-1, Math.min(1, e.gamma / GYRO_SENSITIVITY));
         mouse.y = Math.max(-1, Math.min(1, e.beta / GYRO_SENSITIVITY));
       }
@@ -253,9 +255,11 @@ export default function SpaceBackground() {
       lastTime = now;
       elapsed += delta;
 
-      // 드리프트 블렌드 계산
+      // 드리프트 블렌드 계산 (자이로 활성 시 드리프트 비활성)
       const idleSecs = (now - lastMouseMoveTime) / 1000;
-      const driftBlend = Math.min(1, Math.max(0, (idleSecs - IDLE_THRESHOLD_SECS) / DRIFT_FADE_SECS));
+      const driftBlend = isGyroActive
+        ? 0
+        : Math.min(1, Math.max(0, (idleSecs - IDLE_THRESHOLD_SECS) / DRIFT_FADE_SECS));
 
       // 드리프트 타겟 (Lissajous 느린 사인파)
       const driftX = Math.sin(elapsed * DRIFT_SPEED_X * Math.PI * 2) * DRIFT_AMPLITUDE;
