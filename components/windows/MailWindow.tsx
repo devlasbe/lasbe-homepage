@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { profile } from "@/constants/profile";
 import { Win95StatusBar, Win95Button } from "../ui";
+import { Icon } from "@/components/ui/icon";
 
 const email = profile.mail;
 
@@ -23,10 +24,15 @@ export default function MailWindow() {
       {/* Toolbar */}
       <div className="flex items-center gap-2 px-2 py-1 border-b-2 border-[#808080] bg-[#c0c0c0] flex-shrink-0">
         <Win95Button size="lg" weight="bold" className="flex items-center gap-1" onClick={handleSend}>
-          <span>📤</span>
+          <Icon.Sendmail2001 style={{ width: 16, height: 16, display: "block" }} />
           <span>보내기(S)</span>
         </Win95Button>
-        {sent && <span className="text-system-body text-[#008000]">✓ 메일 앱이 열렸습니다!</span>}
+        {sent && (
+          <span className="flex items-center gap-1 text-system-body text-[#008000]">
+            <Icon.Tick style={{ width: 14, height: 14, display: "block" }} />
+            메일 앱이 열렸습니다!
+          </span>
+        )}
       </div>
 
       {/* Header fields */}
