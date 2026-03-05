@@ -42,9 +42,9 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
   },
   {
     id: "readme",
-    label: "README.txt",
+    label: "README",
     icon: Icon.QuestionBubble,
-    title: "README.txt - 도움말",
+    title: "README - 도움말",
     defaultSize: { width: 520, height: 480 },
     content: <ReadmeWindow />,
     readmeDesc: "이 포트폴리오 사이트의 구성과 사용 방법을 안내하는 도움말",
@@ -69,7 +69,7 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
   },
   {
     id: "guestbook",
-    label: "방명록.exe",
+    label: "방명록",
     icon: Icon.Addrbook,
     title: "방명록 - Guestbook",
     defaultSize: { width: 480, height: 500 },
@@ -87,7 +87,7 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
   },
   {
     id: "openfranchise",
-    label: "오픈프차.exe",
+    label: "오픈프차",
     icon: Icon.Ie,
     title: "오픈프차 - 프랜차이즈 창업 정보 서비스",
     defaultSize: { width: 540, height: 500 },

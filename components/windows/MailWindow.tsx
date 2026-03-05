@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { profileDataList } from "@/constants/portfolio";
+import { profileData } from "@/constants/portfolio";
 import { Win95StatusBar, Win95Button } from "../ui";
 
-const email = profileDataList.find((p) => p.label === "메일")?.value ?? "";
+const email = profileData.mail.value;
 
 export default function MailWindow() {
   const [subject, setSubject] = useState("");
@@ -12,9 +12,7 @@ export default function MailWindow() {
   const [sent, setSent] = useState(false);
 
   const handleSend = () => {
-    const mailto = `mailto:${email}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
+    const mailto = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.open(mailto);
     setSent(true);
     setTimeout(() => setSent(false), 3000);
@@ -28,11 +26,7 @@ export default function MailWindow() {
           <span>📤</span>
           <span>보내기(S)</span>
         </Win95Button>
-        {sent && (
-          <span className="text-system-body text-[#008000]">
-            ✓ 메일 앱이 열렸습니다!
-          </span>
-        )}
+        {sent && <span className="text-system-body text-[#008000]">✓ 메일 앱이 열렸습니다!</span>}
       </div>
 
       {/* Header fields */}
@@ -79,7 +73,9 @@ export default function MailWindow() {
         placeholder="메시지를 입력하세요..."
       />
 
-      <Win95StatusBar><span>준비</span></Win95StatusBar>
+      <Win95StatusBar>
+        <span>준비</span>
+      </Win95StatusBar>
     </div>
   );
 }
