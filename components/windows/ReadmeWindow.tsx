@@ -78,21 +78,18 @@ export default function ReadmeWindow() {
           <p className="text-system-caption text-[#808080] mt-0.5">이 포트폴리오에 숨겨진 기믹들을 소개합니다</p>
         </div>
 
-        {/* Apps */}
-        <Win95Section icon="📱" title="앱 목록">
-          {WINDOW_CONFIGS.filter((c) => c.readmeDesc !== undefined).map((c) => {
-            const Icon = c.icon;
-            return (
-              <div key={c.id} className="flex items-start gap-2 mb-3">
-                <Icon className="shrink-0 w-4 h-4 mt-0.5" />
-                <p className="leading-snug">
-                  <span className="font-bold">{c.label}</span>
-                  <br />
-                  <span className="text-system-caption text-[#555]">{c.readmeDesc}</span>
-                </p>
-              </div>
-            );
-          })}
+        {/* Desktop operations */}
+        <Win95Section icon="🗂️" title="데스크톱 조작">
+          {DESKTOP_OPS.map(({ icon, action, desc }) => (
+            <div key={action} className="flex items-start gap-2 mb-3">
+              <span className="shrink-0 leading-tight">{icon}</span>
+              <p className="leading-snug">
+                <span className="font-bold">{action}</span>
+                <br />
+                <span className="text-system-caption text-[#555]">{desc}</span>
+              </p>
+            </div>
+          ))}
         </Win95Section>
 
         {/* Keyboard shortcuts */}
@@ -123,20 +120,6 @@ export default function ReadmeWindow() {
           ))}
         </Win95Section>
 
-        {/* Desktop operations */}
-        <Win95Section icon="🗂️" title="데스크톱 조작">
-          {DESKTOP_OPS.map(({ icon, action, desc }) => (
-            <div key={action} className="flex items-start gap-2 mb-3">
-              <span className="shrink-0 leading-tight">{icon}</span>
-              <p className="leading-snug">
-                <span className="font-bold">{action}</span>
-                <br />
-                <span className="text-system-caption text-[#555]">{desc}</span>
-              </p>
-            </div>
-          ))}
-        </Win95Section>
-
         {/* Hidden gimmicks */}
         <Win95Section icon="✨" title="기타">
           {GIMMICKS.map(({ icon, title, desc }) => (
@@ -149,6 +132,23 @@ export default function ReadmeWindow() {
               </p>
             </div>
           ))}
+        </Win95Section>
+
+        {/* Apps */}
+        <Win95Section icon="📱" title="앱 목록">
+          {WINDOW_CONFIGS.filter((c) => c.readmeDesc !== undefined).map((c) => {
+            const Icon = c.icon;
+            return (
+              <div key={c.id} className="flex items-start gap-2 mb-3">
+                <Icon className="shrink-0 w-4 h-4 mt-0.5" />
+                <p className="leading-snug">
+                  <span className="font-bold">{c.label}</span>
+                  <br />
+                  <span className="text-system-caption text-[#555]">{c.readmeDesc}</span>
+                </p>
+              </div>
+            );
+          })}
         </Win95Section>
       </div>
 
