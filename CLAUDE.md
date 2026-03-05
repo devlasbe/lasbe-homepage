@@ -11,25 +11,24 @@
 | Styling         | Tailwind CSS                                                       |
 | Package Manager | pnpm (preinstall 훅으로 강제 적용)                                 |
 | Database        | Firebase Firestore (방문자 수 카운트)                              |
-| Font            | Noto Sans KR, Archivo Black (Google Fonts)                         |
-| UI Libraries    | @lasbe/react-card-animation, @lasbe/react-scroll-animation, Swiper |
+| Font            | 나눔고딕코딩 (Nanum Gothic Coding, next/font/google)               |
+| UI Libraries    | @react95/icons, react-draggable, react-resizable, react-notion-x   |
 
 ## 폴더 구조
 
 ```
 lasbe-homepage/
 ├── app/                        # Next.js App Router
-├── components/                 # 전체 컴포넌트
-│   ├── Provider.tsx            # 범용 — JotaiProvider + ViewCountInitializer
-│   ├── Typing.tsx              # 범용 — 타이핑 애니메이션
+│   └── api/                    # Route Handlers (도메인별 폴더로 구성)
+├── components/                 # 컴포넌트
+│   ├── contexts/               # React Context
 │   ├── desktop/                # Win95 OS 셸 컴포넌트
 │   ├── windows/                # Window 컨텐츠 컴포넌트
 │   └── ui/                     # 공유 Win95 UI 서브컴포넌트
-├── atoms/                      # jotai atom 정의 및 타입 — window.ts
-├── constants/                  # 정적 상수 — win95.ts, portfolio.ts
-├── hooks/                      # 커스텀 훅 (useBreakpoint, useViewCount, useIconPositions, useKeyboardShortcuts, useWindowManager)
-├── services/                   # 외부 서비스 연동
-├── utils/                      # 유틸리티 함수
+├── constants/                  # 정적 상수 데이터
+├── hooks/                      # 커스텀 훅
+├── services/                   # 도메인 API wrapper
+├── utils/                      # 범용 유틸리티
 ├── docs/                       # 작업 계획 문서
 └── public/                     # 정적 에셋
 ```
@@ -51,15 +50,27 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 - **작업 전 계획 저장 필수**: 모든 작업을 시작하기 전에 반드시 `docs/` 폴더 아래에 작업 계획을 md 파일로 저장해야 한다. 해당 파일이 이미 존재한다면 새로 생성하지 않고 기존 파일을 수정한다.
 - **반응형 디자인 필수**: 모든 UI 작업은 반드시 반응형 디자인을 고려해야 한다. Tailwind CSS의 반응형 접두사(`sm:`, `md:`, `lg:` 등)를 활용하여 모바일부터 데스크톱까지 모든 화면 크기에서 올바르게 표시되어야 한다.
 - **Single Source of Truth**: 데이터와 상수는 단 한 곳에만 정의한다. 동일한 데이터를 여러 파일에 중복 정의하지 않는다. 컴포넌트에서 사용하는 정적 데이터(리스트, 설정 값 등)는 해당 도메인의 `constants/` 파일에 정의하고 import하여 사용한다.
-- **파일 배치 원칙**: win95가 프로젝트 전체의 단일 도메인이므로 `features/` 계층 없이 루트 폴더에 직접 배치한다.
-  - `components/` — 범용 컴포넌트만 (Provider, Typing)
-  - `components/desktop/` — Win95 OS 셸 컴포넌트 (Desktop, Window, Taskbar 등)
+- **파일 배치 원칙**: win95가 프로젝트 전체의 단일 도메인이므로 루트 폴더에 직접 배치한다.
+  - `components/` — 범용 컴포넌트만
+  - `components/desktop/` — Win95 OS 셸 컴포넌트
   - `components/windows/` — Window 컨텐츠 컴포넌트
   - `components/ui/` — 공유 Win95 UI 서브컴포넌트 (2개 이상 사용처 확인 후 추출)
-  - `atoms/` — jotai atom 정의 및 타입 (순수 atom만, 훅 없음)
-  - `constants/` — 정적 상수 데이터 (`win95.ts`, `portfolio.ts`)
-  - `hooks/` — 커스텀 훅 (범용 + Win95 훅 모두 포함, `useWindowManager` 포함)
-  - `services/`, `utils/` — 범용 서비스/유틸리티
+  - `constants/` — 정적 상수 데이터
+  - `hooks/` — 커스텀 훅 (범용 + Win95 훅 모두 포함)
+  - `services/` — 도메인별 API wrapper. 내부 Next.js API와 외부 API 호출을 캡슐화. 직접 `fetch`를 사용한다.
+  - `utils/` — 범용 유틸리티. 도메인에 종속되지 않는 순수 함수와 외부 SDK 초기화
+
+## API / Service 흐름
+
+```
+app/api/[도메인]/route.ts          — Next.js Route Handler (HTTP 엔드포인트 정의)
+app/api/[도메인]/[도메인].types.ts — 해당 도메인의 요청/응답 타입 (route.ts와 co-locate)
+services/[도메인]Service.ts        — 클라이언트 API wrapper
+```
+
+- 타입 파일은 관련 `route.ts`와 같은 폴더에 위치한다
+- `services/`는 내부 API(`/api/*`)와 외부 API 모두 캡슐화한다
+- `services/`에서 직접 `fetch`를 사용한다
 
 ## 코드 컨벤션
 

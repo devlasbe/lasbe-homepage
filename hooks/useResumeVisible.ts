@@ -1,6 +1,6 @@
 "use client";
 
-import { fetchService } from "@/services/fetchService";
+import { configService } from "@/services/configService";
 import { useEffect, useState } from "react";
 
 export const useResumeVisible = () => {
@@ -8,9 +8,9 @@ export const useResumeVisible = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchService
-      .get<{ isVisible: boolean }>("/api/config/resume-visible")
-      .then((data) => setIsVisible(data.isVisible))
+    configService
+      .getResumeVisible()
+      .then((data) => setIsVisible(data.is_visible_resume))
       .catch(() => setIsVisible(false))
       .finally(() => setIsLoading(false));
   }, []);

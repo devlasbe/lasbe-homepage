@@ -1,29 +1,18 @@
 export const dynamic = "force-dynamic";
 
 import { createHash } from "crypto";
-import { db } from "@/services/firebase";
+import { db } from "@/utils/firebase";
 import { addDoc, collection, getDocs, orderBy, query, Timestamp } from "firebase/firestore";
 import { NextRequest, NextResponse } from "next/server";
+import type {
+  GuestbookEntryType,
+  GuestbookDocType,
+  GuestbookGetResponseType,
+  GuestbookPostResponseType,
+  ErrorResponseType,
+} from "./guestbook.types";
 
-type GuestbookEntryType = {
-  id: string;
-  name: string;
-  comment: string;
-  createdAt: string;
-};
-
-type GuestbookDocType = {
-  name: string;
-  passwordHash: string;
-  comment: string;
-  createdAt: Timestamp;
-};
-
-type GetResponseType = { entries: GuestbookEntryType[] };
-type PostResponseType = { id: string; success: boolean };
-type ErrorResponseType = { error: string };
-
-export async function GET(): Promise<NextResponse<GetResponseType | ErrorResponseType>> {
+export async function GET(): Promise<NextResponse<GuestbookGetResponseType | ErrorResponseType>> {
   try {
     const colRef = collection(db, "guestbook");
     const q = query(colRef, orderBy("createdAt", "desc"));
@@ -48,7 +37,7 @@ export async function GET(): Promise<NextResponse<GetResponseType | ErrorRespons
 
 export async function POST(
   request: NextRequest
-): Promise<NextResponse<PostResponseType | ErrorResponseType>> {
+): Promise<NextResponse<GuestbookPostResponseType | ErrorResponseType>> {
   try {
     const { name, password, comment } = (await request.json()) as {
       name: string;

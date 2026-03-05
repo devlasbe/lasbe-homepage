@@ -5,11 +5,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { Icon } from "@/components/ui/icon";
 import { Win95MenuBar, Win95StatusBar, Win95AddressBar, Win95Button } from "../ui";
+import { githubService } from "@/services/githubService";
+import type { GithubProfileType, GithubRepoType } from "@/services/githubService";
 
 // ── GitHub API ──
 const GITHUB_USERNAME = "devlasbe";
 const REPO_COUNT = 6;
-const GITHUB_API_BASE = "https://api.github.com";
 const GITHUB_PROFILE_URL = `https://github.com/${GITHUB_USERNAME}`;
 
 // ── 메뉴 ──
@@ -32,27 +33,6 @@ const LANG_COLORS: Record<string, string> = {
   Swift: "#F05138",
 };
 
-type GithubProfileType = {
-  name: string;
-  login: string;
-  bio: string | null;
-  avatar_url: string;
-  public_repos: number;
-  followers: number;
-  following: number;
-  html_url: string;
-};
-
-type GithubRepoType = {
-  id: number;
-  name: string;
-  description: string | null;
-  language: string | null;
-  stargazers_count: number;
-  forks_count: number;
-  html_url: string;
-};
-
 type FetchStateType = "idle" | "loading" | "success" | "error";
 
 export default function GithubWindow() {
@@ -63,16 +43,9 @@ export default function GithubWindow() {
   const fetchData = useCallback(async () => {
     setFetchState("loading");
     try {
-      const [profileRes, reposRes] = await Promise.all([
-        fetch(`${GITHUB_API_BASE}/users/${GITHUB_USERNAME}`),
-        fetch(`${GITHUB_API_BASE}/users/${GITHUB_USERNAME}/repos?sort=pushed&per_page=${REPO_COUNT}`),
-      ]);
-
-      if (!profileRes.ok || !reposRes.ok) throw new Error("API 오류");
-
       const [profileData, reposData] = await Promise.all([
-        profileRes.json() as Promise<GithubProfileType>,
-        reposRes.json() as Promise<GithubRepoType[]>,
+        githubService.getProfile(GITHUB_USERNAME),
+        githubService.getRepos(GITHUB_USERNAME, REPO_COUNT),
       ]);
 
       setProfile(profileData);

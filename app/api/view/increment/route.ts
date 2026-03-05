@@ -1,10 +1,8 @@
 import { getDateString } from "@/utils/date";
-import { db } from "@/services/firebase";
+import { db } from "@/utils/firebase";
 import { doc, getDoc, increment, setDoc, updateDoc } from "firebase/firestore";
 import { NextResponse } from "next/server";
-
-type IncrementResponseType = { success: boolean };
-type ErrorResponseType = { error: string };
+import type { IncrementResponseType, ErrorResponseType } from "../view.types";
 
 export async function POST(): Promise<
   NextResponse<IncrementResponseType | ErrorResponseType>
