@@ -1,5 +1,5 @@
 import type { ComponentType, SVGProps, ReactNode } from "react";
-import { Mail, Ie, QuestionBubble, Explorer100, Wordpad, Addrbook, Write1, User6 } from "@react95/icons";
+import { Icon } from "@/components/ui/icon";
 import MailWindow from "@/components/windows/MailWindow";
 import ReadmeWindow from "@/components/windows/ReadmeWindow";
 import GithubWindow from "@/components/windows/GithubWindow";
@@ -25,7 +25,7 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
   {
     id: "settings",
     label: "내 정보",
-    icon: User6,
+    icon: Icon.User6,
     title: "내 정보 — 장성우",
     defaultSize: { width: 480, height: 520 },
     content: <MyProfileWindow />,
@@ -34,7 +34,7 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
   {
     id: "mail",
     label: "메일 보내기",
-    icon: Mail,
+    icon: Icon.Mail,
     title: "메일 보내기 - Outlook Express",
     defaultSize: { width: 520, height: 420 },
     content: <MailWindow />,
@@ -43,7 +43,7 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
   {
     id: "readme",
     label: "README.txt",
-    icon: QuestionBubble,
+    icon: Icon.QuestionBubble,
     title: "README.txt - 도움말",
     defaultSize: { width: 520, height: 480 },
     content: <ReadmeWindow />,
@@ -52,7 +52,7 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
   {
     id: "github",
     label: "GitHub",
-    icon: Explorer100,
+    icon: Icon.Explorer100,
     title: "GitHub - devlasbe",
     defaultSize: { width: 620, height: 540 },
     content: <GithubWindow />,
@@ -61,7 +61,7 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
   {
     id: "notion",
     label: "경력기술서",
-    icon: Wordpad,
+    icon: Icon.Wordpad,
     title: "경력기술서 - Notion",
     defaultSize: { width: 780, height: 560 },
     content: <ResumeWindow />,
@@ -70,7 +70,7 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
   {
     id: "guestbook",
     label: "방명록.exe",
-    icon: Addrbook,
+    icon: Icon.Addrbook,
     title: "방명록 - Guestbook",
     defaultSize: { width: 480, height: 500 },
     content: <GuestbookWindow />,
@@ -79,7 +79,7 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
   {
     id: "blog",
     label: "블로그",
-    icon: Write1,
+    icon: Icon.Write1,
     title: "블로그 - lasbe.tistory.com",
     defaultSize: { width: 780, height: 560 },
     content: <BlogWindow />,
@@ -88,7 +88,7 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
   {
     id: "openfranchise",
     label: "오픈프차.exe",
-    icon: Ie,
+    icon: Icon.Ie,
     title: "오픈프차 - 프랜차이즈 창업 정보 서비스",
     defaultSize: { width: 540, height: 500 },
     content: <OpenFranchiseWindow />,

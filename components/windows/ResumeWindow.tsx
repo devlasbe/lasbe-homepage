@@ -4,7 +4,7 @@ import { useState } from "react";
 import NotionViewer, { type FetchStateType } from "@/components/NotionViewer";
 import { Win95MenuBar, Win95StatusBar, Win95AddressBar } from "../ui";
 import { useResumeVisible } from "@/hooks/useResumeVisible";
-import { Warning } from "@react95/icons";
+import { Icon } from "@/components/ui/icon";
 
 // ── Notion 설정 ──
 const NOTION_PAGE_ID = "28699322f59d8060911ff907842cfffc";
@@ -16,7 +16,7 @@ const MENU_ITEMS = ["파일(F)", "보기(V)", "도움말(H)"] as const;
 function UnderConstructionView() {
   return (
     <div className="flex flex-col items-center justify-center h-full gap-4 text-system-body select-none">
-      <Warning style={{ width: 48, height: 48, display: "block" }} />
+      <Icon.Warning style={{ width: 48, height: 48, display: "block" }} />
       <p className="text-system-heading font-bold text-[#000080]">공사 중입니다</p>
       <p className="text-system-caption text-[#808080]">Under Construction</p>
     </div>
