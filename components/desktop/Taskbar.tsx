@@ -1,15 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useAtom } from "jotai";
-import { isStartMenuOpenAtom } from "@/atoms/window";
+import { useStartMenuContext } from "@/components/contexts/startMenuContext";
 import { useWindowManager } from "@/hooks/useWindowManager";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 import SystemTray from "./SystemTray";
 import StartMenu from "./StartMenu";
 
 export default function Taskbar() {
-  const [isStartMenuOpen, setIsStartMenuOpen] = useAtom(isStartMenuOpenAtom);
+  const { isStartMenuOpen, setIsStartMenuOpen } = useStartMenuContext();
   const { windows, focusWindow, minimizeWindow, restoreWindow, closeWindow } = useWindowManager();
   const { isMobile } = useBreakpoint();
 

@@ -1,14 +1,13 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useAtom } from "jotai";
-import { isStartMenuOpenAtom } from "@/atoms/window";
+import { useStartMenuContext } from "@/components/contexts/startMenuContext";
 import { useWindowManager } from "@/hooks/useWindowManager";
 import { useIconPositions } from "@/hooks/useIconPositions";
 import { WINDOW_CONFIGS, WindowConfigType } from "@/constants/windowConfigs";
 
 export default function StartMenu() {
-  const [isOpen, setIsOpen] = useAtom(isStartMenuOpenAtom);
+  const { isStartMenuOpen: isOpen, setIsStartMenuOpen: setIsOpen } = useStartMenuContext();
   const { openWindow } = useWindowManager();
   const { resetPositions } = useIconPositions();
   const menuRef = useRef<HTMLDivElement>(null);

@@ -1,12 +1,11 @@
 "use client";
 
-import { useAtom } from "jotai";
 import { useCallback } from "react";
-import { windowsAtom } from "@/atoms/window";
-import type { WindowStateType, OpenWindowConfigType } from "@/atoms/window";
+import { useWindowContext } from "@/components/contexts/windowContext";
+import type { WindowStateType, OpenWindowConfigType } from "@/components/contexts/windowContext";
 
 export const useWindowManager = () => {
-  const [windows, setWindows] = useAtom(windowsAtom);
+  const { windows, setWindows } = useWindowContext();
 
   const focusWindow = useCallback(
     (id: string) => {

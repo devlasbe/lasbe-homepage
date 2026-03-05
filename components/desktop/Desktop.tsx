@@ -1,10 +1,8 @@
 "use client";
 
-import { createRef, useRef } from "react";
-import { useAtom } from "jotai";
+import { createRef, useRef, useState } from "react";
 import Draggable, { type DraggableEvent, type DraggableData } from "react-draggable";
 import { useWindowManager } from "@/hooks/useWindowManager";
-import { isBootCompleteAtom } from "@/atoms/window";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { useIconPositions } from "@/hooks/useIconPositions";
 import { useKeyboardShortcuts } from "@/hooks/useKeyboardShortcuts";
@@ -21,7 +19,7 @@ const DRAG_THRESHOLD = 4; // px 미만 이동은 클릭으로 간주
 
 export default function Desktop() {
   const { windows, openWindow } = useWindowManager();
-  const [isBootComplete, setIsBootComplete] = useAtom(isBootCompleteAtom);
+  const [isBootComplete, setIsBootComplete] = useState(false);
   const { isMobile } = useBreakpoint();
   const { getPosition, updatePosition, isReady, windowHeight } = useIconPositions();
   useKeyboardShortcuts();

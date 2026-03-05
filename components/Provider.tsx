@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect } from "react";
-import { Provider as JotaiProvider } from "jotai";
 import { useViewCount } from "@/hooks/useViewCount";
+import { WindowProvider } from "@/components/contexts/windowContext";
+import { StartMenuProvider } from "@/components/contexts/startMenuContext";
 
 function ViewCountInitializer() {
   const { increaseViewCountOneTime } = useViewCount();
@@ -14,11 +15,11 @@ function ViewCountInitializer() {
 
 export default function Provider({ children }: { children: React.ReactNode }) {
   return (
-    <JotaiProvider>
-      <>
+    <WindowProvider>
+      <StartMenuProvider>
         <ViewCountInitializer />
         {children}
-      </>
-    </JotaiProvider>
+      </StartMenuProvider>
+    </WindowProvider>
   );
 }
