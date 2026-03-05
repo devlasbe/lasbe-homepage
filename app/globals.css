@@ -6,22 +6,70 @@
   box-sizing: border-box;
 }
 
+/** Win95 Scrollbar **/
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #c0c0c0 #808080;
+}
+
 *::-webkit-scrollbar {
-  display: none;
+  width: 17px;
+  height: 17px;
+}
+
+/* Track: Win95 체커보드 패턴 */
+*::-webkit-scrollbar-track {
+  background-color: #808080;
+  background-image:
+    linear-gradient(45deg, #c0c0c0 25%, transparent 25%, transparent 75%, #c0c0c0 75%),
+    linear-gradient(45deg, #c0c0c0 25%, transparent 25%, transparent 75%, #c0c0c0 75%);
+  background-size: 4px 4px;
+  background-position: 0 0, 2px 2px;
+}
+
+/* Thumb: raised bevel */
+*::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-bottom: 2px solid #808080;
+  border-right: 2px solid #808080;
+  min-height: 20px;
+  min-width: 20px;
+}
+*::-webkit-scrollbar-thumb:active {
+  border-top: 2px solid #808080;
+  border-left: 2px solid #808080;
+  border-bottom: 2px solid #ffffff;
+  border-right: 2px solid #ffffff;
+}
+
+/* Buttons: raised bevel */
+*::-webkit-scrollbar-button {
+  background: #c0c0c0;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-bottom: 2px solid #808080;
+  border-right: 2px solid #808080;
+  width: 17px;
+  height: 17px;
+  display: block;
+}
+*::-webkit-scrollbar-button:active {
+  border-top: 2px solid #808080;
+  border-left: 2px solid #808080;
+  border-bottom: 2px solid #ffffff;
+  border-right: 2px solid #ffffff;
+}
+
+/* Corner */
+*::-webkit-scrollbar-corner {
+  background: #c0c0c0;
 }
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
-
-  /* Win95 design tokens */
-  --win95-bg: #c0c0c0;
-  --win95-desktop: #008080;
-  --win95-title-active: #000080;
-  --win95-title-inactive: #7b7b7b;
-  --win95-border-light: #ffffff;
-  --win95-border-dark: #808080;
-  --win95-border-darker: #000000;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -37,11 +85,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
 .icon {
   cursor: pointer;
   transition: 1s;
@@ -73,30 +116,6 @@ body {
   100% {
     transform: rotate(0);
   }
-}
-
-@keyframes blink {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.cursor-animation {
-  animation: blink 0.7s infinite;
-}
-
-.button-hover {
-  transition: transform 0.15s cubic-bezier(0, 0.2, 0.5, 3);
-}
-
-.button-hover:hover {
-  transform: scale(1.03);
 }
 
 /** Win95 Bevel Utilities **/
@@ -245,11 +264,4 @@ button.win95-raised:active {
 
 .notion-h3 {
   margin-bottom: 0.5rem !important;
-}
-
-/** Swiper Custom **/
-:root {
-  --swiper-theme-color: #004d60 !important;
-  --swiper-navigation-size: 25px !important;
-  --swiper-pagination-bottom: -5px !important;
 }
