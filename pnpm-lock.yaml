@@ -8,12 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@lasbe/react-card-animation':
-        specifier: ^1.0.0
-        version: 1.1.0(react@18.3.1)
-      '@lasbe/react-scroll-animation':
-        specifier: ^2.0.6
-        version: 2.0.6(react@18.3.1)
       '@react95/icons':
         specifier: ^2.2.0
         version: 2.2.0
@@ -50,9 +44,6 @@ importers:
       react-resizable:
         specifier: ^3.1.3
         version: 3.1.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      swiper:
-        specifier: ^11.1.14
-        version: 11.2.6
       three:
         specifier: ^0.183.1
         version: 0.183.1
@@ -371,16 +362,6 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
-
-  '@lasbe/react-card-animation@1.1.0':
-    resolution: {integrity: sha512-9IV2Uim6KqNI9r7ALJd7f8nZu1+117W0IFnoJhb4Vl+Y6OEOfHn83t6xwXkoI0e4W3CoGz7Mi8tay8XreHCO4A==}
-    peerDependencies:
-      react: '>=16.8.3'
-
-  '@lasbe/react-scroll-animation@2.0.6':
-    resolution: {integrity: sha512-K1zqgUY8byMZ2zGWUVCmdpjBGHdq3+mhUdvoDVVA3j0zjaqthRPyEXbDY9kTN8O6J1vkMqSEgbOTFZoBYrm5zQ==}
-    peerDependencies:
-      react: '>=16.8.3'
 
   '@matejmazur/react-katex@3.1.3':
     resolution: {integrity: sha512-rBp7mJ9An7ktNoU653BWOYdO4FoR4YNwofHZi+vaytX/nWbIlmHVIF+X8VFOn6c3WYmrLT5FFBjKqCZ1sjR5uQ==}
@@ -2196,10 +2177,6 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  swiper@11.2.6:
-    resolution: {integrity: sha512-8aXpYKtjy3DjcbzZfz+/OX/GhcU5h+looA6PbAzHMZT6ESSycSp9nAjPCenczgJyslV+rUGse64LMGpWE3PX9Q==}
-    engines: {node: '>= 4.7.0'}
-
   tailwindcss@3.4.17:
     resolution: {integrity: sha512-w33E2aCvSDP0tW9RZuNXadXlkHXqFzSkQew/aIa2i/Sj8fThxwovwlXHSPXTbAHwEIhBFXAedUhP2tueAKP8Og==}
     engines: {node: '>=14.0.0'}
@@ -2797,14 +2774,6 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
-
-  '@lasbe/react-card-animation@1.1.0(react@18.3.1)':
-    dependencies:
-      react: 18.3.1
-
-  '@lasbe/react-scroll-animation@2.0.6(react@18.3.1)':
-    dependencies:
-      react: 18.3.1
 
   '@matejmazur/react-katex@3.1.3(katex@0.16.21)(react@18.3.1)':
     dependencies:
@@ -4878,8 +4847,6 @@ snapshots:
       has-flag: 4.0.0
 
   supports-preserve-symlinks-flag@1.0.0: {}
-
-  swiper@11.2.6: {}
 
   tailwindcss@3.4.17:
     dependencies:
