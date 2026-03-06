@@ -18,7 +18,7 @@ export default function Window({ window: win }: WindowPropsType) {
   const { focusWindow, updatePosition, updateSize, closeWindow, minimizeWindow, maximizeWindow } =
     useWindowManager();
   const { windows } = useWindowContext();
-  const { isMobile, isTablet } = useBreakpoint();
+  const { isMobile } = useBreakpoint();
   const nodeRef = useRef<HTMLDivElement>(null);
   const resizeOriginRef = useRef<{ x: number; width: number } | null>(null);
 
@@ -162,21 +162,17 @@ export default function Window({ window: win }: WindowPropsType) {
         onMouseDown={() => focusWindow(win.id)}
         onContextMenu={(e) => e.stopPropagation()}
       >
-        {isTablet ? (
-          <div style={{ width: win.size.width, height: win.size.height }}>{windowContent}</div>
-        ) : (
-          <ResizableBox
-            width={win.size.width}
-            height={win.size.height}
-            minConstraints={[280, 200]}
-            resizeHandles={["se", "e", "s", "sw", "w"]}
-            onResizeStart={handleResizeStart}
-            onResize={handleResize}
-            onResizeStop={handleResizeStop}
-          >
-            {windowContent}
-          </ResizableBox>
-        )}
+        <ResizableBox
+          width={win.size.width}
+          height={win.size.height}
+          minConstraints={[280, 200]}
+          resizeHandles={["se", "e", "s", "sw", "w"]}
+          onResizeStart={handleResizeStart}
+          onResize={handleResize}
+          onResizeStop={handleResizeStop}
+        >
+          {windowContent}
+        </ResizableBox>
       </div>
     </Draggable>
   );
