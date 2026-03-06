@@ -1,5 +1,6 @@
 "use client";
 
+import type { ComponentType, SVGProps } from "react";
 import { useWindowContext } from "@/components/contexts/windowContext";
 import { useWindowManager } from "@/hooks/useWindowManager";
 import { WINDOW_CONFIGS } from "@/constants/windowConfigs";
@@ -21,7 +22,7 @@ export function Win95WindowToolbar() {
   return (
     <div className="flex items-center gap-px px-1 py-0.5 border-b-2 border-gray-500 bg-gray-300 flex-shrink-0 flex-wrap">
       {WINDOW_CONFIGS.map((cfg) => {
-        const IconComponent = cfg.icon;
+        const IconComponent = cfg.icon as ComponentType<SVGProps<SVGSVGElement> & { variant?: string }>;
         const isActive = openIds.has(cfg.id);
         return (
           <button
@@ -37,11 +38,14 @@ export function Win95WindowToolbar() {
                 defaultSize: cfg.defaultSize,
               })
             }
-            className={`py-1.5 px-2.5 cursor-pointer outline-none ${
-              isActive ? "bg-gray-400" : "hover:bg-gray-200"
-            }`}
+            className={`py-1.5 px-2.5 cursor-pointer outline-none ${isActive ? "bg-gray-400" : "hover:bg-gray-200"}`}
           >
-            <IconComponent style={{ width: 16, height: 16, display: "block" }} variant={TOOLBAR_ICON_VARIANT.get(cfg.icon)} />
+            <IconComponent
+              width={16}
+              height={16}
+              variant={TOOLBAR_ICON_VARIANT.get(IconComponent) || undefined}
+              style={{ display: "block" }}
+            />
           </button>
         );
       })}
