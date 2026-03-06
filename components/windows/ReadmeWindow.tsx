@@ -22,6 +22,7 @@ const DESKTOP_OPS = [
   { icon: "🖱️", action: "아이콘 더블클릭", desc: "해당 앱 창 열기" },
   { icon: "✋", action: "아이콘 드래그", desc: "위치 자유 배치 — 새로고침 후에도 유지 (localStorage)" },
   { icon: "🪟", action: "시작 버튼", desc: "시작 메뉴 열기 — 모든 앱에 접근 가능" },
+  { icon: "🖱️", action: "배경 우클릭", desc: "컨텍스트 메뉴 열기 — 블로그/깃허브 바로가기 및 아이콘 정렬" },
 ];
 
 const GIMMICKS = [
