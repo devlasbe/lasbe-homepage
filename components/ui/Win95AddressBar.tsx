@@ -16,7 +16,7 @@ export function Win95AddressBar({
   actionHref,
 }: Win95AddressBarPropsType) {
   return (
-    <div className="flex items-center gap-1 px-1 py-1 border-b border-[#808080] bg-[#c0c0c0] flex-shrink-0">
+    <div className="flex items-center gap-1 px-1 py-1 border-b border-gray-500 bg-gray-300 flex-shrink-0">
       {showNavButtons && (
         <>
           <Win95Button disabled>◀</Win95Button>
@@ -27,7 +27,7 @@ export function Win95AddressBar({
         </>
       )}
       <span className="text-system-caption px-1 shrink-0">주소(D):</span>
-      <div className="flex-1 win95-sunken bg-white px-1 py-0.5 text-system-caption text-[#000080] truncate">
+      <div className="flex-1 win95-sunken bg-white px-1 py-0.5 text-system-caption text-blue-900 truncate">
         {url}
       </div>
       {actionHref ? (
@@ -35,7 +35,7 @@ export function Win95AddressBar({
           href={actionHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="win95-raised bg-[#c0c0c0] px-2 py-0.5 text-system-caption shrink-0"
+          className="win95-raised bg-gray-300 px-2 py-0.5 text-system-caption shrink-0"
         >
           {actionLabel}
         </a>

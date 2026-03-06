@@ -18,6 +18,7 @@ function cx(...args: (string | undefined | false)[]) {
 type Win95ButtonPropsType = {
   size?: "lg" | "md" | "sm";
   weight?: "medium" | "bold";
+  active?: boolean;
   className?: string;
   children: React.ReactNode;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
@@ -25,6 +26,7 @@ type Win95ButtonPropsType = {
 export default function Win95Button({
   size = "md",
   weight = "medium",
+  active = false,
   className,
   children,
   ...rest
@@ -32,7 +34,8 @@ export default function Win95Button({
   return (
     <button
       className={cx(
-        "win95-raised bg-[#c0c0c0] cursor-pointer disabled:opacity-50",
+        active ? "win95-sunken" : "win95-raised",
+        "bg-gray-300 cursor-pointer disabled:opacity-50",
         SIZE_CLASS[size],
         WEIGHT_CLASS[weight],
         className

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import NotionViewer, { type FetchStateType } from "@/components/NotionViewer";
-import { Win95MenuBar, Win95StatusBar, Win95AddressBar } from "../ui";
+import { Win95StatusBar, Win95AddressBar } from "../ui";
 import { useResumeVisible } from "@/hooks/useResumeVisible";
 import { Icon } from "@/components/ui/icon";
 
@@ -10,15 +10,12 @@ import { Icon } from "@/components/ui/icon";
 const NOTION_PAGE_ID = "28699322f59d8060911ff907842cfffc";
 const NOTION_DIRECT_URL = "https://www.notion.so/devlasbe/2025-28699322f59d8060911ff907842cfffc";
 
-// ── 메뉴 ──
-const MENU_ITEMS = ["파일(F)", "보기(V)", "도움말(H)"] as const;
-
 function UnderConstructionView() {
   return (
     <div className="flex flex-col items-center justify-center h-full gap-4 text-system-body select-none">
       <Icon.Warning style={{ width: 48, height: 48, display: "block" }} />
-      <p className="text-system-heading font-bold text-[#000080]">공사 중입니다</p>
-      <p className="text-system-caption text-[#808080]">Under Construction</p>
+      <p className="text-system-heading font-bold text-blue-900">공사 중입니다</p>
+      <p className="text-system-caption text-gray-500">Under Construction</p>
     </div>
   );
 }
@@ -29,7 +26,7 @@ export default function ResumeWindow() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-full text-system-body text-[#808080]">
+      <div className="flex items-center justify-center h-full text-system-body text-gray-500">
         Loading...
       </div>
     );
@@ -41,8 +38,6 @@ export default function ResumeWindow() {
 
   return (
     <div className="flex flex-col h-full text-system-body">
-      <Win95MenuBar items={MENU_ITEMS} />
-
       {/* 주소 표시줄 */}
       <Win95AddressBar url={NOTION_DIRECT_URL} actionLabel="새창" actionHref={NOTION_DIRECT_URL} />
 

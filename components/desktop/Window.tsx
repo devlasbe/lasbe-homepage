@@ -8,6 +8,7 @@ import type { WindowType } from "@/components/contexts/windowContext";
 import { useWindowManager } from "@/hooks/useWindowManager";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 import Win95Button from "@/components/ui/Win95Button";
+import { Win95WindowToolbar } from "@/components/ui/Win95WindowToolbar";
 
 type WindowPropsType = {
   window: WindowType;
@@ -17,7 +18,7 @@ export default function Window({ window: win }: WindowPropsType) {
   const { focusWindow, updatePosition, updateSize, closeWindow, minimizeWindow, maximizeWindow } =
     useWindowManager();
   const { windows } = useWindowContext();
-  const { isMobile, isTablet } = useBreakpoint();
+  const { isMobile } = useBreakpoint();
   const nodeRef = useRef<HTMLDivElement>(null);
   const resizeOriginRef = useRef<{ x: number; width: number } | null>(null);
 
@@ -73,13 +74,13 @@ export default function Window({ window: win }: WindowPropsType) {
 
   const isFocused = win.zIndex === Math.max(...windows.map((w) => w.zIndex));
   const titleBarBg = isFocused
-    ? "bg-gradient-to-r from-[#000080] to-[#1084d0]"
-    : "bg-[#7b7b7b]";
-  const titleBarText = isFocused ? "text-white" : "text-[#c0c0c0]";
+    ? "bg-gradient-to-r from-blue-900 to-blue-500"
+    : "bg-gray-500";
+  const titleBarText = isFocused ? "text-white" : "text-gray-300";
 
   const windowContent = (
     <div
-      className="win95-window-border win95-raised bg-[#c0c0c0] flex flex-col"
+      className="win95-window-border win95-raised bg-gray-300 flex flex-col"
       style={{ width: "100%", height: "100%" }}
     >
       {/* Title bar */}
@@ -123,8 +124,10 @@ export default function Window({ window: win }: WindowPropsType) {
           </Win95Button>
         </div>
       </div>
+      {/* Window Toolbar */}
+      <Win95WindowToolbar />
       {/* Content area */}
-      <div className="flex-1 overflow-auto p-1 bg-[#c0c0c0]">{win.content}</div>
+      <div className="flex-1 overflow-auto p-1 bg-gray-300">{win.content}</div>
     </div>
   );
 
@@ -134,6 +137,7 @@ export default function Window({ window: win }: WindowPropsType) {
         className="absolute top-0 left-0 right-0 bottom-12"
         style={{ zIndex: win.zIndex }}
         onMouseDown={() => focusWindow(win.id)}
+        onContextMenu={(e) => e.stopPropagation()}
       >
         {windowContent}
       </div>
@@ -156,22 +160,19 @@ export default function Window({ window: win }: WindowPropsType) {
         className="absolute"
         style={{ zIndex: win.zIndex }}
         onMouseDown={() => focusWindow(win.id)}
+        onContextMenu={(e) => e.stopPropagation()}
       >
-        {isTablet ? (
-          <div style={{ width: win.size.width, height: win.size.height }}>{windowContent}</div>
-        ) : (
-          <ResizableBox
-            width={win.size.width}
-            height={win.size.height}
-            minConstraints={[280, 200]}
-            resizeHandles={["se", "e", "s", "sw", "w"]}
-            onResizeStart={handleResizeStart}
-            onResize={handleResize}
-            onResizeStop={handleResizeStop}
-          >
-            {windowContent}
-          </ResizableBox>
-        )}
+        <ResizableBox
+          width={win.size.width}
+          height={win.size.height}
+          minConstraints={[280, 200]}
+          resizeHandles={["se", "e", "s", "sw", "w"]}
+          onResizeStart={handleResizeStart}
+          onResize={handleResize}
+          onResizeStop={handleResizeStop}
+        >
+          {windowContent}
+        </ResizableBox>
       </div>
     </Draggable>
   );

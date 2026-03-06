@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Win95Button from "@/components/ui/Win95Button";
+import { APP } from "@/constants/app";
 
 type BootPhaseType = "booting" | "fading";
 
@@ -52,16 +53,16 @@ export default function BootScreen({ onComplete }: BootScreenPropsType) {
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] bg-[#008080] flex items-center justify-center cursor-pointer transition-opacity duration-500 ${phase === "fading" ? "opacity-0" : "opacity-100"}`}
+      className={`fixed inset-0 z-[9999] bg-teal-500 flex items-center justify-center cursor-pointer transition-opacity duration-500 ${phase === "fading" ? "opacity-0" : "opacity-100"}`}
       onClick={handleSkip}
     >
       <div
-        className="win95-raised bg-[#c0c0c0] w-[320px] md:w-[360px] select-none"
+        className="win95-raised bg-gray-300 w-[320px] md:w-[360px] select-none"
         onClick={(e) => e.stopPropagation()}
       >
         {/* 타이틀바 */}
-        <div className="bg-[#000080] flex items-center justify-between px-2 py-1">
-          <span className="text-white text-system-body">LASBE OS 95</span>
+        <div className="bg-blue-900 flex items-center justify-between px-2 py-1">
+          <span className="text-white text-system-body">{APP.NAME} {APP.VERSION}</span>
           <div className="flex gap-1">
             <Win95Button size="sm" className="w-5 h-5 leading-none text-black">
               ─
@@ -106,7 +107,7 @@ export default function BootScreen({ onComplete }: BootScreenPropsType) {
             {Array.from({ length: TOTAL_SEGMENTS }).map((_, i) => (
               <div
                 key={i}
-                className={`flex-1 h-4 ${i < progress ? "bg-[#000080]" : "bg-[#c0c0c0]"}`}
+                className={`flex-1 h-4 ${i < progress ? "bg-blue-900" : "bg-gray-300"}`}
               />
             ))}
           </div>

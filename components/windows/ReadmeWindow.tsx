@@ -1,7 +1,8 @@
 "use client";
 
-import { Win95Section, Win95StatusBar, Win95Button } from "../ui";
+import { Win95Section, Win95StatusBar } from "../ui";
 import { WINDOW_CONFIGS } from "@/constants/windowConfigs";
+import { APP } from "@/constants/app";
 
 const SHORTCUTS = [
   { icon: "⌨️", key: "Esc", desc: "활성 창 닫기" },
@@ -22,6 +23,7 @@ const DESKTOP_OPS = [
   { icon: "🖱️", action: "아이콘 더블클릭", desc: "해당 앱 창 열기" },
   { icon: "✋", action: "아이콘 드래그", desc: "위치 자유 배치 — 새로고침 후에도 유지 (localStorage)" },
   { icon: "🪟", action: "시작 버튼", desc: "시작 메뉴 열기 — 모든 앱에 접근 가능" },
+  { icon: "🖱️", action: "배경 우클릭", desc: "컨텍스트 메뉴 열기 — 블로그/깃허브 바로가기 및 아이콘 정렬" },
 ];
 
 const GIMMICKS = [
@@ -61,21 +63,14 @@ const GIMMICKS = [
 export default function ReadmeWindow() {
   return (
     <div className="flex flex-col h-full text-system-body">
-      {/* Toolbar */}
-      <div className="flex items-center gap-1 px-2 py-1 bg-[#c0c0c0] border-b border-[#808080] flex-shrink-0">
-        {["도움말 항목(H)", "검색(S)", "이전(B)", "인쇄(P)"].map((btn) => (
-          <Win95Button key={btn}>{btn}</Win95Button>
-        ))}
-      </div>
-
       {/* Content */}
       <div className="flex-1 overflow-y-auto bg-white p-4">
         {/* Header */}
-        <div className="border-b-2 border-[#000080] pb-3 mb-4">
-          <p className="font-bold text-[#000080]" style={{ fontSize: "1.1em" }}>
-            🖥️ LASBE OS 95 — 사용 설명서
+        <div className="border-b-2 border-blue-900 pb-3 mb-4">
+          <p className="font-bold text-blue-900" style={{ fontSize: "1.1em" }}>
+            🖥️ {APP.NAME} {APP.VERSION} — 사용 설명서
           </p>
-          <p className="text-system-caption text-[#808080] mt-0.5">이 포트폴리오에 숨겨진 기믹들을 소개합니다</p>
+          <p className="text-system-caption text-gray-500 mt-0.5">이 포트폴리오에 숨겨진 기믹들을 소개합니다</p>
         </div>
 
         {/* Desktop operations */}
@@ -86,7 +81,7 @@ export default function ReadmeWindow() {
               <p className="leading-snug">
                 <span className="font-bold">{action}</span>
                 <br />
-                <span className="text-system-caption text-[#555]">{desc}</span>
+                <span className="text-system-caption text-gray-700">{desc}</span>
               </p>
             </div>
           ))}
@@ -100,7 +95,7 @@ export default function ReadmeWindow() {
               <p className="leading-snug">
                 <span className="font-bold">{key}</span>
                 <br />
-                <span className="text-system-caption text-[#555]">{desc}</span>
+                <span className="text-system-caption text-gray-700">{desc}</span>
               </p>
             </div>
           ))}
@@ -114,7 +109,7 @@ export default function ReadmeWindow() {
               <p className="leading-snug">
                 <span className="font-bold">{action}</span>
                 <br />
-                <span className="text-system-caption text-[#555]">{desc}</span>
+                <span className="text-system-caption text-gray-700">{desc}</span>
               </p>
             </div>
           ))}
@@ -128,7 +123,7 @@ export default function ReadmeWindow() {
               <p className="leading-snug">
                 <span className="font-bold">{title}</span>
                 <br />
-                <span className="text-system-caption text-[#555]">{desc}</span>
+                <span className="text-system-caption text-gray-700">{desc}</span>
               </p>
             </div>
           ))}
@@ -144,7 +139,7 @@ export default function ReadmeWindow() {
                 <p className="leading-snug">
                   <span className="font-bold">{c.label}</span>
                   <br />
-                  <span className="text-system-caption text-[#555]">{c.readmeDesc}</span>
+                  <span className="text-system-caption text-gray-700">{c.readmeDesc}</span>
                 </p>
               </div>
             );
@@ -152,7 +147,9 @@ export default function ReadmeWindow() {
         </Win95Section>
       </div>
 
-      <Win95StatusBar><span>도움말 뷰어 1.0 — LASBE OS 95 Portfolio Edition</span></Win95StatusBar>
+      <Win95StatusBar>
+        <span>도움말 뷰어 1.0 — {APP.NAME} {APP.VERSION}</span>
+      </Win95StatusBar>
     </div>
   );
 }

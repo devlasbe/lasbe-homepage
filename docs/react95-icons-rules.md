@@ -32,7 +32,10 @@ const IconComponent = icon;
 | 시작 메뉴 항목 | 24×24 |
 | 타이틀바 / 작업표시줄 버튼 | 16×16 |
 
-- `variant` prop은 사용하지 않는다. 크기는 항상 `style`로 제어한다.
+- 크기는 항상 `style`로 제어한다.
+- `variant` prop은 기본적으로 생략하되, **16×16 컨텍스트(툴바 등)에서 기본 variant가 `32x32_4`인 아이콘은 `16x16_4` variant를 명시해야 한다.** 32×32 SVG를 16×16으로 스케일다운하면 서브픽셀 앤티앨리어싱이 발생한다.
+  - `Win95WindowToolbar` 내 `TOOLBAR_ICON_VARIANT` 맵에 아이콘 컴포넌트를 키로 등록하여 관리한다.
+  - 해당 아이콘에 16x16 variant가 없는 경우(예: `QuestionBubble`)는 어쩔 수 없이 스케일다운을 감수한다.
 - `flexShrink: 0`은 flex 레이아웃에서 아이콘이 찌그러질 수 있는 곳에만 추가한다.
 
 ### 사용 가능한 아이콘 목록 확인

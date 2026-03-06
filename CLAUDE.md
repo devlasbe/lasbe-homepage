@@ -4,15 +4,15 @@
 
 ## 기술 스택
 
-| 분류            | 기술                                                               |
-| --------------- | ------------------------------------------------------------------ |
-| Framework       | Next.js 14 (App Router)                                            |
-| Language        | TypeScript                                                         |
-| Styling         | Tailwind CSS                                                       |
-| Package Manager | pnpm (preinstall 훅으로 강제 적용)                                 |
-| Database        | Firebase Firestore (방문자 수 카운트)                              |
-| Font            | 나눔고딕코딩 (Nanum Gothic Coding, next/font/google)               |
-| UI Libraries    | @react95/icons, react-draggable, react-resizable, react-notion-x   |
+| 분류            | 기술                                                             |
+| --------------- | ---------------------------------------------------------------- |
+| Framework       | Next.js 14 (App Router)                                          |
+| Language        | TypeScript                                                       |
+| Styling         | Tailwind CSS                                                     |
+| Package Manager | pnpm (preinstall 훅으로 강제 적용)                               |
+| Database        | Firebase Firestore (방문자 수 카운트)                            |
+| Font            | 나눔고딕코딩 (Nanum Gothic Coding, next/font/google)             |
+| UI Libraries    | @react95/icons, react-draggable, react-resizable, react-notion-x |
 
 ## 폴더 구조
 
@@ -89,10 +89,9 @@ services/[도메인]Service.ts        — 클라이언트 API wrapper
 
   파생 값은 기본 상수에서 계산한다 (`const NEAR_DOT_COUNT = Math.floor(NEAR_TOTAL * NEAR_DOT_RATIO)`).
 
-- **Font Size 토큰**: 커스텀 폰트 크기는 `text-system-*` prefix를 사용한다. (`tailwind.config.ts` `theme.extend.fontSize`에 정의)
-  - OS Chrome (반응형): `text-system-ui`, `text-system-ui-md`, `text-system-ui-lg`, `text-system-desktop-icon` — desktop 기본값은 tailwind.config.ts에, 모바일 오버라이드는 `app/globals.css` `@layer utilities`에 정의
-  - Window Content (고정): `text-system-caption`, `text-system-body`, `text-system-heading`, `text-system-icon-md`, `text-system-icon-lg`
-  - 새 토큰 추가 시 `tailwind.config.ts` `theme.extend.fontSize`에 추가한다.
+- **디자인 토큰**: 폰트 크기와 색상은 `tailwind.config.ts`에 정의된 토큰을 사용한다. 필요한 토큰이 없으면 `tailwind.config.ts`에 먼저 정의한 후 사용한다.
+  - Font Size: `theme.extend.fontSize` — `text-system-*` prefix (예: `text-system-body`, `text-system-heading`)
+  - Color: `theme.extend.colors` — Tailwind 팔레트 스케일 방식 (예: `blue-900`, `gray-300`, `teal-500`)
 
 ## 공유 UI 서브컴포넌트 분리 원칙
 
@@ -111,7 +110,6 @@ services/[도메인]Service.ts        — 클라이언트 API wrapper
 
 ### 규칙
 
-- `ui/` 컴포넌트 props 타입은 `Type` postfix 포함. (`type FooPropsType = {...}`)
 - `ui/` 컴포넌트는 `"use client"` 없는 순수 표현 컴포넌트로 유지한다. (이벤트/상태가 필요하면 핸들러를 props로 받기)
 - 단일 사용처에서의 조기 추출 금지. 2개 이상 사용처 확인 후 추출한다.
 

@@ -3,14 +3,12 @@
 import { useEffect, useRef } from "react";
 import { useStartMenuContext } from "@/components/contexts/startMenuContext";
 import { useWindowManager } from "@/hooks/useWindowManager";
-import { useIconPositions } from "@/hooks/useIconPositions";
 import { WINDOW_CONFIGS, WindowConfigType } from "@/constants/windowConfigs";
-import { Icon } from "@/components/ui/icon";
+import { APP } from "@/constants/app";
 
 export default function StartMenu() {
   const { isStartMenuOpen: isOpen, setIsStartMenuOpen: setIsOpen } = useStartMenuContext();
   const { openWindow } = useWindowManager();
-  const { resetPositions } = useIconPositions();
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -35,19 +33,14 @@ export default function StartMenu() {
     setIsOpen(false);
   };
 
-  const handleResetIcons = () => {
-    setIsOpen(false);
-    resetPositions();
-  };
-
   return (
     <div
       ref={menuRef}
-      className="absolute bottom-12 left-0 win95-raised bg-[#c0c0c0] flex shadow-lg"
+      className="absolute bottom-12 left-0 win95-raised bg-gray-300 flex shadow-lg"
       style={{ zIndex: 10000 }}
     >
       {/* Left sidebar - "Windows 95" vertical text */}
-      <div className="w-8 bg-gradient-to-t from-[#7b7b7b] to-[#000080] flex items-end justify-center pb-2 select-none">
+      <div className="w-8 bg-gradient-to-t from-gray-500 to-blue-900 flex items-end justify-center pb-2 select-none">
         <span
           className="text-white font-bold text-system-caption tracking-widest"
           style={{
@@ -56,7 +49,7 @@ export default function StartMenu() {
             letterSpacing: "0.15em",
           }}
         >
-          LASBE OS 95
+          {APP.NAME} {APP.VERSION}
         </span>
       </div>
 
@@ -65,7 +58,7 @@ export default function StartMenu() {
         {WINDOW_CONFIGS.map((cfg) => (
           <button
             key={cfg.id}
-            className="flex items-center gap-2 px-3 py-2 md:py-1.5 text-left text-system-body hover:bg-[#000080] hover:text-white active:bg-[#000080] active:text-white"
+            className="flex items-center gap-2 px-3 py-2 md:py-1.5 text-left text-system-body hover:bg-blue-900 hover:text-white active:bg-blue-900 active:text-white"
             onClick={() => handleItemClick(cfg)}
           >
             <cfg.icon style={{ width: 24, height: 24, display: "block", flexShrink: 0 }} />
@@ -73,17 +66,6 @@ export default function StartMenu() {
           </button>
         ))}
 
-        {/* Divider */}
-        <div className="my-1 mx-2 border-t border-[#808080] border-b border-b-white" />
-
-        {/* Reset icon positions */}
-        <button
-          className="flex items-center gap-2 px-3 py-2 md:py-1.5 text-left text-system-body hover:bg-[#000080] hover:text-white active:bg-[#000080] active:text-white"
-          onClick={handleResetIcons}
-        >
-          <Icon.FolderOpen style={{ width: 24, height: 24, display: "block", flexShrink: 0 }} />
-          <span>아이콘 정렬</span>
-        </button>
       </div>
     </div>
   );

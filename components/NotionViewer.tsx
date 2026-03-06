@@ -59,7 +59,7 @@ export default function NotionViewer({ pageId, directUrl, onStateChange }: Notio
             href={directUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="win95-raised bg-[#c0c0c0] px-3 py-1 text-system-body"
+            className="win95-raised bg-gray-300 px-3 py-1 text-system-body"
           >
             Notion에서 열기
           </a>

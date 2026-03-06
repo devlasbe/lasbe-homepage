@@ -46,6 +46,9 @@ export const metadata: Metadata = {
   },
   verification: {
     google: SEO.GOOGLE_VERIFICATION,
+    other: {
+      "naver-site-verification": [SEO.NAVER_VERIFICATION],
+    },
   },
 };
 
