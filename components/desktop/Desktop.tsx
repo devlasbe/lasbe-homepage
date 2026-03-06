@@ -9,6 +9,7 @@ import { useKeyboardShortcuts } from "@/hooks/useKeyboardShortcuts";
 import BootScreen from "./BootScreen";
 import { WINDOW_CONFIGS } from "@/constants/windowConfigs";
 import DesktopIcon from "./DesktopIcon";
+import DesktopContextMenu from "./DesktopContextMenu";
 import Window from "./Window";
 import Taskbar from "./Taskbar";
 import SpaceBackground from "./SpaceBackground";
@@ -20,8 +21,9 @@ const DRAG_THRESHOLD = 4; // px 미만 이동은 클릭으로 간주
 export default function Desktop() {
   const { windows, openWindow } = useWindowManager();
   const [isBootComplete, setIsBootComplete] = useState(false);
+  const [contextMenuPos, setContextMenuPos] = useState<{ x: number; y: number } | null>(null);
   const { isMobile } = useBreakpoint();
-  const { getPosition, updatePosition, isReady, windowHeight } = useIconPositions();
+  const { getPosition, updatePosition, resetPositions, isReady, windowHeight } = useIconPositions();
   useKeyboardShortcuts();
   // 아이콘 id별 드래그 발생 여부 추적 (re-render 없이 관리)
   const draggedRef = useRef<Set<string>>(new Set());
@@ -29,7 +31,14 @@ export default function Desktop() {
   return (
     <div className="flex flex-col w-full h-dvh overflow-hidden">
       {/* Desktop area */}
-      <div className="relative flex-1 bg-black overflow-hidden">
+      <div
+        className="relative flex-1 bg-black overflow-hidden"
+        onContextMenu={(e) => {
+          if (isMobile) return;
+          e.preventDefault();
+          setContextMenuPos({ x: e.clientX, y: e.clientY });
+        }}
+      >
         {/* 우주 배경 — 최하단 레이어 */}
         <SpaceBackground />
         {/* 모바일: 기존 중앙 그리드 레이아웃 유지 */}
@@ -88,6 +97,16 @@ export default function Desktop() {
               );
             })}
           </>
+        )}
+
+        {/* Context menu */}
+        {contextMenuPos && (
+          <DesktopContextMenu
+            x={contextMenuPos.x}
+            y={contextMenuPos.y}
+            onClose={() => setContextMenuPos(null)}
+            onResetIcons={resetPositions}
+          />
         )}
 
         {/* Open windows */}
