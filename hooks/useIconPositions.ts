@@ -83,10 +83,8 @@ export function useIconPositions() {
   }, []);
 
   const resetPositions = useCallback(() => {
-    try {
-      localStorage.removeItem(LS_KEY);
-    } catch {}
-    window.location.reload();
+    try { localStorage.removeItem(LS_KEY); } catch {}
+    setPositions({});
   }, []);
 
   return { getPosition, updatePosition, resetPositions, isReady, windowHeight };
