@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { useStartMenuContext } from "@/components/contexts/startMenuContext";
 import { useWindowManager } from "@/hooks/useWindowManager";
 import { WINDOW_CONFIGS, WindowConfigType } from "@/constants/windowConfigs";
+import { APP } from "@/constants/app";
 
 export default function StartMenu() {
   const { isStartMenuOpen: isOpen, setIsStartMenuOpen: setIsOpen } = useStartMenuContext();
@@ -48,7 +49,7 @@ export default function StartMenu() {
             letterSpacing: "0.15em",
           }}
         >
-          LASBE OS 95
+          {APP.NAME} {APP.VERSION}
         </span>
       </div>
 

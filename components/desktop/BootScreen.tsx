@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Win95Button from "@/components/ui/Win95Button";
+import { APP } from "@/constants/app";
 
 type BootPhaseType = "booting" | "fading";
 
@@ -61,7 +62,7 @@ export default function BootScreen({ onComplete }: BootScreenPropsType) {
       >
         {/* 타이틀바 */}
         <div className="bg-blue-900 flex items-center justify-between px-2 py-1">
-          <span className="text-white text-system-body">LASBE OS 95</span>
+          <span className="text-white text-system-body">{APP.NAME} {APP.VERSION}</span>
           <div className="flex gap-1">
             <Win95Button size="sm" className="w-5 h-5 leading-none text-black">
               ─

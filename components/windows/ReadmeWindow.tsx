@@ -1,7 +1,8 @@
 "use client";
 
-import { Win95Section, Win95StatusBar, Win95Button } from "../ui";
+import { Win95Section, Win95StatusBar } from "../ui";
 import { WINDOW_CONFIGS } from "@/constants/windowConfigs";
+import { APP } from "@/constants/app";
 
 const SHORTCUTS = [
   { icon: "⌨️", key: "Esc", desc: "활성 창 닫기" },
@@ -62,19 +63,12 @@ const GIMMICKS = [
 export default function ReadmeWindow() {
   return (
     <div className="flex flex-col h-full text-system-body">
-      {/* Toolbar */}
-      <div className="flex items-center gap-1 px-2 py-1 bg-gray-300 border-b border-gray-500 flex-shrink-0">
-        {["도움말 항목(H)", "검색(S)", "이전(B)", "인쇄(P)"].map((btn) => (
-          <Win95Button key={btn}>{btn}</Win95Button>
-        ))}
-      </div>
-
       {/* Content */}
       <div className="flex-1 overflow-y-auto bg-white p-4">
         {/* Header */}
         <div className="border-b-2 border-blue-900 pb-3 mb-4">
           <p className="font-bold text-blue-900" style={{ fontSize: "1.1em" }}>
-            🖥️ LASBE OS 95 — 사용 설명서
+            🖥️ {APP.NAME} {APP.VERSION} — 사용 설명서
           </p>
           <p className="text-system-caption text-gray-500 mt-0.5">이 포트폴리오에 숨겨진 기믹들을 소개합니다</p>
         </div>
@@ -153,7 +147,9 @@ export default function ReadmeWindow() {
         </Win95Section>
       </div>
 
-      <Win95StatusBar><span>도움말 뷰어 1.0 — LASBE OS 95 Portfolio Edition</span></Win95StatusBar>
+      <Win95StatusBar>
+        <span>도움말 뷰어 1.0 — {APP.NAME} {APP.VERSION}</span>
+      </Win95StatusBar>
     </div>
   );
 }

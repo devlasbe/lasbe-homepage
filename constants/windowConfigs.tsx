@@ -45,7 +45,7 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
     label: "내 정보",
     icon: Icon.Notepad,
     title: "내 정보 — 장성우",
-    defaultSize: { width: 480, height: 520 },
+    defaultSize: { width: 520, height: 560 },
     content: <MyProfileWindow />,
     readmeDesc: "캐릭터 이미지, 자기소개, 방문자 수를 확인하는 프로필 창",
   },

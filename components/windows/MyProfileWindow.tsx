@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useViewCount } from "@/hooks/useViewCount";
 import { profile } from "@/constants/profile";
+import { APP } from "@/constants/app";
 
 // ── 프로필 표시 데이터 ──
 const PROFILE = [
@@ -113,7 +114,7 @@ export default function MyProfileWindow() {
       </div>
 
       <Win95StatusBar>
-        <span>사용자 속성 — LASBE OS 95</span>
+        <span>사용자 속성 — {APP.NAME} {APP.VERSION}</span>
       </Win95StatusBar>
     </div>
   );
