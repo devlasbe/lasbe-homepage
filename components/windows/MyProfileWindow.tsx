@@ -50,6 +50,9 @@ export default function MyProfileWindow() {
           <p className="text-system-caption text-[#444] mt-1 leading-snug">
             React · React Native를 이용해 웹, 앱 개발을 합니다.
           </p>
+          <p className="text-system-caption text-[#444] mt-1 leading-snug">
+            서버 개발과 인프라에도 관심이 많으며, 경계 없는 개발자를 지향합니다.
+          </p>
         </div>
       </div>
 
