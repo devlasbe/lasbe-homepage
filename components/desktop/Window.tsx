@@ -137,6 +137,7 @@ export default function Window({ window: win }: WindowPropsType) {
         className="absolute top-0 left-0 right-0 bottom-12"
         style={{ zIndex: win.zIndex }}
         onMouseDown={() => focusWindow(win.id)}
+        onContextMenu={(e) => e.stopPropagation()}
       >
         {windowContent}
       </div>
@@ -159,6 +160,7 @@ export default function Window({ window: win }: WindowPropsType) {
         className="absolute"
         style={{ zIndex: win.zIndex }}
         onMouseDown={() => focusWindow(win.id)}
+        onContextMenu={(e) => e.stopPropagation()}
       >
         {isTablet ? (
           <div style={{ width: win.size.width, height: win.size.height }}>{windowContent}</div>
