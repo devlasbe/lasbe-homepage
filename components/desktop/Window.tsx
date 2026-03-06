@@ -8,6 +8,7 @@ import type { WindowType } from "@/components/contexts/windowContext";
 import { useWindowManager } from "@/hooks/useWindowManager";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 import Win95Button from "@/components/ui/Win95Button";
+import { Win95WindowToolbar } from "@/components/ui/Win95WindowToolbar";
 
 type WindowPropsType = {
   window: WindowType;
@@ -123,6 +124,8 @@ export default function Window({ window: win }: WindowPropsType) {
           </Win95Button>
         </div>
       </div>
+      {/* Window Toolbar */}
+      <Win95WindowToolbar />
       {/* Content area */}
       <div className="flex-1 overflow-auto p-1 bg-[#c0c0c0]">{win.content}</div>
     </div>
