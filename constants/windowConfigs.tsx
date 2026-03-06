@@ -51,9 +51,9 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
   },
   {
     id: "mail",
-    label: "메일 보내기",
+    label: "메일",
     icon: Icon.Mail,
-    title: "메일 보내기 - Outlook Express",
+    title: "메일 - Outlook Express",
     defaultSize: { width: 520, height: 420 },
     content: <MailWindow />,
     readmeDesc: "Outlook Express 스타일 메일 작성기 (전송 시 mailto: 실행)",

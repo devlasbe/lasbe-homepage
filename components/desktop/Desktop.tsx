@@ -40,9 +40,7 @@ export default function Desktop() {
                 key={cfg.id}
                 icon={cfg.icon}
                 label={cfg.label}
-                onDoubleClick={() =>
-                  openWindow({ ...cfg, content: cfg.content })
-                }
+                onDoubleClick={() => openWindow({ ...cfg, content: cfg.content })}
               />
             ))}
           </div>
@@ -63,10 +61,7 @@ export default function Desktop() {
                     draggedRef.current.delete(cfg.id);
                   }}
                   onDrag={(_e: DraggableEvent, data: DraggableData) => {
-                    if (
-                      Math.abs(data.deltaX) > DRAG_THRESHOLD ||
-                      Math.abs(data.deltaY) > DRAG_THRESHOLD
-                    ) {
+                    if (Math.abs(data.deltaX) > DRAG_THRESHOLD || Math.abs(data.deltaY) > DRAG_THRESHOLD) {
                       draggedRef.current.add(cfg.id);
                     }
                   }}
@@ -106,9 +101,7 @@ export default function Desktop() {
       {/* Taskbar */}
       <Taskbar />
 
-      {!isBootComplete && (
-        <BootScreen onComplete={() => setIsBootComplete(true)} />
-      )}
+      {!isBootComplete && <BootScreen onComplete={() => setIsBootComplete(true)} />}
     </div>
   );
 }
