@@ -44,7 +44,7 @@ export default function DesktopIcon({ icon: IconComponent, label, onDoubleClick 
         <IconComponent style={{ width: 32, height: 32, display: "block" }} />
       </div>
       <span
-        className={`text-center text-white text-system-ui leading-tight whitespace-nowrap w-full px-0.5 ${
+        className={`text-center text-white text-system-ui leading-tight whitespace-nowrap px-0.5 ${
           selected ? "bg-blue-900" : "bg-transparent"
         }`}
         style={{

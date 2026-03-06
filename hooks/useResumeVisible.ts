@@ -1,19 +1,12 @@
 "use client";
 
-import { configService } from "@/services/configService";
-import { useEffect, useState } from "react";
+import { useConfigContext } from "@/components/contexts/configContext";
 
 export const useResumeVisible = () => {
-  const [isVisible, setIsVisible] = useState<boolean | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const config = useConfigContext();
 
-  useEffect(() => {
-    configService
-      .getResumeVisible()
-      .then((data) => setIsVisible(data.is_visible_resume))
-      .catch(() => setIsVisible(false))
-      .finally(() => setIsLoading(false));
-  }, []);
-
-  return { isVisible, isLoading };
+  return {
+    isVisible: config?.isVisibleResume ?? null,
+    isLoading: config === null,
+  };
 };
