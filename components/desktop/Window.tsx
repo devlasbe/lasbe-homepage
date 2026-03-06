@@ -74,13 +74,13 @@ export default function Window({ window: win }: WindowPropsType) {
 
   const isFocused = win.zIndex === Math.max(...windows.map((w) => w.zIndex));
   const titleBarBg = isFocused
-    ? "bg-gradient-to-r from-[#000080] to-[#1084d0]"
-    : "bg-[#7b7b7b]";
-  const titleBarText = isFocused ? "text-white" : "text-[#c0c0c0]";
+    ? "bg-gradient-to-r from-blue-900 to-blue-500"
+    : "bg-gray-500";
+  const titleBarText = isFocused ? "text-white" : "text-gray-300";
 
   const windowContent = (
     <div
-      className="win95-window-border win95-raised bg-[#c0c0c0] flex flex-col"
+      className="win95-window-border win95-raised bg-gray-300 flex flex-col"
       style={{ width: "100%", height: "100%" }}
     >
       {/* Title bar */}
@@ -127,7 +127,7 @@ export default function Window({ window: win }: WindowPropsType) {
       {/* Window Toolbar */}
       <Win95WindowToolbar />
       {/* Content area */}
-      <div className="flex-1 overflow-auto p-1 bg-[#c0c0c0]">{win.content}</div>
+      <div className="flex-1 overflow-auto p-1 bg-gray-300">{win.content}</div>
     </div>
   );
 

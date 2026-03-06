@@ -22,13 +22,13 @@ export default function MailWindow() {
   return (
     <div className="flex flex-col h-full">
       {/* Toolbar */}
-      <div className="flex items-center gap-2 px-2 py-1 border-b-2 border-[#808080] bg-[#c0c0c0] flex-shrink-0">
+      <div className="flex items-center gap-2 px-2 py-1 border-b-2 border-gray-500 bg-gray-300 flex-shrink-0">
         <Win95Button size="lg" weight="bold" className="flex items-center gap-1" onClick={handleSend}>
           <Icon.Sendmail2001 style={{ width: 16, height: 16, display: "block" }} />
           <span>보내기(S)</span>
         </Win95Button>
         {sent && (
-          <span className="flex items-center gap-1 text-system-body text-[#008000]">
+          <span className="flex items-center gap-1 text-system-body text-green-500">
             <Icon.Tick style={{ width: 14, height: 14, display: "block" }} />
             메일 앱이 열렸습니다!
           </span>
@@ -36,14 +36,14 @@ export default function MailWindow() {
       </div>
 
       {/* Header fields */}
-      <div className="border-b-2 border-[#808080] flex-shrink-0">
-        <div className="flex items-center px-2 py-1 border-b border-[#d0d0d0]">
+      <div className="border-b-2 border-gray-500 flex-shrink-0">
+        <div className="flex items-center px-2 py-1 border-b border-gray-200">
           <span className="text-system-body w-20 shrink-0">받는사람:</span>
-          <span className="text-system-body text-[#000080]">{email}</span>
+          <span className="text-system-body text-blue-900">{email}</span>
         </div>
-        <div className="flex items-center px-2 py-1 border-b border-[#d0d0d0]">
+        <div className="flex items-center px-2 py-1 border-b border-gray-200">
           <span className="text-system-body w-20 shrink-0">참조(C):</span>
-          <span className="text-system-body text-[#808080]"></span>
+          <span className="text-system-body text-gray-500"></span>
         </div>
         <div className="flex items-center px-2 py-1">
           <span className="text-system-body w-20 shrink-0">제목(U):</span>
@@ -58,14 +58,14 @@ export default function MailWindow() {
       </div>
 
       {/* Format toolbar */}
-      <div className="flex items-center gap-1 px-2 py-0.5 border-b border-[#808080] bg-[#c0c0c0] text-system-caption flex-shrink-0">
+      <div className="flex items-center gap-1 px-2 py-0.5 border-b border-gray-500 bg-gray-300 text-system-caption flex-shrink-0">
         <select className="win95-sunken bg-white text-system-caption px-1">
           <option>굴림체</option>
         </select>
         <select className="win95-sunken bg-white text-system-caption px-1 w-12">
           <option>10</option>
         </select>
-        <div className="w-px h-4 bg-[#808080] mx-1" />
+        <div className="w-px h-4 bg-gray-500 mx-1" />
         <Win95Button weight="bold">B</Win95Button>
         <Win95Button className="italic">I</Win95Button>
         <Win95Button className="underline">U</Win95Button>

@@ -14,8 +14,8 @@ function UnderConstructionView() {
   return (
     <div className="flex flex-col items-center justify-center h-full gap-4 text-system-body select-none">
       <Icon.Warning style={{ width: 48, height: 48, display: "block" }} />
-      <p className="text-system-heading font-bold text-[#000080]">공사 중입니다</p>
-      <p className="text-system-caption text-[#808080]">Under Construction</p>
+      <p className="text-system-heading font-bold text-blue-900">공사 중입니다</p>
+      <p className="text-system-caption text-gray-500">Under Construction</p>
     </div>
   );
 }
@@ -26,7 +26,7 @@ export default function ResumeWindow() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-full text-system-body text-[#808080]">
+      <div className="flex items-center justify-center h-full text-system-body text-gray-500">
         Loading...
       </div>
     );

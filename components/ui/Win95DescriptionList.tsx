@@ -19,7 +19,7 @@ export function Win95DescriptionList({ items, className }: Win95DescriptionListP
         return (
           <li key={i} className="list-disc text-system-caption leading-relaxed">
             {item.href ? (
-              <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-[#000080] underline">
+              <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-blue-900 underline">
                 {item.desc}
               </a>
             ) : (

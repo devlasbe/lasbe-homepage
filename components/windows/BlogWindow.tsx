@@ -44,7 +44,7 @@ export default function BlogWindow() {
               href={BLOG_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="win95-raised bg-[#c0c0c0] px-4 py-1 text-system-body"
+              className="win95-raised bg-gray-300 px-4 py-1 text-system-body"
             >
               새창으로 열기
             </a>

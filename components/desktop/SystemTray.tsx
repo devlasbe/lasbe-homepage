@@ -33,7 +33,7 @@ export default function SystemTray() {
           {counts.today ?? "-"} / {counts.total ?? "-"}
         </span>
       </span>
-      <span className="hidden sm:block w-px h-4 bg-[#808080]" />
+      <span className="hidden sm:block w-px h-4 bg-gray-500" />
       <span className="text-system-body">{time}</span>
     </div>
   );

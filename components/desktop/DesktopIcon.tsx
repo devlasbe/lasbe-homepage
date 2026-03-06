@@ -40,12 +40,12 @@ export default function DesktopIcon({ icon: IconComponent, label, onDoubleClick 
       onTouchEnd={handleTouchEnd}
       onBlur={handleBlur}
     >
-      <div className={`p-1 ${selected ? "bg-[#000080] opacity-80" : ""}`}>
+      <div className={`p-1 ${selected ? "bg-blue-900 opacity-80" : ""}`}>
         <IconComponent style={{ width: 32, height: 32, display: "block" }} />
       </div>
       <span
         className={`text-center text-white text-system-ui leading-tight break-words w-full px-0.5 ${
-          selected ? "bg-[#000080]" : "bg-transparent"
+          selected ? "bg-blue-900" : "bg-transparent"
         }`}
         style={{
           textShadow: selected ? "none" : "1px 1px 0 #000000",

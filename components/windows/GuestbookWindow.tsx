@@ -77,18 +77,18 @@ export default function GuestbookWindow() {
   return (
     <div className="flex flex-col h-full">
       {/* Toolbar */}
-      <div className="flex items-center gap-2 px-2 py-1 border-b-2 border-[#808080] bg-[#c0c0c0] flex-shrink-0">
+      <div className="flex items-center gap-2 px-2 py-1 border-b-2 border-gray-500 bg-gray-300 flex-shrink-0">
         <Win95Button size="lg" className="flex items-center gap-1" onClick={fetchEntries} disabled={isLoading}>
           <span>🔄</span>
           <span>새로고침(R)</span>
         </Win95Button>
         {submitted && (
-          <span className="text-system-body text-[#008000]">✓ 등록되었습니다!</span>
+          <span className="text-system-body text-green-500">✓ 등록되었습니다!</span>
         )}
       </div>
 
       {/* Form */}
-      <div className="border-b-2 border-[#808080] px-2 py-2 flex-shrink-0 bg-[#c0c0c0]">
+      <div className="border-b-2 border-gray-500 px-2 py-2 flex-shrink-0 bg-gray-300">
         <div className="flex flex-col sm:flex-row gap-1 sm:gap-2 mb-1">
           <div className="flex items-center gap-1 flex-1">
             <label className="text-system-body w-14 shrink-0">이름:</label>
@@ -127,7 +127,7 @@ export default function GuestbookWindow() {
         </div>
         <div className="flex items-center justify-between">
           {(formError || error) && (
-            <span className="text-system-body text-[#ff0000]">{formError ?? error}</span>
+            <span className="text-system-body text-red-500">{formError ?? error}</span>
           )}
           <div className="ml-auto">
             <Win95Button size="lg" onClick={handleSubmit} disabled={isSubmitting}>
@@ -140,23 +140,23 @@ export default function GuestbookWindow() {
       {/* Entry list */}
       <div className="flex-1 overflow-y-auto bg-white win95-sunken">
         {isLoading && (
-          <div className="flex items-center justify-center h-full text-system-body text-[#808080]">
+          <div className="flex items-center justify-center h-full text-system-body text-gray-500">
             불러오는 중...
           </div>
         )}
         {!isLoading && entries.length === 0 && (
-          <div className="flex items-center justify-center h-full text-system-body text-[#808080]">
+          <div className="flex items-center justify-center h-full text-system-body text-gray-500">
             아직 방명록이 없습니다. 첫 번째로 남겨보세요!
           </div>
         )}
         {!isLoading &&
           entries.map((entry) => (
-            <div key={entry.id} className="border-b border-[#d0d0d0] px-3 py-2">
+            <div key={entry.id} className="border-b border-gray-200 px-3 py-2">
               {/* Entry header */}
               <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2 min-w-0">
                   <span className="text-system-body font-bold truncate">▌ {entry.name}</span>
-                  <span className="text-system-caption text-[#808080] shrink-0">
+                  <span className="text-system-caption text-gray-500 shrink-0">
                     {formatDate(entry.createdAt)}
                   </span>
                 </div>
@@ -196,7 +196,7 @@ export default function GuestbookWindow() {
                     </Win95Button>
                   </div>
                   {deleteErrors[entry.id] && (
-                    <span className="text-system-caption text-[#ff0000]">
+                    <span className="text-system-caption text-red-500">
                       {deleteErrors[entry.id]}
                     </span>
                   )}

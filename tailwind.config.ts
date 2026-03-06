@@ -28,13 +28,27 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        "my-orange": "#ff6f00",
-        "my-green": "#004d60",
-        "my-blue": "#009bef",
-        "win95-gray": "#c0c0c0",
-        "win95-desktop": "#008080",
-        "win95-title": "#000080",
-        "win95-title-inactive": "#7b7b7b",
+        blue: {
+          500: "#1084d0",
+          900: "#000080",
+        },
+        teal: {
+          500: "#008080",
+        },
+        gray: {
+          200: "#d0d0d0",
+          300: "#c0c0c0",
+          400: "#a8a4a0",
+          500: "#808080",
+          700: "#444444",
+        },
+        green: {
+          500: "#008000",
+        },
+        red: {
+          500: "#ff0000",
+          900: "#800000",
+        },
       },
     },
   },

@@ -13,7 +13,7 @@ export default function OpenFranchiseWindow() {
       {/* Content */}
       <div className="flex-1 overflow-y-auto bg-white win95-sunken">
         {/* Header */}
-        <div className="bg-[#000080] text-white px-4 py-3 flex items-center gap-3">
+        <div className="bg-blue-900 text-white px-4 py-3 flex items-center gap-3">
           <span className="text-system-icon-lg">🏪</span>
           <div>
             <p className="font-bold text-system-heading">{data.title}</p>
@@ -24,17 +24,17 @@ export default function OpenFranchiseWindow() {
         <div className="p-4 space-y-4">
           {/* 소개 */}
           <section>
-            <p className="font-bold text-system-body border-b border-[#808080] pb-0.5 mb-2">■ 서비스 소개</p>
-            <p className="text-system-body leading-relaxed text-[#222]">{data.desc}</p>
+            <p className="font-bold text-system-body border-b border-gray-500 pb-0.5 mb-2">■ 서비스 소개</p>
+            <p className="text-system-body leading-relaxed text-gray-700">{data.desc}</p>
           </section>
 
           {/* 주요 기능 */}
           <section>
-            <p className="font-bold text-system-body border-b border-[#808080] pb-0.5 mb-2">■ 주요 특징</p>
+            <p className="font-bold text-system-body border-b border-gray-500 pb-0.5 mb-2">■ 주요 특징</p>
             <ul className="space-y-1">
               {data.subDesc.map((item) => (
-                <li key={item} className="flex items-start gap-1.5 text-system-body text-[#222]">
-                  <span className="shrink-0 text-[#000080]">▶</span>
+                <li key={item} className="flex items-start gap-1.5 text-system-body text-gray-700">
+                  <span className="shrink-0 text-blue-900">▶</span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -43,13 +43,13 @@ export default function OpenFranchiseWindow() {
 
           {/* 기술 스택 */}
           <section>
-            <p className="font-bold text-system-body border-b border-[#808080] pb-0.5 mb-2">■ 기술 스택</p>
+            <p className="font-bold text-system-body border-b border-gray-500 pb-0.5 mb-2">■ 기술 스택</p>
             <Win95TechBadgeList items={data.stack} />
           </section>
 
           {/* 바로가기 링크 */}
           <section>
-            <p className="font-bold text-system-body border-b border-[#808080] pb-0.5 mb-2">■ 바로가기</p>
+            <p className="font-bold text-system-body border-b border-gray-500 pb-0.5 mb-2">■ 바로가기</p>
             <div className="flex flex-wrap gap-2">
               <Link href={data.link!} target="_blank">
                 <Win95Button size="lg" weight="bold">

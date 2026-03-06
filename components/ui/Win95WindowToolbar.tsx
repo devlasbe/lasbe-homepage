@@ -19,7 +19,7 @@ export function Win95WindowToolbar() {
   const openIds = new Set(windows.filter((w) => w.state !== "minimized").map((w) => w.id));
 
   return (
-    <div className="flex items-center gap-px px-1 py-0.5 border-b-2 border-[#808080] bg-[#c0c0c0] flex-shrink-0 flex-wrap">
+    <div className="flex items-center gap-px px-1 py-0.5 border-b-2 border-gray-500 bg-gray-300 flex-shrink-0 flex-wrap">
       {WINDOW_CONFIGS.map((cfg) => {
         const IconComponent = cfg.icon;
         const isActive = openIds.has(cfg.id);
@@ -38,7 +38,7 @@ export function Win95WindowToolbar() {
               })
             }
             className={`py-1.5 px-2.5 cursor-pointer outline-none ${
-              isActive ? "bg-[#a8a4a0]" : "hover:bg-[#d0ccc8]"
+              isActive ? "bg-gray-400" : "hover:bg-gray-200"
             }`}
           >
             <IconComponent style={{ width: 16, height: 16, display: "block" }} variant={TOOLBAR_ICON_VARIANT.get(cfg.icon)} />

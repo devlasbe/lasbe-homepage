@@ -53,7 +53,7 @@ export default function DesktopContextMenu({
   return (
     <div
       ref={menuRef}
-      className="fixed win95-raised bg-[#c0c0c0] min-w-[140px] shadow-lg"
+      className="fixed win95-raised bg-gray-300 min-w-[140px] shadow-lg"
       style={{ left: x, top: y, zIndex: 10000 }}
     >
       {LINK_ITEMS.map(({ label, href }) => (
@@ -62,7 +62,7 @@ export default function DesktopContextMenu({
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center px-3 py-1 text-left text-system-caption hover:bg-[#000080] hover:text-white"
+          className="flex items-center px-3 py-1 text-left text-system-caption hover:bg-blue-900 hover:text-white"
           onClick={onClose}
         >
           {label}
@@ -70,10 +70,10 @@ export default function DesktopContextMenu({
       ))}
 
       {/* Divider */}
-      <div className="my-1 mx-2 border-t border-[#808080] border-b border-b-white" />
+      <div className="my-1 mx-2 border-t border-gray-500 border-b border-b-white" />
 
       <button
-        className="flex items-center w-full px-3 py-1 text-left text-system-caption hover:bg-[#000080] hover:text-white"
+        className="flex items-center w-full px-3 py-1 text-left text-system-caption hover:bg-blue-900 hover:text-white"
         onClick={() => {
           onClose();
           onResetIcons();

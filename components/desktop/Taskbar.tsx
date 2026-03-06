@@ -36,13 +36,13 @@ export default function Taskbar() {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 h-12 win95-raised bg-[#c0c0c0] flex items-center px-1 gap-1 z-[9999]">
+    <div className="fixed bottom-0 left-0 right-0 h-12 win95-raised bg-gray-300 flex items-center px-1 gap-1 z-[9999]">
       {/* Start Button */}
       <div className="relative flex-shrink-0">
         <button
           className={`flex items-center gap-1 px-2 h-10 font-bold text-system-ui-md min-w-[70px] ${
             isStartMenuOpen ? "win95-sunken" : "win95-raised"
-          } bg-[#c0c0c0]`}
+          } bg-gray-300`}
           onClick={() => setIsStartMenuOpen((prev) => !prev)}
         >
           <Image src="/lasbe_character.jpg" alt="시작" width={20} height={20} className="rounded-sm object-cover flex-shrink-0" />
@@ -52,7 +52,7 @@ export default function Taskbar() {
       </div>
 
       {/* Separator */}
-      <div className="w-px h-8 bg-[#808080] mx-1 flex-shrink-0" />
+      <div className="w-px h-8 bg-gray-500 mx-1 flex-shrink-0" />
 
       {isMobile ? (
         /* 모바일: 뒤로가기 버튼 + 활성 윈도우 제목 */
@@ -60,7 +60,7 @@ export default function Taskbar() {
           {activeWindow && (
             <>
               <button
-                className="win95-raised bg-[#c0c0c0] px-3 h-8 text-system-ui-md flex-shrink-0"
+                className="win95-raised bg-gray-300 px-3 h-8 text-system-ui-md flex-shrink-0"
                 onClick={() => closeWindow(activeWindow.id)}
               >
                 ← 뒤로
@@ -82,7 +82,7 @@ export default function Taskbar() {
                 key={win.id}
                 className={`flex items-center gap-1 px-2 h-8 text-system-ui max-w-[140px] min-w-[80px] truncate flex-shrink-0 ${
                   isActive ? "win95-sunken" : "win95-raised"
-                } bg-[#c0c0c0]`}
+                } bg-gray-300`}
                 onClick={() => handleTaskbarButtonClick(win.id)}
               >
                 <win.icon style={{ width: 16, height: 16, display: "block", flexShrink: 0 }} />

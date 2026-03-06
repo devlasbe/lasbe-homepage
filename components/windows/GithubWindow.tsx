@@ -69,18 +69,18 @@ export default function GithubWindow() {
       />
 
       {/* Content area */}
-      <div className="flex-1 overflow-y-auto bg-[#c0c0c0] win95-sunken">
+      <div className="flex-1 overflow-y-auto bg-gray-300 win95-sunken">
         {fetchState === "loading" && (
           <div className="flex flex-col items-center justify-center h-full gap-3">
             <Icon.Explorer100 width={32} height={32} className="animate-pulse" />
-            <p className="text-system-body text-[#444]">GitHub에서 데이터를 불러오는 중...</p>
+            <p className="text-system-body text-gray-700">GitHub에서 데이터를 불러오는 중...</p>
           </div>
         )}
 
         {fetchState === "error" && (
           <div className="flex flex-col items-center justify-center h-full gap-3">
             <Icon.Warning width={32} height={32} />
-            <p className="text-system-body text-[#800000]">데이터를 불러오지 못했습니다.</p>
+            <p className="text-system-body text-red-900">데이터를 불러오지 못했습니다.</p>
             <Win95Button size="lg" onClick={fetchData}>
               다시 시도
             </Win95Button>
@@ -94,7 +94,7 @@ export default function GithubWindow() {
               <legend className="px-1 text-system-caption font-bold">프로필</legend>
               <div className="flex gap-2 items-center">
                 {/* Avatar */}
-                <div className="win95-raised shrink-0 overflow-hidden bg-[#808080]" style={{ width: 48, height: 48 }}>
+                <div className="win95-raised shrink-0 overflow-hidden bg-gray-500" style={{ width: 48, height: 48 }}>
                   <Image
                     src={profile.avatar_url}
                     alt={profile.login}
@@ -107,9 +107,9 @@ export default function GithubWindow() {
                 {/* Info */}
                 <div className="flex-1 min-w-0">
                   <p className="font-bold text-system-body leading-tight truncate">{profile.name}</p>
-                  <p className="text-system-caption text-[#000080] font-bold truncate">@{profile.login}</p>
+                  <p className="text-system-caption text-blue-900 font-bold truncate">@{profile.login}</p>
                   {profile.bio && (
-                    <p className="text-system-caption text-[#444] leading-snug line-clamp-1">{profile.bio}</p>
+                    <p className="text-system-caption text-gray-700 leading-snug line-clamp-1">{profile.bio}</p>
                   )}
                 </div>
               </div>
@@ -130,7 +130,7 @@ export default function GithubWindow() {
 
             {/* Recent repos */}
             <div>
-              <p className="text-system-caption font-bold text-[#000080] border-b-2 border-[#000080] pb-0.5 mb-2">
+              <p className="text-system-caption font-bold text-blue-900 border-b-2 border-blue-900 pb-0.5 mb-2">
                 최근 저장소
               </p>
               <div className="space-y-2">
@@ -142,14 +142,14 @@ export default function GithubWindow() {
                     className="block win95-raised p-2 active:win95-sunken"
                   >
                     <div className="flex items-start justify-between gap-2">
-                      <p className="text-[#000080] text-system-body font-bold truncate">{repo.name}</p>
-                      <div className="flex items-center gap-2 text-system-caption text-[#444] shrink-0">
+                      <p className="text-blue-900 text-system-body font-bold truncate">{repo.name}</p>
+                      <div className="flex items-center gap-2 text-system-caption text-gray-700 shrink-0">
                         {repo.stargazers_count > 0 && <span>★ {repo.stargazers_count}</span>}
                         {repo.forks_count > 0 && <span>Forks {repo.forks_count}</span>}
                       </div>
                     </div>
                     {repo.description && (
-                      <p className="text-system-caption text-[#444] mt-0.5 leading-snug line-clamp-2">
+                      <p className="text-system-caption text-gray-700 mt-0.5 leading-snug line-clamp-2">
                         {repo.description}
                       </p>
                     )}
@@ -161,7 +161,7 @@ export default function GithubWindow() {
                             backgroundColor: LANG_COLORS[repo.language] ?? "#808080",
                           }}
                         />
-                        <span className="text-system-caption text-[#444]">{repo.language}</span>
+                        <span className="text-system-caption text-gray-700">{repo.language}</span>
                       </div>
                     )}
                   </Link>
@@ -170,7 +170,7 @@ export default function GithubWindow() {
             </div>
 
             {/* Footer */}
-            <div className="text-center pt-2 border-t-2 border-[#808080]">
+            <div className="text-center pt-2 border-t-2 border-gray-500">
               <Link href={GITHUB_PROFILE_URL} target="_blank">
                 <Win95Button size="lg">
                   <Icon.Explorer100 width={16} height={16} className="inline mr-1" />
