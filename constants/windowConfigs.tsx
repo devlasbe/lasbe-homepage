@@ -8,6 +8,7 @@ import GuestbookWindow from "@/components/windows/GuestbookWindow";
 import BlogWindow from "@/components/windows/BlogWindow";
 import OpenFranchiseWindow from "@/components/windows/OpenFranchiseWindow";
 import MyProfileWindow from "@/components/windows/MyProfileWindow";
+import NotionRenderTestWindow from "@/components/windows/NotionRenderTestWindow";
 
 type IconType = ComponentType<SVGProps<SVGSVGElement>>;
 
@@ -93,5 +94,14 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
     defaultSize: { width: 540, height: 500 },
     content: <OpenFranchiseWindow />,
     readmeDesc: "프랜차이즈 창업 정보를 한 눈에 확인하는 풀스택 사이드 프로젝트",
+  },
+  {
+    id: "notion-render-test",
+    label: "노션 렌더러",
+    icon: Icon.Joy110,
+    title: "노션 렌더러",
+    defaultSize: { width: 780, height: 560 },
+    content: <NotionRenderTestWindow />,
+    readmeDesc: "react-notion-x 렌더러 테스트용 Notion 페이지 (다양한 블록 타입 포함)",
   },
 ];
