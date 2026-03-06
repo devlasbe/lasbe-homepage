@@ -2,19 +2,14 @@
 
 import Link from "next/link";
 import { project } from "@/constants/project";
-import { Win95MenuBar, Win95StatusBar, Win95TechBadgeList } from "../ui";
+import { Win95StatusBar, Win95TechBadgeList } from "../ui";
 import Win95Button from "../ui/Win95Button";
-
-// ── 메뉴 ──
-const MENU_ITEMS = ["파일(F)", "편집(E)", "보기(V)", "도움말(H)"] as const;
 
 export default function OpenFranchiseWindow() {
   const data = project.OPEN_FRANCHISE;
 
   return (
     <div className="flex flex-col h-full text-system-body">
-      <Win95MenuBar items={MENU_ITEMS} />
-
       {/* Content */}
       <div className="flex-1 overflow-y-auto bg-white win95-sunken">
         {/* Header */}

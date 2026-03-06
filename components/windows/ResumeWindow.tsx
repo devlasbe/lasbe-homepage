@@ -2,16 +2,13 @@
 
 import { useState } from "react";
 import NotionViewer, { type FetchStateType } from "@/components/NotionViewer";
-import { Win95MenuBar, Win95StatusBar, Win95AddressBar } from "../ui";
+import { Win95StatusBar, Win95AddressBar } from "../ui";
 import { useResumeVisible } from "@/hooks/useResumeVisible";
 import { Icon } from "@/components/ui/icon";
 
 // ── Notion 설정 ──
 const NOTION_PAGE_ID = "28699322f59d8060911ff907842cfffc";
 const NOTION_DIRECT_URL = "https://www.notion.so/devlasbe/2025-28699322f59d8060911ff907842cfffc";
-
-// ── 메뉴 ──
-const MENU_ITEMS = ["파일(F)", "보기(V)", "도움말(H)"] as const;
 
 function UnderConstructionView() {
   return (
@@ -41,8 +38,6 @@ export default function ResumeWindow() {
 
   return (
     <div className="flex flex-col h-full text-system-body">
-      <Win95MenuBar items={MENU_ITEMS} />
-
       {/* 주소 표시줄 */}
       <Win95AddressBar url={NOTION_DIRECT_URL} actionLabel="새창" actionHref={NOTION_DIRECT_URL} />
 

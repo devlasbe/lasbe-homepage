@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Icon } from "@/components/ui/icon";
-import { Win95MenuBar, Win95StatusBar, Win95AddressBar, Win95Button } from "../ui";
+import { Win95StatusBar, Win95AddressBar, Win95Button } from "../ui";
 import { githubService } from "@/services/githubService";
 import type { GithubProfileType, GithubRepoType } from "@/services/githubService";
 import { profile } from "@/constants/profile";
@@ -13,9 +13,6 @@ import { profile } from "@/constants/profile";
 const GITHUB_USERNAME = profile.github.username;
 const REPO_COUNT = 6;
 const GITHUB_PROFILE_URL = profile.github.url;
-
-// ── 메뉴 ──
-const MENU_ITEMS = ["파일(F)", "보기(V)", "도움말(H)"] as const;
 
 // ── 언어 색상 ──
 const LANG_COLORS: Record<string, string> = {
@@ -63,8 +60,6 @@ export default function GithubWindow() {
 
   return (
     <div className="flex flex-col h-full text-system-body">
-      <Win95MenuBar items={MENU_ITEMS} />
-
       {/* Navigation bar */}
       <Win95AddressBar
         url={`https://github.com/${GITHUB_USERNAME}`}

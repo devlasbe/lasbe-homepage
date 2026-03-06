@@ -1,14 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Win95MenuBar, Win95StatusBar, Win95AddressBar } from "../ui";
+import { Win95StatusBar, Win95AddressBar } from "../ui";
 import { profile } from "@/constants/profile";
 
 // ── 블로그 설정 ──
 const BLOG_URL = profile.blog.url;
-
-// ── 메뉴 ──
-const MENU_ITEMS = ["파일(F)", "보기(V)", "도움말(H)"] as const;
 
 type LoadStateType = "loading" | "loaded" | "error";
 
@@ -23,8 +20,6 @@ export default function BlogWindow() {
 
   return (
     <div className="flex flex-col h-full text-system-body">
-      <Win95MenuBar items={MENU_ITEMS} />
-
       {/* 주소 표시줄 */}
       <Win95AddressBar
         url={BLOG_URL}
