@@ -43,7 +43,7 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
   {
     id: "settings",
     label: "내 정보",
-    icon: Icon.User6,
+    icon: Icon.Notepad,
     title: "내 정보 — 장성우",
     defaultSize: { width: 480, height: 520 },
     content: <MyProfileWindow />,
