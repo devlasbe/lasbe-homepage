@@ -16,17 +16,22 @@ import SpaceBackground from "./SpaceBackground";
 
 // WINDOW_CONFIGS는 정적 상수이므로 모듈 스코프에서 refs 배열 생성 가능
 const iconNodeRefs = WINDOW_CONFIGS.map(() => createRef<HTMLDivElement>());
-const DRAG_THRESHOLD = 4; // px 미만 이동은 클릭으로 간주
 
 export default function Desktop() {
   const { windows, openWindow } = useWindowManager();
   const [isBootComplete, setIsBootComplete] = useState(false);
   const [contextMenuPos, setContextMenuPos] = useState<{ x: number; y: number } | null>(null);
+  const [liveDragPos, setLiveDragPos] = useState<{ id: string; x: number; y: number } | null>(null);
   const { isMobile } = useBreakpoint();
   const { getPosition, updatePosition, resetPositions, isReady, windowHeight } = useIconPositions();
   useKeyboardShortcuts();
   // 아이콘 id별 드래그 발생 여부 추적 (re-render 없이 관리)
   const draggedRef = useRef<Set<string>>(new Set());
+
+  function getCurrentPos(id: string, index: number) {
+    if (liveDragPos?.id === id) return { x: liveDragPos.x, y: liveDragPos.y };
+    return getPosition(id, index);
+  }
 
   return (
     <div className="flex flex-col w-full h-dvh overflow-hidden">
@@ -65,20 +70,20 @@ export default function Desktop() {
                   key={`${cfg.id}-${windowHeight}`}
                   nodeRef={nodeRef as React.RefObject<HTMLElement>}
                   bounds="parent"
-                  defaultPosition={getPosition(cfg.id, index)}
-                  onStart={() => {
+                  position={getCurrentPos(cfg.id, index)}
+                  onStart={(_e: DraggableEvent, _data: DraggableData) => {
                     draggedRef.current.delete(cfg.id);
                   }}
                   onDrag={(_e: DraggableEvent, data: DraggableData) => {
-                    if (Math.abs(data.deltaX) > DRAG_THRESHOLD || Math.abs(data.deltaY) > DRAG_THRESHOLD) {
-                      draggedRef.current.add(cfg.id);
-                    }
+                    draggedRef.current.add(cfg.id);
+                    setLiveDragPos({ id: cfg.id, x: data.x, y: data.y });
                   }}
                   onStop={(_e: DraggableEvent, data: DraggableData) => {
                     if (draggedRef.current.has(cfg.id)) {
                       updatePosition(cfg.id, { x: data.x, y: data.y });
                       draggedRef.current.delete(cfg.id);
                     }
+                    setLiveDragPos(null);
                   }}
                 >
                   <div ref={nodeRef} className="absolute">
@@ -105,7 +110,10 @@ export default function Desktop() {
             x={contextMenuPos.x}
             y={contextMenuPos.y}
             onClose={() => setContextMenuPos(null)}
-            onResetIcons={resetPositions}
+            onResetIcons={() => {
+              resetPositions();
+              setLiveDragPos(null);
+            }}
           />
         )}
 
