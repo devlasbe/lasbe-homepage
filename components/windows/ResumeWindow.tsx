@@ -36,12 +36,12 @@ export default function ResumeWindow() {
   return (
     <div className="flex flex-col h-full text-system-body">
       {/* 주소 표시줄 */}
-      <Win95AddressBar url={NOTION_PAGES.resume.url} actionLabel="새창" actionHref={NOTION_PAGES.resume.url} />
+      <Win95AddressBar url={NOTION_PAGES.resume} actionLabel="새창" actionHref={NOTION_PAGES.resume} />
 
       {/* 콘텐츠 영역 */}
       <div className="flex-1 overflow-y-auto bg-white win95-sunken">
         <NotionViewer
-          notionUrl={NOTION_PAGES.resume.url}
+          notionUrl={NOTION_PAGES.resume}
           onStateChange={setFetchState}
         />
       </div>

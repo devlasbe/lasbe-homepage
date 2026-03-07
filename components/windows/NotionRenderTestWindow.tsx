@@ -11,14 +11,14 @@ export default function NotionRenderTestWindow() {
   return (
     <div className="flex flex-col h-full text-system-body">
       <Win95AddressBar
-        url={NOTION_PAGES.renderTest.url}
+        url={NOTION_PAGES.renderTest}
         actionLabel="새창"
-        actionHref={NOTION_PAGES.renderTest.url}
+        actionHref={NOTION_PAGES.renderTest}
       />
 
       <div className="flex-1 overflow-y-auto bg-white win95-sunken">
         <NotionViewer
-          notionUrl={NOTION_PAGES.renderTest.url}
+          notionUrl={NOTION_PAGES.renderTest}
           onStateChange={setFetchState}
         />
       </div>
