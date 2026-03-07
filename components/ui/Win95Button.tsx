@@ -35,7 +35,7 @@ export default function Win95Button({
     <button
       className={cx(
         active ? "win95-sunken" : "win95-raised",
-        "bg-gray-300 cursor-pointer disabled:opacity-50",
+        "bg-gray-300 cursor-pointer disabled:opacity-50 whitespace-nowrap",
         SIZE_CLASS[size],
         WEIGHT_CLASS[weight],
         className
