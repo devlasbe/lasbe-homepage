@@ -5,7 +5,7 @@ import NotionViewer, { type FetchStateType } from "@/components/NotionViewer";
 import { Win95StatusBar, Win95AddressBar } from "../ui";
 import { useResumeVisible } from "@/hooks/useResumeVisible";
 import { Icon } from "@/components/ui/icon";
-import { RESUME_NOTION_URL } from "@/constants/notionPages";
+import { NOTION_PAGES } from "@/constants/notionPages";
 
 function UnderConstructionView() {
   return (
@@ -36,12 +36,12 @@ export default function ResumeWindow() {
   return (
     <div className="flex flex-col h-full text-system-body">
       {/* 주소 표시줄 */}
-      <Win95AddressBar url={RESUME_NOTION_URL} actionLabel="새창" actionHref={RESUME_NOTION_URL} />
+      <Win95AddressBar url={NOTION_PAGES.resume.url} actionLabel="새창" actionHref={NOTION_PAGES.resume.url} />
 
       {/* 콘텐츠 영역 */}
       <div className="flex-1 overflow-y-auto bg-white win95-sunken">
         <NotionViewer
-          notionUrl={RESUME_NOTION_URL}
+          notionUrl={NOTION_PAGES.resume.url}
           onStateChange={setFetchState}
         />
       </div>

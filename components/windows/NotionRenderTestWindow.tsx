@@ -3,7 +3,7 @@
 import { useState } from "react";
 import NotionViewer, { type FetchStateType } from "@/components/NotionViewer";
 import { Win95StatusBar, Win95AddressBar } from "../ui";
-import { NOTION_RENDER_TEST_URL } from "@/constants/notionPages";
+import { NOTION_PAGES } from "@/constants/notionPages";
 
 export default function NotionRenderTestWindow() {
   const [fetchState, setFetchState] = useState<FetchStateType>("loading");
@@ -11,14 +11,14 @@ export default function NotionRenderTestWindow() {
   return (
     <div className="flex flex-col h-full text-system-body">
       <Win95AddressBar
-        url={NOTION_RENDER_TEST_URL}
+        url={NOTION_PAGES.renderTest.url}
         actionLabel="새창"
-        actionHref={NOTION_RENDER_TEST_URL}
+        actionHref={NOTION_PAGES.renderTest.url}
       />
 
       <div className="flex-1 overflow-y-auto bg-white win95-sunken">
         <NotionViewer
-          notionUrl={NOTION_RENDER_TEST_URL}
+          notionUrl={NOTION_PAGES.renderTest.url}
           onStateChange={setFetchState}
         />
       </div>
