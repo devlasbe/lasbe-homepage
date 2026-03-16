@@ -7,11 +7,6 @@
 }
 
 /** Win95 Scrollbar **/
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #c0c0c0 #808080;
-}
-
 *::-webkit-scrollbar {
   width: 17px;
   height: 17px;
@@ -24,7 +19,9 @@
     linear-gradient(45deg, #c0c0c0 25%, transparent 25%, transparent 75%, #c0c0c0 75%),
     linear-gradient(45deg, #c0c0c0 25%, transparent 25%, transparent 75%, #c0c0c0 75%);
   background-size: 4px 4px;
-  background-position: 0 0, 2px 2px;
+  background-position:
+    0 0,
+    2px 2px;
 }
 
 /* Thumb: raised bevel */
