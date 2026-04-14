@@ -7,6 +7,7 @@ import ResumeWindow from "@/components/windows/ResumeWindow";
 import GuestbookWindow from "@/components/windows/GuestbookWindow";
 import BlogWindow from "@/components/windows/BlogWindow";
 import OpenFranchiseWindow from "@/components/windows/OpenFranchiseWindow";
+import ShapicWindow from "@/components/windows/ShapicWindow";
 import MyProfileWindow from "@/components/windows/MyProfileWindow";
 import NotionRenderTestWindow from "@/components/windows/NotionRenderTestWindow";
 
@@ -94,6 +95,15 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
     defaultSize: { width: 540, height: 500 },
     content: <OpenFranchiseWindow />,
     readmeDesc: "프랜차이즈 창업 정보를 한 눈에 확인하는 풀스택 사이드 프로젝트",
+  },
+  {
+    id: "shapic",
+    label: "Shapic",
+    icon: Icon.Mspaint,
+    title: "Shapic - SNS 이미지 최적화 앱",
+    defaultSize: { width: 540, height: 520 },
+    content: <ShapicWindow />,
+    readmeDesc: "SNS에 최적화된 이미지 리사이징 및 변환 데스크톱 앱 (Electron)",
   },
   {
     id: "notion-render-test",

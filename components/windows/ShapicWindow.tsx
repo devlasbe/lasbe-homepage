@@ -1,0 +1,70 @@
+"use client";
+
+import Link from "next/link";
+import { project } from "@/constants/project";
+import { Win95StatusBar, Win95TechBadgeList } from "../ui";
+import Win95Button from "../ui/Win95Button";
+
+export default function ShapicWindow() {
+  const data = project.SHAPIC;
+
+  return (
+    <div className="flex flex-col h-full text-system-body">
+      {/* Content */}
+      <div className="flex-1 overflow-y-auto bg-white win95-sunken">
+        {/* Header */}
+        <div className="bg-blue-900 text-white px-4 py-3 flex items-center gap-3">
+          <span className="text-system-icon-lg">📸</span>
+          <div>
+            <p className="font-bold text-system-heading">{data.title}</p>
+            <p className="text-system-caption opacity-75">{data.period} · 데스크톱 이미지 최적화 앱</p>
+          </div>
+        </div>
+
+        <div className="p-4 space-y-4">
+          {/* 소개 */}
+          <section>
+            <p className="font-bold text-system-body border-b border-gray-500 pb-0.5 mb-2">■ 서비스 소개</p>
+            <p className="text-system-body leading-relaxed text-gray-700">{data.desc}</p>
+          </section>
+
+          {/* 주요 기능 */}
+          <section>
+            <p className="font-bold text-system-body border-b border-gray-500 pb-0.5 mb-2">■ 주요 특징</p>
+            <ul className="space-y-1">
+              {data.subDesc.map((item) => (
+                <li key={item} className="flex items-start gap-1.5 text-system-body text-gray-700">
+                  <span className="shrink-0 text-blue-900">▶</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          {/* 기술 스택 */}
+          <section>
+            <p className="font-bold text-system-body border-b border-gray-500 pb-0.5 mb-2">■ 기술 스택</p>
+            <Win95TechBadgeList items={data.stack} />
+          </section>
+
+          {/* 바로가기 링크 */}
+          <section>
+            <p className="font-bold text-system-body border-b border-gray-500 pb-0.5 mb-2">■ 바로가기</p>
+            <div className="flex flex-wrap gap-2">
+              <Link href={data.readme} target="_blank">
+                <Win95Button size="lg" weight="bold">
+                  📂 GitHub 저장소
+                </Win95Button>
+              </Link>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <Win95StatusBar>
+        <span>Shapic</span>
+        <span>📸 Open Source · GPL-3.0</span>
+      </Win95StatusBar>
+    </div>
+  );
+}
