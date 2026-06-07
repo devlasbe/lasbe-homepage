@@ -2,6 +2,10 @@
   "name": "lasbe-homepage",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@10.6.5",
+  "pnpm": {
+    "ignoredBuiltDependencies": ["canvas", "protobufjs", "unrs-resolver"]
+  },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "dev": "next dev",
