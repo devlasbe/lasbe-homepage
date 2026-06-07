@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/third-parties": "^14.2.35",
     "@react95/icons": "^2.2.0",
     "firebase": "^10.14.1",
     "katex": "^0.16.33",
