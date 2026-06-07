@@ -1,7 +1,7 @@
 "use client";
 
 import { Win95Section, Win95StatusBar } from "../ui";
-import { WINDOW_CONFIGS } from "@/constants/windowConfigs";
+import { useVisibleWindowConfigs } from "@/hooks/useVisibleWindowConfigs";
 import { APP } from "@/constants/app";
 
 const SHORTCUTS = [
@@ -61,6 +61,8 @@ const GIMMICKS = [
 
 // ── 컴포넌트 ──
 export default function ReadmeWindow() {
+  const visibleConfigs = useVisibleWindowConfigs();
+
   return (
     <div className="flex flex-col h-full text-system-body">
       {/* Content */}
@@ -131,7 +133,7 @@ export default function ReadmeWindow() {
 
         {/* Apps */}
         <Win95Section icon="📱" title="앱 목록">
-          {WINDOW_CONFIGS.filter((c) => c.readmeDesc !== undefined).map((c) => {
+          {visibleConfigs.filter((c) => c.readmeDesc !== undefined).map((c) => {
             const Icon = c.icon;
             return (
               <div key={c.id} className="flex items-start gap-2 mb-3">

@@ -3,7 +3,7 @@
 import type { ComponentType, SVGProps } from "react";
 import { useWindowContext } from "@/components/contexts/windowContext";
 import { useWindowManager } from "@/hooks/useWindowManager";
-import { WINDOW_CONFIGS } from "@/constants/windowConfigs";
+import { useVisibleWindowConfigs } from "@/hooks/useVisibleWindowConfigs";
 import { Icon } from "@/components/ui/icon";
 
 // 기본 variant가 32x32인 아이콘은 16x16 컨텍스트에서 명시적으로 지정
@@ -17,11 +17,12 @@ const TOOLBAR_ICON_VARIANT: Map<unknown, string> = new Map([
 export function Win95WindowToolbar() {
   const { windows } = useWindowContext();
   const { openWindow } = useWindowManager();
+  const visibleConfigs = useVisibleWindowConfigs();
   const openIds = new Set(windows.filter((w) => w.state !== "minimized").map((w) => w.id));
 
   return (
     <div className="flex items-center gap-px px-1 py-0.5 border-b-2 border-gray-500 bg-gray-300 flex-shrink-0 flex-wrap">
-      {WINDOW_CONFIGS.map((cfg) => {
+      {visibleConfigs.map((cfg) => {
         const IconComponent = cfg.icon as ComponentType<SVGProps<SVGSVGElement> & { variant?: string }>;
         const isActive = openIds.has(cfg.id);
         return (
