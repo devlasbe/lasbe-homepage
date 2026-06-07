@@ -9,6 +9,7 @@ const LINK_ITEMS = [
   { label: "블로그 이동", href: profile.blog.url },
   { label: "깃허브 이동", href: profile.github.url },
   { label: "오픈프차 이동", href: project.OPEN_FRANCHISE.link },
+  { label: "Shapic 이동", href: project.SHAPIC.readme },
 ];
 
 type DesktopContextMenuPropsType = {

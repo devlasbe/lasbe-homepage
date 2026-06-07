@@ -16,6 +16,9 @@
 # production
 /build
 
+# local work plans
+/docs/
+
 # misc
 .DS_Store
 *.pem

@@ -3,12 +3,14 @@
 import { useEffect, useRef } from "react";
 import { useStartMenuContext } from "@/components/contexts/startMenuContext";
 import { useWindowManager } from "@/hooks/useWindowManager";
-import { WINDOW_CONFIGS, WindowConfigType } from "@/constants/windowConfigs";
+import type { WindowConfigType } from "@/constants/windowConfigs";
+import { useVisibleWindowConfigs } from "@/hooks/useVisibleWindowConfigs";
 import { APP } from "@/constants/app";
 
 export default function StartMenu() {
   const { isStartMenuOpen: isOpen, setIsStartMenuOpen: setIsOpen } = useStartMenuContext();
   const { openWindow } = useWindowManager();
+  const visibleConfigs = useVisibleWindowConfigs();
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -55,7 +57,7 @@ export default function StartMenu() {
 
       {/* Menu items */}
       <div className="flex flex-col min-w-[180px]">
-        {WINDOW_CONFIGS.map((cfg) => (
+        {visibleConfigs.map((cfg) => (
           <button
             key={cfg.id}
             className="flex items-center gap-2 px-3 py-2 md:py-1.5 text-left text-system-body hover:bg-blue-900 hover:text-white active:bg-blue-900 active:text-white"

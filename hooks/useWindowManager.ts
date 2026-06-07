@@ -3,6 +3,7 @@
 import { useCallback } from "react";
 import { useWindowContext } from "@/components/contexts/windowContext";
 import type { WindowStateType, OpenWindowConfigType } from "@/components/contexts/windowContext";
+import { analytics } from "@/utils/analytics";
 
 export const useWindowManager = () => {
   const { windows, setWindows } = useWindowContext();
@@ -19,6 +20,7 @@ export const useWindowManager = () => {
 
   const openWindow = useCallback(
     (config: OpenWindowConfigType) => {
+      analytics.track("window_open", { window_id: config.id, window_name: config.title });
       setWindows((prev) => {
         const existing = prev.find((w) => w.id === config.id);
         const maxZ = prev.reduce((max, w) => Math.max(max, w.zIndex), 99);

@@ -7,8 +7,7 @@ import { useWindowManager } from "@/hooks/useWindowManager";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { useIconPositions } from "@/hooks/useIconPositions";
 import { useKeyboardShortcuts } from "@/hooks/useKeyboardShortcuts";
-import { useConfigContext } from "@/components/contexts/configContext";
-import type { AppConfigType } from "@/components/contexts/configContext";
+import { useVisibleWindowConfigs } from "@/hooks/useVisibleWindowConfigs";
 import BootScreen from "./BootScreen";
 import { WINDOW_CONFIGS } from "@/constants/windowConfigs";
 import DesktopIcon from "./DesktopIcon";
@@ -16,11 +15,6 @@ import DesktopContextMenu from "./DesktopContextMenu";
 import Window from "./Window";
 import Taskbar from "./Taskbar";
 import SpaceBackground from "./SpaceBackground";
-
-// config 플래그로 노출 여부를 제어하는 윈도우 id 매핑
-const CONFIG_GATED_WINDOWS: Partial<Record<string, keyof AppConfigType>> = {
-  "notion-render-test": "isVisibleNotionTest",
-};
 
 // id별 nodeRef를 Record로 관리
 const iconNodeRefs: Record<string, RefObject<HTMLDivElement>> = Object.fromEntries(
@@ -35,14 +29,10 @@ export default function Desktop() {
   const { isMobile } = useBreakpoint();
   const { getPosition, updatePosition, resetPositions, isReady, windowHeight } = useIconPositions();
   useKeyboardShortcuts();
-  const config = useConfigContext();
   // 아이콘 id별 드래그 발생 여부 추적 (re-render 없이 관리)
   const draggedRef = useRef<Set<string>>(new Set());
 
-  const visibleConfigs = WINDOW_CONFIGS.filter((cfg) => {
-    const key = CONFIG_GATED_WINDOWS[cfg.id];
-    return !key || config?.[key] === true;
-  });
+  const visibleConfigs = useVisibleWindowConfigs();
 
   function getCurrentPos(id: string, index: number) {
     if (liveDragPos?.id === id) return { x: liveDragPos.x, y: liveDragPos.y };

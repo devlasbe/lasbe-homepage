@@ -7,6 +7,7 @@ export const SEO = {
   SITE_KEYWORDS: "프론트엔드, frontend, 개발자, 포트폴리오",
   SITE_LOCALE: "ko_KR",
   GOOGLE_VERIFICATION: "V-Js1CpUphzCpgx5C1w-VJvL0m2f4hAkTCZFgGNQxro",
+  GA_MEASUREMENT_ID: "G-44WTGLNWZJ",
   NAVER_VERIFICATION: "7b30b3889eed5b950eb1b64e6eedac3e6fcde8d3",
   SITEMAP_URL: `${SITE_URL}/sitemap.xml`,
   OG_IMAGE_URL: `${SITE_URL}/lasbe_character.jpg`,
