@@ -8,6 +8,7 @@ import GuestbookWindow from "@/components/windows/GuestbookWindow";
 import BlogWindow from "@/components/windows/BlogWindow";
 import OpenFranchiseWindow from "@/components/windows/OpenFranchiseWindow";
 import ShapicWindow from "@/components/windows/ShapicWindow";
+import KoreaDebtClockWindow from "@/components/windows/KoreaDebtClockWindow";
 import MyProfileWindow from "@/components/windows/MyProfileWindow";
 import NotionRenderTestWindow from "@/components/windows/NotionRenderTestWindow";
 
@@ -104,6 +105,15 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
     defaultSize: { width: 540, height: 520 },
     content: <ShapicWindow />,
     readmeDesc: "SNS에 최적화된 이미지 리사이징 및 변환 데스크톱 앱 (Electron)",
+  },
+  {
+    id: "korea-debt-clock",
+    label: "K-머니",
+    icon: Icon.Calculator,
+    title: "K-머니 - 대한민국 국가부채",
+    defaultSize: { width: 560, height: 560 },
+    content: <KoreaDebtClockWindow />,
+    readmeDesc: "대한민국 국가부채를 실시간 보간으로 시각화한 대시보드",
   },
   {
     id: "notion-render-test",
