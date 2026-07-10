@@ -55,4 +55,18 @@ export const project = {
     link: undefined,
     readme: "https://github.com/devlasbe/shapic",
   },
+  KOREA_DEBT_CLOCK: {
+    title: "K-머니",
+    period: "2026.07~",
+    desc: "대한민국 국가부채(국가채무)가 실시간으로 늘어나는 모습을 보여주는 대시보드입니다. 연 1회 갱신되는 공식 통계를 초당 단위로 보간해 실시간 카운터로 시각화합니다.",
+    subDesc: [
+      "연 1회 갱신되는 공식 통계를 초당 단위로 보간해 실시간으로 올라가는 카운터로 시각화",
+      "GDP 대비 채무비율·국민 1인당 빚·연도별 추이·정부 재정운용계획 전망(2029년까지) 제공",
+      "e-나라지표·KOSIS·한국은행 ECOS·Frankfurter(ECB) 공공·무료 데이터를 교차 검증해 통합",
+      "국가부채라는 딱딱한 통계를 한눈에 체감되는 대시보드로 재구성",
+    ],
+    stack: ["Vite", "React", "TypeScript", "Tailwind CSS", "Recharts", "Vercel"],
+    link: "https://dashboard.lasbe.kr",
+    readme: "https://github.com/devlasbe/korea-debt-clock",
+  },
 };
