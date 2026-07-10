@@ -67,6 +67,6 @@ export const project = {
     ],
     stack: ["Vite", "React", "TypeScript", "Tailwind CSS", "Recharts", "Vercel"],
     link: "https://dashboard.lasbe.kr",
-    readme: "https://github.com/devlasbe/korea-debt-clock",
+    readme: undefined,
   },
 };

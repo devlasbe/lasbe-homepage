@@ -56,11 +56,6 @@ export default function KoreaDebtClockWindow() {
                   🌐 서비스 방문하기
                 </Win95Button>
               </Link>
-              <Link href={data.readme} target="_blank">
-                <Win95Button size="lg" weight="bold">
-                  📂 GitHub 저장소
-                </Win95Button>
-              </Link>
             </div>
           </section>
         </div>
