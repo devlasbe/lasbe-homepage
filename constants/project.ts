@@ -69,4 +69,19 @@ export const project = {
     link: "https://dashboard.lasbe.kr",
     readme: undefined,
   },
+  FREE_LOGI: {
+    title: "FreeLogi",
+    period: "2026.10~",
+    desc: "Logitech 마우스 버튼을 키보드 단축키로 매핑하는 가벼운 macOS 메뉴바 앱. Logi Options+의 높은 메모리 사용과 오류로 인한 매핑 먹통 문제를 직접 해결하려고 제작.",
+    subDesc: [
+      "누른 버튼을 그대로 캡처해 매핑 — 사전 정의된 컨트롤 ID 목록에 의존하지 않아 제스처 버튼 등 미지원 버튼 대응",
+      "⌘⌥⌃⇧ 조합 단축키 매핑 + 프로필 생성/전환(메뉴바에서도 전환)",
+      "HID++ raw movement 지원 버튼은 상/하/좌/우 방향 제스처별 단축키 지정",
+      "유휴 시 약 12MB 메모리 (설정창 열면 26MB, 작성자 Mac 기준 측정)",
+      "로그인 시 자동 실행, Apple Silicon/Intel 지원",
+    ],
+    stack: ["Swift", "HID++", "SwiftUI", "AppKit"],
+    link: undefined,
+    readme: "https://github.com/devlasbe/free-logi",
+  },
 };
