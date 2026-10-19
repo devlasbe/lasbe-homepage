@@ -9,6 +9,7 @@ import BlogWindow from "@/components/windows/BlogWindow";
 import OpenFranchiseWindow from "@/components/windows/OpenFranchiseWindow";
 import ShapicWindow from "@/components/windows/ShapicWindow";
 import KoreaDebtClockWindow from "@/components/windows/KoreaDebtClockWindow";
+import FreeLogiWindow from "@/components/windows/FreeLogiWindow";
 import MyProfileWindow from "@/components/windows/MyProfileWindow";
 import NotionRenderTestWindow from "@/components/windows/NotionRenderTestWindow";
 
@@ -114,6 +115,15 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
     defaultSize: { width: 560, height: 560 },
     content: <KoreaDebtClockWindow />,
     readmeDesc: "대한민국 국가부채를 실시간 보간으로 시각화한 대시보드",
+  },
+  {
+    id: "free-logi",
+    label: "FreeLogi",
+    icon: Icon.KeyboardMouse,
+    title: "FreeLogi - Logitech 마우스 버튼 매핑",
+    defaultSize: { width: 560, height: 560 },
+    content: <FreeLogiWindow />,
+    readmeDesc: "Logitech 마우스 버튼을 단축키로 매핑하는 macOS 메뉴바 앱 (Swift)",
   },
   {
     id: "notion-render-test",
