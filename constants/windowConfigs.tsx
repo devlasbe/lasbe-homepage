@@ -10,6 +10,7 @@ import OpenFranchiseWindow from "@/components/windows/OpenFranchiseWindow";
 import ShapicWindow from "@/components/windows/ShapicWindow";
 import KoreaDebtClockWindow from "@/components/windows/KoreaDebtClockWindow";
 import FreeLogiWindow from "@/components/windows/FreeLogiWindow";
+import FilmModeWindow from "@/components/windows/FilmModeWindow";
 import MyProfileWindow from "@/components/windows/MyProfileWindow";
 import NotionRenderTestWindow from "@/components/windows/NotionRenderTestWindow";
 
@@ -124,6 +125,15 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
     defaultSize: { width: 560, height: 560 },
     content: <FreeLogiWindow />,
     readmeDesc: "Logitech 마우스 버튼을 단축키로 매핑하는 macOS 메뉴바 앱 (Swift)",
+  },
+  {
+    id: "film-mode",
+    label: "Film Mode",
+    icon: Icon.Camera,
+    title: "Film Mode - 필름 카메라",
+    defaultSize: { width: 560, height: 560 },
+    content: <FilmModeWindow />,
+    readmeDesc: "필름 시뮬레이션으로 촬영하는 필름 카메라 앱 (iOS·Android)",
   },
   {
     id: "notion-render-test",
