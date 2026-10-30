@@ -84,4 +84,34 @@ export const project = {
     link: undefined,
     readme: "https://github.com/devlasbe/free-logi",
   },
+  FILM_MODE: {
+    title: "Film Mode",
+    period: "2026.10~",
+    desc: "필름을 고르고, 뷰파인더로 보고, 셔터를 누르는 필름 카메라 앱입니다. 필름 시뮬레이션으로 색과 입자감을 실시간으로 미리 보며 촬영합니다.",
+    subDesc: [
+      "필름마다 다른 색감·채도·대비·입자를 실시간으로 미리 보며 촬영",
+      "좌우 스와이프로 필름 교체, 위로 스와이프로 필름 목록 열기",
+      "렌즈 배율 선택, 날짜 각인, 플래시, 기본 필름 설정",
+      "회원가입 없이 사용, 촬영과 필름 효과 적용은 기기 안에서 처리",
+      "한국어, 영어, 일본어 지원",
+    ],
+    stack: ["Expo", "React Native", "TypeScript", "VisionCamera", "Skia", "Zustand"],
+    link: undefined,
+    readme: undefined,
+    icon: "/film-mode/icon.png",
+    stores: [
+      {
+        platform: "Android",
+        name: "Google Play",
+        url: "https://play.google.com/store/apps/details?id=com.lasbe.filmmode",
+        qr: "/film-mode/qr-android.svg",
+      },
+      {
+        platform: "iOS",
+        name: "App Store",
+        url: "https://apps.apple.com/kr/app/id6821528661",
+        qr: "/film-mode/qr-ios.svg",
+      },
+    ],
+  },
 };
