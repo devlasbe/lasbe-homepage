@@ -15,6 +15,7 @@ export type WindowType = {
   position: { x: number; y: number };
   size: { width: number; height: number };
   zIndex: number;
+  historyIdx: number;
   state: WindowStateType;
   prevPosition?: { x: number; y: number };
   prevSize?: { width: number; height: number };
@@ -41,7 +42,7 @@ export function useWindowContext() {
   return ctx;
 }
 
-export function WindowProvider({ children }: { children: React.ReactNode }) {
-  const [windows, setWindows] = useState<WindowType[]>([]);
+export function WindowProvider({ children, initialWindows }: { children: React.ReactNode; initialWindows: WindowType[] }) {
+  const [windows, setWindows] = useState<WindowType[]>(initialWindows);
   return <WindowContext.Provider value={{ windows, setWindows }}>{children}</WindowContext.Provider>;
 }

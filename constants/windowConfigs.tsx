@@ -1,4 +1,5 @@
 import type { ComponentType, SVGProps, ReactNode } from "react";
+import type { AppConfigType } from "@/components/contexts/configContext";
 import { Icon } from "@/components/ui/icon";
 import MailWindow from "@/components/windows/MailWindow";
 import ReadmeWindow from "@/components/windows/ReadmeWindow";
@@ -145,3 +146,11 @@ export const WINDOW_CONFIGS: WindowConfigType[] = [
     readmeDesc: "react-notion-x 렌더러 테스트용 Notion 페이지 (다양한 블록 타입 포함)",
   },
 ];
+
+// config 플래그로 노출 여부를 제어하는 윈도우 id 매핑
+export const CONFIG_GATED_WINDOWS: Partial<Record<string, keyof AppConfigType>> = {
+  notion: "isVisibleResume",
+  "notion-render-test": "isVisibleNotionTest",
+};
+
+export const PUBLIC_WINDOW_CONFIGS = WINDOW_CONFIGS.filter((config) => !CONFIG_GATED_WINDOWS[config.id]);
