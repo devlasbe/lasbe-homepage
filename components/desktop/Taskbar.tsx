@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useStartMenuContext } from "@/components/contexts/startMenuContext";
-import { useWindowManager } from "@/hooks/useWindowManager";
+import { getTopWindow, useWindowManager } from "@/hooks/useWindowManager";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 import SystemTray from "./SystemTray";
 import StartMenu from "./StartMenu";
@@ -12,15 +12,7 @@ export default function Taskbar() {
   const { windows, focusWindow, minimizeWindow, restoreWindow, closeWindow } = useWindowManager();
   const { isMobile } = useBreakpoint();
 
-  const activeWindow =
-    windows.length > 0
-      ? windows
-          .filter((w) => w.state !== "minimized")
-          .reduce(
-            (top, w) => (!top || w.zIndex > top.zIndex ? w : top),
-            null as (typeof windows)[0] | null
-          )
-      : null;
+  const activeWindow = getTopWindow(windows);
   const activeWindowId = activeWindow?.id ?? null;
 
   const handleTaskbarButtonClick = (id: string) => {

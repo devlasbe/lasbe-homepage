@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useWindowManager } from "@/hooks/useWindowManager";
+import { getTopWindow, useWindowManager } from "@/hooks/useWindowManager";
 
 export function useKeyboardShortcuts() {
   const { windows, closeWindow, maximizeWindow } = useWindowManager();
@@ -17,15 +17,7 @@ export function useKeyboardShortcuts() {
       if (isTyping) return;
 
       // 활성 창 (최상단 비최소화 창)
-      const activeWindow =
-        windows.length > 0
-          ? windows
-              .filter((w) => w.state !== "minimized")
-              .reduce(
-                (top, w) => (!top || w.zIndex > top.zIndex ? w : top),
-                null as (typeof windows)[0] | null
-              )
-          : null;
+      const activeWindow = getTopWindow(windows);
 
       if (!activeWindow) return;
 

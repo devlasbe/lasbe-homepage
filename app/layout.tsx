@@ -6,7 +6,8 @@ import 'katex/dist/katex.min.css'
 import { Nanum_Gothic_Coding } from 'next/font/google'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import Provider from '@/components/Provider'
-import { SEO } from '@/constants/seo'
+import { SEO, SEO_OPEN_GRAPH_BASE, SEO_TWITTER_BASE } from '@/constants/seo'
+import Desktop from '@/components/desktop/Desktop'
 
 const nanumGothicCoding = Nanum_Gothic_Coding({
   subsets: ['latin'],
@@ -26,24 +27,20 @@ const jsonLd = {
 }
 
 export const metadata: Metadata = {
-  title: SEO.SITE_TITLE,
+  metadataBase: new URL(SEO.SITE_URL),
+  title: { default: SEO.SITE_TITLE, template: SEO.TITLE_TEMPLATE },
   description: SEO.SITE_DESCRIPTION,
   keywords: SEO.SITE_KEYWORDS,
-  alternates: { canonical: SEO.SITE_URL },
   openGraph: {
+    ...SEO_OPEN_GRAPH_BASE,
     title: SEO.SITE_TITLE,
     description: SEO.SITE_DESCRIPTION,
-    siteName: SEO.SITE_TITLE,
-    locale: SEO.SITE_LOCALE,
-    type: 'website',
-    url: SEO.SITE_URL,
-    images: [{ url: SEO.OG_IMAGE_URL, width: 808, height: 808, alt: SEO.SITE_TITLE }]
+    url: SEO.SITE_URL
   },
   twitter: {
-    card: 'summary',
+    ...SEO_TWITTER_BASE,
     title: SEO.SITE_TITLE,
-    description: SEO.SITE_DESCRIPTION,
-    images: [SEO.OG_IMAGE_URL]
+    description: SEO.SITE_DESCRIPTION
   },
   verification: {
     google: SEO.GOOGLE_VERIFICATION,
@@ -59,10 +56,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <body className={`${nanumGothicCoding.variable} font-main antialiased overflow-x-hidden text-neutral-900`}>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-        <Provider>{children}</Provider>
+        <Provider><Desktop />{children}</Provider>
       </body>
       <GoogleAnalytics gaId={SEO.GA_MEASUREMENT_ID} />
     </html>
