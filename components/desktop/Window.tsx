@@ -146,7 +146,7 @@ export default function Window({ window: win }: WindowPropsType) {
 
   return (
     <Draggable
-      nodeRef={nodeRef as React.RefObject<HTMLElement>}
+      nodeRef={nodeRef as React.RefObject<HTMLElement | null>}
       handle=".win95-titlebar"
       bounds="parent"
       position={localPos}

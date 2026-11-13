@@ -27,21 +27,147 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/${{secrets.DOCKER_IMAGENAME}}:${{github.run_id}}
 
       - name: execute remote ssh
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v1.2.5
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.SERVER_SSH_PORT }}
           script: |
-            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
-            docker pull ${{ secrets.DOCKER_USERNAME }}/${{secrets.DOCKER_IMAGENAME}}:${{github.run_id}}
-            docker stop ${{secrets.DOCKER_IMAGENAME}} || true
-            docker rm ${{secrets.DOCKER_IMAGENAME}} || true
-            docker run -d --restart=always --name ${{secrets.DOCKER_IMAGENAME}} -p 3000:3000 \
-              -e FIREBASE_KEY=${{ secrets.FIREBASE_KEY }} \
-              -e FIREBASE_PROJECT=${{ secrets.FIREBASE_PROJECT }} \
-              -e FIREBASE_MESSAGING=${{ secrets.FIREBASE_MESSAGING }} \
-              -e FIREBASE_APP_ID=${{ secrets.FIREBASE_APP_ID }} \
-              -e FIREBASE_MEASUREMENT_ID=${{ secrets.FIREBASE_MEASUREMENT_ID }} \
-              ${{ secrets.DOCKER_USERNAME }}/${{secrets.DOCKER_IMAGENAME}}:${{github.run_id}}
+            set -eu
+            NAME=${{secrets.DOCKER_IMAGENAME}}
+            IMAGE=${{ secrets.DOCKER_USERNAME }}/${{secrets.DOCKER_IMAGENAME}}:${{github.run_id}}
+            LIVE_PORT=3000
+            CANDIDATE_PORT=3010
+            CANDIDATE="$NAME-candidate"
+            PREV="$NAME-prev"
+            SWAPPED=0
+            RENAMED=0
+            HAD_LIVE=0
+            RESTORING=0
+
+            ENV_FILE=$(mktemp)
+            chmod 600 "$ENV_FILE"
+            check() {
+              label=$1
+              url=$2
+              kind=${3:-status}
+              if ! status=$(curl -sS -m 20 -o "$ENV_FILE.body" -D "$ENV_FILE.headers" -w '%{http_code}' -H 'Accept: image/webp' "$url"); then
+                echo "[deploy] Failed: $label (request failed)"
+                return 1
+              fi
+              if [ "$status" != 200 ]; then
+                echo "[deploy] Failed: $label (HTTP $status)"
+                return 1
+              fi
+              if [ "$kind" = title ] && ! grep -q '<title>Shapic' "$ENV_FILE.body"; then
+                echo "[deploy] Failed: $label (title missing)"
+                return 1
+              fi
+              if [ "$kind" = image ] && ! grep -iq '^content-type:[[:space:]]*image/' "$ENV_FILE.headers"; then
+                echo "[deploy] Failed: $label (invalid Content-Type)"
+                return 1
+              fi
+              echo "[deploy] Passed: $label"
+            }
+
+            wait_ready() {
+              port=$1
+              attempt=0
+              while [ "$attempt" -lt 60 ]; do
+                if curl -fsS -m 5 -o /dev/null "http://127.0.0.1:$port/" 2>/dev/null; then
+                  return 0
+                fi
+                attempt=$((attempt + 1))
+                sleep 1
+              done
+              echo "[deploy] Failed: port $port did not become ready"
+              return 1
+            }
+
+            restore_prev() {
+              if [ "$RESTORING" -eq 1 ]; then
+                return
+              fi
+              RESTORING=1
+              echo "[deploy] Rolling back" || true
+              # rename 전에 실패했다면 운영 컨테이너는 아직 $NAME이다. 지우지 않고 다시 켠다
+              if [ "$RENAMED" -eq 1 ] || [ "$HAD_LIVE" -eq 0 ]; then
+                docker rm -f "$NAME" 2>/dev/null || true
+                if docker inspect "$PREV" >/dev/null 2>&1; then
+                  docker rename "$PREV" "$NAME" || true
+                fi
+              fi
+              docker update --restart=always "$NAME" || true
+              docker start "$NAME" || true
+              if wait_ready "$LIVE_PORT"; then
+                echo "[deploy] Rollback readiness passed" || true
+              else
+                echo "[deploy] Rollback readiness failed" || true
+              fi
+            }
+
+            on_exit() {
+              rm -f "$ENV_FILE" "$ENV_FILE.body" "$ENV_FILE.headers" || true
+              if [ "$SWAPPED" -eq 1 ]; then
+                restore_prev || true
+              fi
+            }
+
+            trap on_exit EXIT
+            trap 'exit 1' INT TERM HUP
+            printf '%s\n' "FIREBASE_KEY=${{ secrets.FIREBASE_KEY }}" > "$ENV_FILE"
+            printf '%s\n' "FIREBASE_PROJECT=${{ secrets.FIREBASE_PROJECT }}" >> "$ENV_FILE"
+            printf '%s\n' "FIREBASE_MESSAGING=${{ secrets.FIREBASE_MESSAGING }}" >> "$ENV_FILE"
+            printf '%s\n' "FIREBASE_APP_ID=${{ secrets.FIREBASE_APP_ID }}" >> "$ENV_FILE"
+            printf '%s\n' "FIREBASE_MEASUREMENT_ID=${{ secrets.FIREBASE_MEASUREMENT_ID }}" >> "$ENV_FILE"
+
+            echo "[deploy] Logging in and pulling image"
+            printf '%s' "${{ secrets.DOCKER_TOKEN }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+            docker pull "$IMAGE"
+
+            echo "[deploy] Starting candidate"
+            docker rm -f "$CANDIDATE" 2>/dev/null || true
+            if ! docker run -d --name "$CANDIDATE" -p 127.0.0.1:$CANDIDATE_PORT:3000 --env-file "$ENV_FILE" "$IMAGE"; then
+              echo "[deploy] Failed: candidate could not start"
+              docker logs --tail 50 "$CANDIDATE" 2>&1 || true
+              docker rm -f "$CANDIDATE" 2>/dev/null || true
+              exit 1
+            fi
+            if ! wait_ready "$CANDIDATE_PORT" ||
+              ! check 'candidate /' "http://127.0.0.1:$CANDIDATE_PORT/" ||
+              ! check 'candidate /shapic' "http://127.0.0.1:$CANDIDATE_PORT/shapic" title ||
+              ! check 'candidate /api/config' "http://127.0.0.1:$CANDIDATE_PORT/api/config" ||
+              ! check 'candidate /api/guestbook' "http://127.0.0.1:$CANDIDATE_PORT/api/guestbook" ||
+              ! check 'candidate image' "http://127.0.0.1:$CANDIDATE_PORT/_next/image?url=%2Flasbe_character.jpg&w=256&q=75" image; then
+              echo "[deploy] Candidate checks failed"
+              docker logs --tail 50 "$CANDIDATE" 2>&1 || true
+              docker rm -f "$CANDIDATE" 2>/dev/null || true
+              exit 1
+            fi
+            echo "[deploy] Candidate checks passed"
+            docker rm -f "$CANDIDATE"
+
+            echo "[deploy] Replacing live container"
+            SWAPPED=1
+            if docker inspect "$NAME" >/dev/null 2>&1; then
+              HAD_LIVE=1
+              docker stop "$NAME"
+              docker rm -f "$PREV" 2>/dev/null || true
+              docker rename "$NAME" "$PREV"
+              RENAMED=1
+              docker update --restart=no "$PREV"
+            fi
+            if ! docker run -d --restart=always --name "$NAME" -p $LIVE_PORT:3000 --env-file "$ENV_FILE" "$IMAGE"; then
+              echo "[deploy] Failed: live container could not start"
+              exit 1
+            fi
+            echo "[deploy] Checking live container"
+            if ! wait_ready "$LIVE_PORT" ||
+              ! check 'live /' "http://127.0.0.1:$LIVE_PORT/" ||
+              ! check 'live /api/guestbook' "http://127.0.0.1:$LIVE_PORT/api/guestbook"; then
+              exit 1
+            fi
+            SWAPPED=0
+            echo "[deploy] Deployment complete; previous container retained"
+            # Manual rollback: docker rm -f NAME && docker rename NAME-prev NAME && docker update --restart=always NAME && docker start NAME
