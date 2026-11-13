@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PUBLIC_WINDOW_CONFIGS } from "@/constants/windowConfigs";
 import { SEO, SEO_OPEN_GRAPH_BASE, SEO_TWITTER_BASE } from "@/constants/seo";
 
-type PagePropsType = { params: { windowId: string } };
+type PagePropsType = { params: Promise<{ windowId: string }> };
 
 export const dynamicParams = false;
 
@@ -11,7 +11,8 @@ export function generateStaticParams() {
   return params;
 }
 
-export function generateMetadata({ params }: PagePropsType): Metadata {
+export async function generateMetadata(props: PagePropsType): Promise<Metadata> {
+  const params = await props.params;
   const config = PUBLIC_WINDOW_CONFIGS.find((windowConfig) => windowConfig.id === params.windowId);
   if (!config) return {};
   const title = config.title;

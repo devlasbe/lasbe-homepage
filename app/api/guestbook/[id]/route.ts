@@ -10,8 +10,9 @@ type GuestbookDocType = {
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  props: { params: Promise<{ id: string }> },
 ): Promise<NextResponse<GuestbookDeleteResponseType | ErrorResponseType>> {
+  const params = await props.params;
   try {
     const { password } = (await request.json()) as { password: string };
 

@@ -20,7 +20,7 @@ import Taskbar from "./Taskbar";
 import SpaceBackground from "./SpaceBackground";
 
 // id별 nodeRef를 Record로 관리
-const iconNodeRefs: Record<string, RefObject<HTMLDivElement>> = Object.fromEntries(
+const iconNodeRefs: Record<string, RefObject<HTMLDivElement | null>> = Object.fromEntries(
   WINDOW_CONFIGS.map((cfg) => [cfg.id, createRef<HTMLDivElement>()])
 );
 
@@ -109,7 +109,7 @@ function DesktopContent() {
               return (
                 <Draggable
                   key={`${cfg.id}-${windowHeight}`}
-                  nodeRef={nodeRef as React.RefObject<HTMLElement>}
+                  nodeRef={nodeRef as React.RefObject<HTMLElement | null>}
                   bounds="parent"
                   position={getCurrentPos(cfg.id, index)}
                   onStart={(_e: DraggableEvent, _data: DraggableData) => {
