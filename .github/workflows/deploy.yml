@@ -52,12 +52,12 @@ jobs:
               label=$1
               url=$2
               kind=${3:-status}
-              if ! status=$(curl -sS -m 20 -o "$ENV_FILE.body" -D "$ENV_FILE.headers" -w '%{http_code}' -H 'Accept: image/webp' "$url"); then
+              if ! http_status=$(curl -sS -m 20 -o "$ENV_FILE.body" -D "$ENV_FILE.headers" -w '%{http_code}' -H 'Accept: image/webp' "$url"); then
                 echo "[deploy] Failed: $label (request failed)"
                 return 1
               fi
-              if [ "$status" != 200 ]; then
-                echo "[deploy] Failed: $label (HTTP $status)"
+              if [ "$http_status" != 200 ]; then
+                echo "[deploy] Failed: $label (HTTP $http_status)"
                 return 1
               fi
               if [ "$kind" = title ] && ! grep -q '<title>Shapic' "$ENV_FILE.body"; then
@@ -128,7 +128,7 @@ jobs:
 
             echo "[deploy] Starting candidate"
             docker rm -f "$CANDIDATE" 2>/dev/null || true
-            if ! docker run -d --name "$CANDIDATE" -p 127.0.0.1:$CANDIDATE_PORT:3000 --env-file "$ENV_FILE" "$IMAGE"; then
+            if ! docker run -d --name "$CANDIDATE" -p "127.0.0.1:$CANDIDATE_PORT:3000" --env-file "$ENV_FILE" "$IMAGE"; then
               echo "[deploy] Failed: candidate could not start"
               docker logs --tail 50 "$CANDIDATE" 2>&1 || true
               docker rm -f "$CANDIDATE" 2>/dev/null || true
@@ -158,7 +158,7 @@ jobs:
               RENAMED=1
               docker update --restart=no "$PREV"
             fi
-            if ! docker run -d --restart=always --name "$NAME" -p $LIVE_PORT:3000 --env-file "$ENV_FILE" "$IMAGE"; then
+            if ! docker run -d --restart=always --name "$NAME" -p "$LIVE_PORT:3000" --env-file "$ENV_FILE" "$IMAGE"; then
               echo "[deploy] Failed: live container could not start"
               exit 1
             fi
